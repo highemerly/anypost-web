@@ -1,0 +1,273 @@
+{
+  "nav": {
+    "share": "シェア",
+    "howto": "使い方",
+    "privacy": "プライバシー",
+    "license": "ライセンス",
+    "services": "対応サービス",
+    "contact": "問い合わせ先"
+  },
+  "contact": {
+    "title": "問い合わせ先",
+    "description": "AnyPost.devに関するお問い合わせについて",
+    "administrator": "管理者",
+    "contactInfo": "お問い合わせ",
+    "contactDescription": "ご質問やご要望がございましたら、以下のリンク記載の連絡先からお問い合わせください。",
+    "visitContactPage": "連絡先ページを開く",
+    "note": "お問い合わせの際は、AnyPost.devに関する内容である旨をお知らせください。"
+  },
+  "footer": {
+    "product": "製品",
+    "legal": "法的事項",
+    "language": "言語",
+    "description": "AnyPost.dev は、ブログなどに設置した1つのリンクから、世界中の様々なSNSにシェアできるサービスです。mastodon, misskey, pleroma, X, facebook, ...などに対応しています。利用している他サービスのロゴの権利は、各権利者に帰属します。"
+  },
+  "share": {
+    "title": "AnyPost.dev",
+    "subtitle": "様々なSNSに簡単に投稿できます",
+    "instanceName": "サーバー名",
+    "instanceNamePlaceholder": "例: mastodon.social",
+    "instanceType": "プラットフォーム種別",
+    "postText": "投稿内容",
+    "postTextPlaceholder": "投稿したい内容を入力してください...",
+    "postUrl": "URL",
+    "postUrlPlaceholder": "共有したいURLを入力してください...",
+    "visibility": "公開範囲",
+    "hashtag": "ハッシュタグ",
+    "hashtagPlaceholder": "ハッシュタグ（#なし）",
+    "postButton": "投稿する！",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "unsupportedInstance": "サポートされていないインスタンスです",
+    "invalidHostname": "不正なホスト名です",
+    "autoPostLoaded": "投稿内容を自動で読み込みました",
+    "autoPostDescription": "フォームに情報が自動入力されています。必要に応じて編集してください。",
+    "serverNameRequired": "サーバー名を入力してください",
+    "autoRedirectTitle": "自動投稿中...",
+    "autoRedirectMessage": "秒後に自動で投稿します",
+    "autoRedirectError": "自動投稿にはサーバー名が必要です",
+    "autoRedirectErrorTitle": "エラー",
+    "close": "閉じる",
+    "clearHistory": "過去使ったサーバーの記録を削除する",
+    "dropdownLabel": "よく使われるサーバーから選択...",
+    "manualInputLabel": "または自分で入力",
+    "previouslyUsed": "前回使用",
+    "visibilityOptions": {
+      "public": "パブリック",
+      "unlisted": "未収載",
+      "private": "フォロワーのみ",
+      "direct": "ダイレクト",
+      "home": "ホーム",
+      "followers": "フォロワー",
+      "specified": "指定ユーザー"
+    }
+  },
+  "top": {
+    "hero": {
+      "title": "複数のソーシャルメディアに",
+      "subtitle": "簡単投稿",
+      "description": "AnyPost.devは、Mastodon、Misskey、Twitter、Facebookなど、様々なソーシャルメディアプラットフォームに簡単に投稿できるツールです。",
+      "cta": "まずは使ってみる",
+      "howTo": "使い方を見る"
+    },
+    "supportedServices": {
+      "title": "対応サービス",
+      "description": "幅広いソーシャルメディアプラットフォームに対応しています",
+      "fediverse": {
+        "title": "Fediverse",
+        "description": "分散型ソーシャルネットワークのプラットフォーム群。オープンで相互接続可能なネットワークです。"
+      },
+      "traditional": {
+        "title": "従来型プラットフォーム",
+        "description": "主要な中央集権型ソーシャルメディアサービスにも対応しています。"
+      },
+      "moreServices": "その他のサービスも順次対応予定です",
+      "viewAllServices": "対応サービス一覧を見る",
+      "fullList": {
+        "title": "対応サービス一覧",
+        "fediverse": "分散型SNS",
+        "traditional": "従来型SNS"
+      }
+    },
+    "features": {
+      "title": "主な機能",
+      "multiPlatform": {
+        "title": "マルチプラットフォーム対応",
+        "description": "Mastodon、Misskey、Twitter、Facebookなど、主要なソーシャルメディアに対応"
+      },
+      "easyToUse": {
+        "title": "使いやすいインターface",
+        "description": "直感的なUIで、誰でも簡単に複数のプラットフォームに投稿可能"
+      },
+      "privacy": {
+        "title": "プライバシー重視",
+        "description": "投稿内容は保存されず、プライバシーを重視した設計"
+      }
+    }
+  },
+  "howto": {
+    "title": "使い方",
+    "description": "AnyPost.devの3つの使用方法をご紹介します",
+    "browser": {
+      "title": "ブラウザで利用する",
+      "bookmarklet": {
+        "title": "ブックマークレットを登録する",
+        "description": "ブラウザのお気に入り機能を使って、どのページからでも簡単にシェアできます。",
+        "codeLabel": "ブックマークレットコード",
+        "steps": {
+          "step1": "1. 上記のコードをコピーしてください",
+          "step2": "2. ブラウザのお気に入りに新しいブックマークを作成し、URLに貼り付けてください",
+          "step3": "3. シェアしたいページでブックマークをクリックするだけ！"
+        }
+      },
+      "serverSpecific": {
+        "title": "特定サーバー向けのブックマークレットを作成する",
+        "description": "よく利用するサーバーを指定して、サーバー選択を省略できるブックマークレットを作成できます。",
+        "serverLabel": "投稿先サーバー名",
+        "serverPlaceholder": "例: mastodon.social",
+        "codeLabel": "カスタムブックマークレットコード",
+        "benefit1": "• このブックマークレットを使用すると、指定したサーバーが自動で選択されます",
+        "benefit2": "• よく使うサーバーがある場合、毎回入力する手間が省けて便利です"
+      }
+    },
+    "website": {
+      "title": "あなたのサイトにボタンを設置する",
+      "shareButton": {
+        "title": "ページをシェアするボタンを設置する",
+        "description": "以下のコードをあなたのブログやWebサイトに貼り付けてください。",
+        "codeLabel": "HTMLコード",
+        "preview": "プレビュー"
+      },
+      "designSelection": "デザインを選択",
+      "designs": {
+        "defaultBlue": {
+          "name": "デフォルトブルー",
+          "description": "オリジナルのブルーデザイン"
+        },
+        "modernGradient": {
+          "name": "モダングラデーション",
+          "description": "モダンなグラデーションデザイン"
+        },
+        "orangeEnergy": {
+          "name": "オレンジエナジー",
+          "description": "エネルギッシュなオレンジデザイン"
+        },
+        "minimalDark": {
+          "name": "ミニマルダーク",
+          "description": "シンプルで小さなダークデザイン"
+        },
+        "popPink": {
+          "name": "ポップピンク",
+          "description": "可愛らしいピンクのポップデザイン"
+        },
+        "techNavy": {
+          "name": "テックネイビー",
+          "description": "開発者向けのシンプルな四角形デザイン"
+        }
+      },
+      "customButton": {
+        "title": "あなたのサイトにボタンを設置する（デベロッパー向け）",
+        "description": "https://anypost.dev/share に以下のクエリ文字列を追加すると、投稿内容や投稿先を自由にカスタマイズできます。"
+      }
+    },
+    "developer": {
+      "title": "ボタンを自由に開発して設置する（デベロッパー向け）",
+      "description": "https://anypost.dev/share に以下のクエリ文字列を追加すると、投稿内容や投稿先を自由にカスタマイズできます。",
+      "table": {
+        "parameter": "パラメータ",
+        "description": "説明",
+        "example": "例"
+      },
+      "parameters": {
+        "text": "投稿内容",
+        "url": "共有するURL",
+        "instance": "投稿先サーバー名",
+        "visibility": "公開範囲",
+        "hashtag": "ハッシュタグ（#なし）",
+        "autoRedirect": "自動投稿（1で有効）"
+      },
+      "samples": {
+        "title": "サンプルURL",
+        "basic": "基本的な使用例",
+        "withInstance": "サーバーと公開範囲を指定",
+        "autoRedirect": "自動投稿の例"
+      },
+      "notes": {
+        "title": "注意事項",
+        "optional": "全てのパラメータは任意です。ただし、自動投稿を有効にする場合は、公開先サーバー名が必須になります。",
+        "compatibility": "全てのパラメータがすべての投稿先に対応しているわけではありません。よって、投稿先によって無視されるパラメータが存在します。",
+        "mastodonExample": "例: Mastodonではハッシュタグは無視されます。そのため、投稿内容（t）にハッシュタグを含める必要があります。",
+        "visibility": "公開範囲は、mastodonとmisskeyのみ対応しており、mastodonは public/unlisted/private/direct から、misskeyは public/home/followers/specified から選択できます。"
+      }
+    }
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "lastUpdated": "最終更新日: 2025年5月28日",
+    "intro": "AnyPost values user privacy. This privacy policy explains what information our service collects and how it is used.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "description": "AnyPost does not store post content or personal information. All processing is done in the browser, and only minimal technical information is sent to the server."
+    },
+    "cookies": {
+      "title": "Cookie Usage",
+      "description": "This site uses minimal necessary cookies to improve user experience. These cookies are used for language settings and basic site functionality."
+    }
+  },
+  "license": {
+    "title": "ライセンス・帰属表示",
+    "lastUpdated": "最終更新日: 2025年5月28日",
+    "intro": "anypost.dev（以下、「本サービス」）で利用している他サービスのロゴの権利は、各権利者に帰属します。",
+    "logos": {
+      "title": "ロゴ・アイコンのライセンス",
+      "misskey": {
+        "description": "misskeyのロゴはCC BY-NC-SA 4.0でライセンスされています。"
+      },
+      "gnusocial": {
+        "description": "gnusocialのロゴはCC BY-SA 4.0でライセンスされています。"
+      }
+    }
+  },
+  "cookies": {
+    "title": "Cookieの使用について",
+    "description": "このサイトでは、サイトの機能向上とユーザー体験の最適化のためにCookieを使用しています。",
+    "essential": "必要なCookieのみを使用し、個人を特定する情報は収集していません。",
+    "serverSaveFeature": "Cookieを許可すると、前回使用したサーバーを記憶する機能が利用できます。",
+    "accept": "同意する",
+    "decline": "拒否する",
+    "noSaveNotice": "Cookieが無効のため、サーバーの記憶機能は利用できません。",
+    "changeSettings": "Cookie設定を変更する"
+  },
+  "language": {
+    "switch": "言語を切り替え",
+    "japanese": "日本語",
+    "english": "English"
+  },
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "retry": "再試行",
+    "close": "閉じる",
+    "example": "例",
+    "copy": "コピー",
+    "copied": "コピーしました！",
+    "techPreview": "Tech Preview"
+  },
+  "services": {
+    "title": "対応サービス一覧",
+    "description": "AnyPost.devが対応している全てのソーシャルメディアプラットフォームをご覧いただけます。",
+    "fediverse": {
+      "title": "分散型ソーシャルネットワーク (Fediverse)",
+      "description": "オープンで相互接続可能な分散型ソーシャルネットワークです。"
+    },
+    "traditional": {
+      "title": "従来型ソーシャルメディア",
+      "description": "主要な中央集権型ソーシャルメディアサービスです。"
+    },
+    "info": {
+      "title": "ご注意",
+      "description": "各サービスによって利用可能な機能（投稿内容、公開範囲、ハッシュタグなど）が異なります。詳細は使い方ページをご確認ください。"
+    },
+    "backToTop": "トップページに戻る"
+  }
+}

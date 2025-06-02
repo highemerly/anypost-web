@@ -1,0 +1,273 @@
+{
+  "nav": {
+    "share": "Share",
+    "howto": "How to Use",
+    "privacy": "Privacy",
+    "license": "License",
+    "services": "Services",
+    "contact": "Contacts"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Contact information for AnyPost.dev",
+    "administrator": "Administrator",
+    "contactInfo": "Contact Information",
+    "contactDescription": "If you have any questions or requests, please contact us through the information described in the link below.",
+    "visitContactPage": "Visit Information Page",
+    "note": "Please mention that your inquiry is related to AnyPost.dev when contacting us."
+  },
+  "footer": {
+    "product": "Product",
+    "legal": "Legal",
+    "language": "Language",
+    "description": "AnyPost.dev is a service that allows you to share content to various social media platforms worldwide from a single link placed on blogs and other sites. Supports mastodon, misskey, pleroma, X, facebook, and more. The rights to logos of other services belong to their respective rights holders. "
+  },
+  "share": {
+    "title": "AnyPost.dev",
+    "subtitle": "Easily share to various social media platforms",
+    "instanceName": "Server Name",
+    "instanceNamePlaceholder": "e.g., mastodon.social",
+    "instanceType": "Platform Type",
+    "postText": "Post Content",
+    "postTextPlaceholder": "Enter what you want to post...",
+    "postUrl": "URL",
+    "postUrlPlaceholder": "Enter URL to share...",
+    "visibility": "Visibility",
+    "hashtag": "Hashtag",
+    "hashtagPlaceholder": "Hashtag (without #)",
+    "postButton": "Post!",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "unsupportedInstance": "Unsupported instance",
+    "invalidHostname": "Invalid hostname",
+    "autoPostLoaded": "Post content automatically loaded",
+    "autoPostDescription": "Form has been auto-filled. Edit as needed.",
+    "serverNameRequired": "Please enter a server name",
+    "autoRedirectTitle": "Auto-posting...",
+    "autoRedirectMessage": "seconds until automatic post",
+    "autoRedirectError": "Server name is required for auto-redirect",
+    "autoRedirectErrorTitle": "Error",
+    "close": "Close",
+    "clearHistory": "Clear server history",
+    "dropdownLabel": "Select from popular servers...",
+    "manualInputLabel": "or enter manually",
+    "previouslyUsed": "previously used",
+    "visibilityOptions": {
+      "public": "Public",
+      "unlisted": "Unlisted",
+      "private": "Followers only",
+      "direct": "Direct",
+      "home": "Home",
+      "followers": "Followers",
+      "specified": "Specified users"
+    }
+  },
+  "top": {
+    "hero": {
+      "title": "Share to Multiple",
+      "subtitle": "Social Media Platforms",
+      "description": "AnyPost.dev is a tool that allows you to easily share content to various social media platforms including Mastodon, Misskey, Twitter, Facebook, and more.",
+      "cta": "Try It Now",
+      "howTo": "How to Use"
+    },
+    "supportedServices": {
+      "title": "Supported Services",
+      "description": "We support a wide range of social media platforms",
+      "fediverse": {
+        "title": "Fediverse",
+        "description": "Decentralized social network platforms. An open and interconnected network ecosystem."
+      },
+      "traditional": {
+        "title": "Traditional Platforms",
+        "description": "We also support major centralized social media services."
+      },
+      "moreServices": "More services coming soon",
+      "viewAllServices": "View All Supported Services",
+      "fullList": {
+        "title": "Complete List of Supported Services",
+        "fediverse": "Decentralized Social Networks",
+        "traditional": "Traditional Social Media"
+      }
+    },
+    "features": {
+      "title": "Key Features",
+      "multiPlatform": {
+        "title": "Multi-Platform Support",
+        "description": "Support for major social media platforms including Mastodon, Misskey, Twitter, Facebook, and more"
+      },
+      "easyToUse": {
+        "title": "Easy to Use Interface",
+        "description": "Intuitive UI that allows anyone to easily post to multiple platforms"
+      },
+      "privacy": {
+        "title": "Privacy Focused",
+        "description": "No content is stored, designed with privacy in mind"
+      }
+    }
+  },
+  "howto": {
+    "title": "How to Use",
+    "description": "Three ways to use AnyPost.dev",
+    "browser": {
+      "title": "Use in Browser",
+      "bookmarklet": {
+        "title": "Register Bookmarklet",
+        "description": "Use your browser's bookmark feature to easily share from any page.",
+        "codeLabel": "Bookmarklet Code",
+        "steps": {
+          "step1": "1. Copy the code above",
+          "step2": "2. Create a new bookmark in your browser and paste it as the URL",
+          "step3": "3. Just click the bookmark on any page you want to share!"
+        }
+      },
+      "serverSpecific": {
+        "title": "Create Server-Specific Bookmarklet",
+        "description": "Create a bookmarklet with your preferred server pre-selected to skip server selection.",
+        "serverLabel": "Target Server Name",
+        "serverPlaceholder": "e.g., mastodon.social",
+        "codeLabel": "Custom Bookmarklet Code",
+        "benefit1": "• This bookmarklet will automatically select your specified server",
+        "benefit2": "• Convenient for users who frequently use the same server"
+      }
+    },
+    "website": {
+      "title": "Add Button to Your Site",
+      "shareButton": {
+        "title": "Add a Share Button",
+        "description": "Paste the following code into your blog or website.",
+        "codeLabel": "HTML Code",
+        "preview": "Preview"
+      },
+      "designSelection": "Select Design",
+      "designs": {
+        "defaultBlue": {
+          "name": "Default Blue",
+          "description": "Original blue design"
+        },
+        "modernGradient": {
+          "name": "Modern Gradient",
+          "description": "Modern gradient design"
+        },
+        "orangeEnergy": {
+          "name": "Orange Energy",
+          "description": "Energetic orange design"
+        },
+        "minimalDark": {
+          "name": "Minimal Dark",
+          "description": "Simple and compact dark design"
+        },
+        "popPink": {
+          "name": "Pop Pink",
+          "description": "Cute and colorful pink design"
+        },
+        "techNavy": {
+          "name": "Tech Navy",
+          "description": "Developer-friendly rectangular design"
+        }
+      },
+      "customButton": {
+        "title": "Add Button to Your Site (For Developers)",
+        "description": "You can customize post content and destination by adding the following query strings to https://anypost.dev/share."
+      }
+    },
+    "developer": {
+      "title": "Custom Development (For Developers)",
+      "description": "You can customize post content and destination by adding the following query strings to https://anypost.dev/share.",
+      "table": {
+        "parameter": "Parameter",
+        "description": "Description",
+        "example": "Example"
+      },
+      "parameters": {
+        "text": "Post content",
+        "url": "URL to share",
+        "instance": "Target server name",
+        "visibility": "Post visibility",
+        "hashtag": "Hashtag (without #)",
+        "autoRedirect": "Auto-redirect (1 to enable)"
+      },
+      "samples": {
+        "title": "Sample URLs",
+        "basic": "Basic usage",
+        "withInstance": "With server and visibility",
+        "autoRedirect": "Auto-redirect example"
+      },
+      "notes": {
+        "title": "Important Notes",
+        "optional": "All parameters are optional. However, when enabling auto-redirect, the target server name is required.",
+        "compatibility": "Not all parameters are supported by all posting destinations. Some parameters may be ignored depending on the platform.",
+        "mastodonExample": "Example: Hashtags are ignored on Mastodon. Therefore, you need to include hashtags in the post content (t) parameter.",
+        "visibility": "Visibility settings are only supported by Mastodon and Misskey. Mastodon supports public/unlisted/private/direct, while Misskey supports public/home/followers/specified."
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: May 28, 2025",
+    "intro": "AnyPost values user privacy. This privacy policy explains what information our service collects and how it is used.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "description": "AnyPost does not store post content or personal information. All processing is done in the browser, and only minimal technical information is sent to the server."
+    },
+    "cookies": {
+      "title": "Cookie Usage",
+      "description": "This site uses minimal necessary cookies to improve user experience. These cookies are used for language settings and basic site functionality."
+    }
+  },
+  "license": {
+    "title": "License & Attribution",
+    "lastUpdated": "Last updated: May 28, 2025",
+    "intro": "The rights to logos of other services used in anypost.dev (hereinafter, \"this Service\") belong to their respective rights holders.",
+    "logos": {
+      "title": "Logo & Icon Licenses",
+      "misskey": {
+        "description": "The Misskey logo is licensed under CC BY-NC-SA 4.0."
+      },
+      "gnusocial": {
+        "description": "The GNU social logo is licensed under CC BY-SA 4.0."
+      }
+    }
+  },
+  "cookies": {
+    "title": "About Cookie Usage",
+    "description": "This site uses cookies to improve site functionality and optimize user experience.",
+    "essential": "We only use necessary cookies and do not collect personally identifiable information.",
+    "serverSaveFeature": "By allowing cookies, you can use the feature to remember previously used servers.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "noSaveNotice": "Server memory feature is not available because cookies are disabled.",
+    "changeSettings": "Change cookie settings"
+  },
+  "language": {
+    "switch": "Switch Language",
+    "japanese": "日本語",
+    "english": "English"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "example": "e.g.",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "techPreview": "Tech Preview"
+  },
+  "services": {
+    "title": "Supported Services",
+    "description": "View all social media platforms supported by AnyPost.dev.",
+    "fediverse": {
+      "title": "Decentralized Social Networks (Fediverse)",
+      "description": "Open and interconnected decentralized social network ecosystem."
+    },
+    "traditional": {
+      "title": "Traditional Social Media",
+      "description": "Major centralized social media services."
+    },
+    "info": {
+      "title": "Note",
+      "description": "Available features (post content, visibility, hashtags, etc.) vary by service. Please check the How to Use page for details."
+    },
+    "backToTop": "Back to Top"
+  }
+}
