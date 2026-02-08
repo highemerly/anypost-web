@@ -44,9 +44,6 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-md p-6">
-      <h1 class="text-2xl font-bold text-gray-900 mb-2">
-        {{ $t('share.title') }}
-      </h1>
       <p class="text-gray-600 mb-8">
         {{ $t('share.subtitle') }}
       </p>
@@ -591,7 +588,7 @@ const handleImageError = (event) => {
   event.target.style.display = 'none'
 }
 
-const handleSubmit = () => {
+const handleSubmit = (openInNewTab = true) => {
   if (!formData.instanceName.trim()) {
     return
   }
@@ -615,7 +612,12 @@ const handleSubmit = () => {
   )
 
   if (shareUrl && shareUrl !== '/') {
-    window.open(shareUrl, '_blank')
+    if (openInNewTab) {
+      window.open(shareUrl, '_blank')
+    } else {
+      // 自動リダイレクトの場合は同じタブで遷移（ポップアップブロック回避）
+      window.location.href = shareUrl
+    }
   }
 }
 
@@ -625,7 +627,7 @@ const startCountdown = () => {
     countdown.value--
     if (countdown.value <= 0) {
       clearInterval(countdownTimer)
-      handleSubmit()
+      handleSubmit(false) // 同じタブで遷移（ポップアップブロック回避）
     }
   }, 1000)
 }
@@ -671,6 +673,7 @@ const parseQueryParams = () => {
   // Auto-redirect functionality
   if (params.a && params.i) {
     autoRedirect.value = true
+    countdown.value = 3 // 即座にモーダルを表示するため初期値を設定
     console.log('Auto-redirect enabled')
 
     // Wait for instance info to be loaded, then start countdown

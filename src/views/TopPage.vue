@@ -46,9 +46,6 @@
           <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">
             {{ $t('top.supportedServices.fediverse.title') }}
           </h3>
-          <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-            {{ $t('top.supportedServices.fediverse.description') }}
-          </p>
           <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8">
             <div
               v-for="service in fediverseServices"
@@ -75,9 +72,6 @@
           <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">
             {{ $t('top.supportedServices.traditional.title') }}
           </h3>
-          <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
-            {{ $t('top.supportedServices.traditional.description') }}
-          </p>
           <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-8">
             <div
               v-for="service in traditionalServices"
@@ -101,9 +95,6 @@
 
         <!-- More Services Notice -->
         <div class="mt-12 text-center">
-          <p class="text-gray-500 text-sm mb-4">
-            {{ $t('top.supportedServices.moreServices') }}
-          </p>
           <router-link
             to="/services"
             class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"

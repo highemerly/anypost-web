@@ -65,6 +65,10 @@
       </div>
     </div>
 
+    <p class="text-gray-600 mb-6">
+        {{ $t('services.more') }}
+    </p>
+
     <!-- Additional Information -->
     <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
       <div class="flex">

@@ -23,7 +23,6 @@
     "description": "AnyPost.dev is a service that allows you to share content to various social media platforms worldwide from a single link placed on blogs and other sites. Supports mastodon, misskey, pleroma, X, facebook, and more. The rights to logos of other services belong to their respective rights holders. "
   },
   "share": {
-    "title": "AnyPost.dev",
     "subtitle": "Easily share to various social media platforms",
     "instanceName": "Server Name",
     "instanceNamePlaceholder": "e.g., mastodon.social",
@@ -71,17 +70,14 @@
       "howTo": "How to Use"
     },
     "supportedServices": {
-      "title": "Supported Services",
+      "title": "Some of the Supported Services",
       "description": "We support a wide range of social media platforms",
       "fediverse": {
-        "title": "Fediverse",
-        "description": "Decentralized social network platforms. An open and interconnected network ecosystem."
+        "title": "Fediverse (Decentralized Social Platforms)"
       },
       "traditional": {
-        "title": "Traditional Platforms",
-        "description": "We also support major centralized social media services."
+        "title": "Traditional Social Platforms"
       },
-      "moreServices": "More services coming soon",
       "viewAllServices": "View All Supported Services",
       "fullList": {
         "title": "Complete List of Supported Services",
@@ -196,7 +192,7 @@
         "title": "Important Notes",
         "optional": "All parameters are optional. However, when enabling auto-redirect, the target server name is required.",
         "compatibility": "Not all parameters are supported by all posting destinations. Some parameters may be ignored depending on the platform.",
-        "mastodonExample": "Example: Hashtags are ignored on Mastodon. Therefore, you need to include hashtags in the post content (t) parameter.",
+        "mastodonExample": "Example: Hashtags parameter is ignored on Mastodon. Therefore, if you watn to include hashtags, it should be included to the post content parameter.",
         "visibility": "Visibility settings are only supported by Mastodon and Misskey. Mastodon supports public/unlisted/private/direct, while Misskey supports public/home/followers/specified."
       }
     }
@@ -236,7 +232,7 @@
     "accept": "Accept",
     "decline": "Decline",
     "noSaveNotice": "Server memory feature is not available because cookies are disabled.",
-    "changeSettings": "Change cookie settings"
+    "changeSettings": "Change cookie acceptance"
   },
   "language": {
     "switch": "Switch Language",
@@ -264,6 +260,7 @@
       "title": "Traditional Social Media",
       "description": "Major centralized social media services."
     },
+    "more": "More services coming soon!",
     "info": {
       "title": "Note",
       "description": "Available features (post content, visibility, hashtags, etc.) vary by service. Please check the How to Use page for details."

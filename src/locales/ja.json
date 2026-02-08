@@ -17,13 +17,12 @@
     "note": "お問い合わせの際は、AnyPost.devに関する内容である旨をお知らせください。"
   },
   "footer": {
-    "product": "製品",
+    "product": "サービス",
     "legal": "法的事項",
     "language": "言語",
     "description": "AnyPost.dev は、ブログなどに設置した1つのリンクから、世界中の様々なSNSにシェアできるサービスです。mastodon, misskey, pleroma, X, facebook, ...などに対応しています。利用している他サービスのロゴの権利は、各権利者に帰属します。"
   },
   "share": {
-    "title": "AnyPost.dev",
     "subtitle": "様々なSNSに簡単に投稿できます",
     "instanceName": "サーバー名",
     "instanceNamePlaceholder": "例: mastodon.social",
@@ -43,8 +42,8 @@
     "autoPostLoaded": "投稿内容を自動で読み込みました",
     "autoPostDescription": "フォームに情報が自動入力されています。必要に応じて編集してください。",
     "serverNameRequired": "サーバー名を入力してください",
-    "autoRedirectTitle": "自動投稿中...",
-    "autoRedirectMessage": "秒後に自動で投稿します",
+    "autoRedirectTitle": "読み込み中...",
+    "autoRedirectMessage": "秒後に、自動で移動します",
     "autoRedirectError": "自動投稿にはサーバー名が必要です",
     "autoRedirectErrorTitle": "エラー",
     "close": "閉じる",
@@ -71,17 +70,14 @@
       "howTo": "使い方を見る"
     },
     "supportedServices": {
-      "title": "対応サービス",
-      "description": "幅広いソーシャルメディアプラットフォームに対応しています",
+      "title": "対応サービスの例",
+      "description": "幅広いSNSプラットフォームに対応しています",
       "fediverse": {
-        "title": "Fediverse",
-        "description": "分散型ソーシャルネットワークのプラットフォーム群。オープンで相互接続可能なネットワークです。"
+        "title": "Fediverse (分散型SNS)"
       },
       "traditional": {
-        "title": "従来型プラットフォーム",
-        "description": "主要な中央集権型ソーシャルメディアサービスにも対応しています。"
+        "title": "従来型SNS"
       },
-      "moreServices": "その他のサービスも順次対応予定です",
       "viewAllServices": "対応サービス一覧を見る",
       "fullList": {
         "title": "対応サービス一覧",
@@ -196,7 +192,7 @@
         "title": "注意事項",
         "optional": "全てのパラメータは任意です。ただし、自動投稿を有効にする場合は、公開先サーバー名が必須になります。",
         "compatibility": "全てのパラメータがすべての投稿先に対応しているわけではありません。よって、投稿先によって無視されるパラメータが存在します。",
-        "mastodonExample": "例: Mastodonではハッシュタグは無視されます。そのため、投稿内容（t）にハッシュタグを含める必要があります。",
+        "mastodonExample": "例: Mastodonではハッシュタグは無視されます。そのため、ハッシュタグを投稿したい場合は、投稿内容（t）にハッシュタグを含めてシェアするしかありません。",
         "visibility": "公開範囲は、mastodonとmisskeyのみ対応しており、mastodonは public/unlisted/private/direct から、misskeyは public/home/followers/specified から選択できます。"
       }
     }
@@ -236,7 +232,7 @@
     "accept": "同意する",
     "decline": "拒否する",
     "noSaveNotice": "Cookieが無効のため、サーバーの記憶機能は利用できません。",
-    "changeSettings": "Cookie設定を変更する"
+    "changeSettings": "Cookieの許諾設定を変更する"
   },
   "language": {
     "switch": "言語を切り替え",
@@ -264,6 +260,7 @@
       "title": "従来型ソーシャルメディア",
       "description": "主要な中央集権型ソーシャルメディアサービスです。"
     },
+    "more": "その他のサービスも順次対応予定です",
     "info": {
       "title": "ご注意",
       "description": "各サービスによって利用可能な機能（投稿内容、公開範囲、ハッシュタグなど）が異なります。詳細は使い方ページをご確認ください。"

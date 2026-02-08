@@ -273,8 +273,7 @@
           </h4>
           <ul class="text-sm text-blue-800 space-y-2">
             <li>{{ $t('howto.developer.notes.optional') }}</li>
-            <li>{{ $t('howto.developer.notes.compatibility') }}</li>
-            <li>{{ $t('howto.developer.notes.mastodonExample') }}</li>
+            <li>{{ $t('howto.developer.notes.compatibility') }} {{ $t('howto.developer.notes.mastodonExample') }}</li>
             <li>{{ $t('howto.developer.notes.visibility') }}</li>
           </ul>
         </div>
