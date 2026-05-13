@@ -197,7 +197,7 @@ import { ref } from 'vue'
 const fediverseServices = ref([
   { name: 'mastodon', displayName: 'Mastodon', icon: '/assets/brand/mastodon.png' },
   { name: 'misskey', displayName: 'Misskey', icon: '/assets/brand/misskey.png' },
-  { name: 'diaspora', displayName: 'Diaspora', icon: '/assets/brand/diaspora.png' },
+  { name: 'bluesky', displayName: 'Bluesky', icon: '/assets/brand/bluesky.png' },
   { name: 'friendica', displayName: 'Friendica', icon: '/assets/brand/friendica.png' },
   { name: 'gnusocial', displayName: 'GNU social', icon: '/assets/brand/gnusocial.png' },
   { name: 'pleroma', displayName: 'Pleroma', icon: '/assets/brand/pleroma.png' }

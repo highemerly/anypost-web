@@ -19,8 +19,13 @@ RUN npm run build
 # ============================================
 FROM nginx:alpine AS runner
 
-# nginx 設定をコピー
-COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+# nginx 設定テンプレートをコピー（起動時に envsubst で展開される）
+COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
+
+# ${API_UPSTREAM} のみを置換対象とする（$host 等の nginx 変数は保護）
+ENV NGINX_ENVSUBST_FILTER=API_UPSTREAM
+# デフォルトの upstream（docker-compose / docker run の -e で上書き可能）
+ENV API_UPSTREAM=https://anypost.dev
 
 # ビルド成果物をコピー
 COPY --from=builder /app/dist /usr/share/nginx/html

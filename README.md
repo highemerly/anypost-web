@@ -71,6 +71,28 @@ npm run lint
 yarn lint
 ```
 
+### Docker での検証
+
+ビルド済み静的ファイルを nginx で配信するイメージを作って、コンテナで検証できます。
+
+```bash
+# ビルド & 起動
+docker compose up --build
+
+# → http://localhost:8080 でアクセス
+# → フロントの /api/* リクエストは、ホストの http://localhost:3001 にプロキシされる
+```
+
+API のプロキシ先は `docker-compose.yml` の `API_UPSTREAM` 環境変数で切り替えられます。
+
+| 用途 | API_UPSTREAM の値 |
+| --- | --- |
+| ホストの localhost:3001 を叩く（既定） | `http://host.docker.internal:3001` |
+| 本番 API を叩く | `https://anypost.dev` |
+| 別コンテナの API を叩く | `http://anypost-api:3000` 等 |
+
+フロント側の API 呼び出しは相対パス (`/api/...`) で書かれており、nginx が `${API_UPSTREAM}/api/` にプロキシします。ビルド成果物は環境に依存しないので、同じイメージを dev/prod 両方で使えます。
+
 ## Project Structure
 
 ```

@@ -212,16 +212,23 @@
   },
   "license": {
     "title": "License & Attribution",
-    "lastUpdated": "Last updated: May 28, 2025",
+    "lastUpdated": "Last updated: May 13, 2026",
     "intro": "The rights to logos of other services used in anypost.dev (hereinafter, \"this Service\") belong to their respective rights holders.",
-    "logos": {
-      "title": "Logo & Icon Licenses",
+    "ccLogos": {
+      "title": "Creative Commons Licensed Logos",
       "misskey": {
         "description": "The Misskey logo is licensed under CC BY-NC-SA 4.0."
       },
       "gnusocial": {
         "description": "The GNU social logo is licensed under CC BY-SA 4.0."
+      },
+      "lemmy": {
+        "description": "The Lemmy logo was created by Andy Cuccaro ({'@'}andycuccaro) and is licensed under CC BY-SA 4.0."
       }
+    },
+    "trademarks": {
+      "title": "Trademarks",
+      "description": "The following logos and names are registered trademarks or trademarks of their respective rights holders. This Service displays them solely as share buttons in compliance with each company's brand guidelines."
     }
   },
   "cookies": {

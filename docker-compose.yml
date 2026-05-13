@@ -1,0 +1,17 @@
+# 開発・検証用 docker-compose
+# 使い方:
+#   docker compose up --build
+#   → http://localhost:8080 でアクセス
+#   → /api/* は host の http://localhost:3001 にプロキシされる
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      # コンテナ内から host マシンの localhost:3001 を指す
+      # macOS/Windows の Docker Desktop では host.docker.internal が自動で解決される
+      API_UPSTREAM: http://host.docker.internal:3001
+    extra_hosts:
+      # Linux でも host.docker.internal を使えるようにする
+      - "host.docker.internal:host-gateway"

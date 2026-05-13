@@ -212,16 +212,23 @@
   },
   "license": {
     "title": "ライセンス・帰属表示",
-    "lastUpdated": "最終更新日: 2025年5月28日",
+    "lastUpdated": "最終更新日: 2026年5月13日",
     "intro": "anypost.dev（以下、「本サービス」）で利用している他サービスのロゴの権利は、各権利者に帰属します。",
-    "logos": {
-      "title": "ロゴ・アイコンのライセンス",
+    "ccLogos": {
+      "title": "Creative Commons ライセンスのロゴ",
       "misskey": {
-        "description": "misskeyのロゴはCC BY-NC-SA 4.0でライセンスされています。"
+        "description": "Misskey のロゴは CC BY-NC-SA 4.0 でライセンスされています。"
       },
       "gnusocial": {
-        "description": "gnusocialのロゴはCC BY-SA 4.0でライセンスされています。"
+        "description": "GNU social のロゴは CC BY-SA 4.0 でライセンスされています。"
+      },
+      "lemmy": {
+        "description": "Lemmy のロゴは Andy Cuccaro ({'@'}andycuccaro) 氏により作成され、CC BY-SA 4.0 でライセンスされています。"
       }
+    },
+    "trademarks": {
+      "title": "各社の商標",
+      "description": "以下のロゴ・名称は、それぞれの権利者の登録商標または商標です。本サービスでは、各社のブランドガイドラインに従い、シェアボタンの表示のみを目的として使用しています。"
     }
   },
   "cookies": {

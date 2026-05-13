@@ -27,9 +27,9 @@ server {
         add_header Cache-Control "public, immutable";
     }
 
-    # API へのプロキシ（同一ドメインで API を提供する場合）
+    # API プロキシ（${API_UPSTREAM} は起動時に envsubst で置換される）
     location /api/ {
-        proxy_pass http://anypost-api:3000/api/;
+        proxy_pass ${API_UPSTREAM}/api/;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

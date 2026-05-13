@@ -19,6 +19,12 @@ export const INSTANCE_TYPES = {
   HATENA: 'hatenabookmark',
   PINTEREST: 'pinterest',
   XING: 'xing',
+  REDDIT: 'reddit',
+  LEMMY: 'lemmy',
+  BLUESKY: 'bluesky',
+  WHATSAPP: 'whatsapp',
+  TELEGRAM: 'telegram',
+  THREADS: 'threads',
   ERROR: 'unknown'
 }
 
@@ -109,7 +115,7 @@ const instanceConfigs = {
     availableParams: ['text', 'url', 'hashtag'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
-      const url = new URL('https://twitter.com/intent/tweet')
+      const url = new URL('https://x.com/intent/tweet')
       if (params.text) url.searchParams.set('text', params.text)
       if (params.url) url.searchParams.set('url', params.url)
       if (params.hashtag) url.searchParams.set('hashtags', params.hashtag)
@@ -187,28 +193,88 @@ const instanceConfigs = {
       if (params.url) url.searchParams.set('url', params.url)
       return url.toString()
     }
+  },
+
+  [INSTANCE_TYPES.REDDIT]: {
+    name: INSTANCE_TYPES.REDDIT,
+    icon: '/assets/brand/reddit.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://www.reddit.com/submit')
+      if (params.text) url.searchParams.set('title', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.LEMMY]: {
+    name: INSTANCE_TYPES.LEMMY,
+    icon: '/assets/brand/lemmy.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL(`https://${instanceName}/create_post`)
+      if (params.text) url.searchParams.set('title', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.BLUESKY]: {
+    name: INSTANCE_TYPES.BLUESKY,
+    icon: '/assets/brand/bluesky.png',
+    availableParams: ['text'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://bsky.app/intent/compose')
+      if (params.text) url.searchParams.set('text', params.text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.WHATSAPP]: {
+    name: INSTANCE_TYPES.WHATSAPP,
+    icon: '/assets/brand/whatsapp.png',
+    availableParams: ['text'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://wa.me/')
+      if (params.text) url.searchParams.set('text', params.text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.TELEGRAM]: {
+    name: INSTANCE_TYPES.TELEGRAM,
+    icon: '/assets/brand/telegram.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://t.me/share/url')
+      if (params.url) url.searchParams.set('url', params.url)
+      if (params.text) url.searchParams.set('text', params.text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.THREADS]: {
+    name: INSTANCE_TYPES.THREADS,
+    icon: '/assets/brand/threads.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://www.threads.net/intent/post')
+      if (params.text) url.searchParams.set('text', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
   }
-
-  // Add other instance types as needed...
 }
-
-// Instance cache - commonly used instances
-const instanceCache = [
-  { instanceName: 'twitter.com', instanceType: 'twitter' },
-  { instanceName: 'x.com', instanceType: 'twitter' },
-  { instanceName: 'facebook.com', instanceType: 'facebook' },
-  { instanceName: 'mstdn.jp', instanceType: 'mastodon' },
-  { instanceName: 'mastodon.cloud', instanceType: 'mastodon' },
-  { instanceName: 'mastodon.social', instanceType: 'mastodon' },
-  { instanceName: 'pawoo.net', instanceType: 'mastodon' },
-  { instanceName: 'best-friends.chat', instanceType: 'mastodon' },
-  { instanceName: 'fedibird.com', instanceType: 'fedibird' },
-  { instanceName: 'misskey.io', instanceType: 'misskey' }
-]
 
 export const useInstanceStore = defineStore('instance', {
   state: () => ({
-    instanceCache: [...instanceCache],
+    instanceCache: [],
     apiCache: new Map(), // API結果のキャッシュ
     currentInstance: null,
     loading: false,
@@ -219,17 +285,7 @@ export const useInstanceStore = defineStore('instance', {
 
   getters: {
     getInstanceConfig: (state) => (instanceType) => {
-      // Handle special cases
-      const typeMap = {
-        azpick: INSTANCE_TYPES.MISSKEY,
-        fedibird: INSTANCE_TYPES.MASTODON,
-        akkoma: INSTANCE_TYPES.PLEROMA,
-        cherrypick: INSTANCE_TYPES.MISSKEY,
-        iceshrimp: INSTANCE_TYPES.MISSKEY
-      }
-
-      const mappedType = typeMap[instanceType] || instanceType
-      return instanceConfigs[mappedType] || instanceConfigs[INSTANCE_TYPES.ERROR]
+      return instanceConfigs[instanceType] || instanceConfigs[INSTANCE_TYPES.ERROR]
     },
 
     isInstanceSupported: (state) => (instanceType) => {
@@ -304,9 +360,9 @@ export const useInstanceStore = defineStore('instance', {
           return this.currentInstance
         }
 
-        // Fetch from API
+        // Fetch from API (same-origin; nginx proxies /api/ to the upstream)
         const response = await axios.get(
-          `https://anypost.dev/api/v1/instances/${cleanInstanceName}`,
+          `/api/v1/instances/${cleanInstanceName}`,
           {
             timeout: API_TIMEOUT,
             signal: this.currentController.signal
