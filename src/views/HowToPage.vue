@@ -36,43 +36,6 @@
           </h2>
         </div>
 
-        <!-- General Bookmarklet -->
-        <div class="mb-8 pb-8 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">
-            {{ $t('howto.browser.bookmarklet.title') }}
-          </h3>
-          <p class="text-gray-600 mb-4">
-            {{ $t('howto.browser.bookmarklet.description') }}
-          </p>
-
-          <div class="bg-gray-50 rounded-lg p-4 mb-4">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              {{ $t('howto.browser.bookmarklet.codeLabel') }}
-            </label>
-            <div class="relative">
-              <textarea
-                ref="bookmarkletCodeTextarea"
-                :value="bookmarkletCode"
-                readonly
-                rows="4"
-                class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-mono"
-              ></textarea>
-              <button
-                @click="copyBookmarkletCode"
-                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-              >
-                {{ $t('common.copy') }}
-              </button>
-            </div>
-          </div>
-
-          <div class="text-sm text-gray-600">
-            <p class="mb-2">{{ $t('howto.browser.bookmarklet.steps.step1') }}</p>
-            <p class="mb-2">{{ $t('howto.browser.bookmarklet.steps.step2') }}</p>
-            <p>{{ $t('howto.browser.bookmarklet.steps.step3') }}</p>
-          </div>
-        </div>
-
         <!-- Server-specific Bookmarklet -->
         <div>
           <h3 class="text-lg font-semibold text-gray-800 mb-4">
@@ -118,8 +81,55 @@
           </div>
 
           <div class="text-sm text-gray-600">
-            <p class="mb-2">{{ $t('howto.browser.serverSpecific.benefit1') }}</p>
-            <p>{{ $t('howto.browser.serverSpecific.benefit2') }}</p>
+            <p class="mb-2">{{ $t('howto.browser.serverSpecific.steps.step1') }}</p>
+            <p class="mb-2">{{ $t('howto.browser.serverSpecific.steps.step2') }}</p>
+            <p class="mb-2">{{ $t('howto.browser.serverSpecific.steps.step3') }}</p>
+            <p>{{ $t('howto.browser.serverSpecific.steps.step4') }}</p>
+          </div>
+        </div>
+
+        <!-- OR Divider -->
+        <div class="my-8 flex items-center" aria-hidden="true">
+          <div class="flex-grow border-t border-gray-200"></div>
+          <span class="px-4 text-sm font-medium text-gray-500">— {{ $t('howto.browser.or') }} —</span>
+          <div class="flex-grow border-t border-gray-200"></div>
+        </div>
+
+        <!-- General Bookmarklet -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">
+            {{ $t('howto.browser.bookmarklet.title') }}
+          </h3>
+          <p class="text-gray-600 mb-4">
+            {{ $t('howto.browser.bookmarklet.description') }}
+          </p>
+
+          <div class="bg-gray-50 rounded-lg p-4 mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              {{ $t('howto.browser.bookmarklet.codeLabel') }}
+            </label>
+            <div class="relative">
+              <textarea
+                ref="bookmarkletCodeTextarea"
+                :value="bookmarkletCode"
+                readonly
+                rows="4"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-mono"
+              ></textarea>
+              <button
+                @click="copyBookmarkletCode"
+                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              >
+                {{ $t('common.copy') }}
+              </button>
+            </div>
+          </div>
+
+          <div class="text-sm text-gray-600">
+            <p class="mb-2">{{ $t('howto.browser.bookmarklet.steps.step1') }}</p>
+            <p class="mb-2">{{ $t('howto.browser.bookmarklet.steps.step2') }}</p>
+            <p class="mb-2">{{ $t('howto.browser.bookmarklet.steps.step3') }}</p>
+            <p>{{ $t('howto.browser.bookmarklet.steps.step4') }}</p>
           </div>
         </div>
       </div>

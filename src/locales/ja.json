@@ -20,7 +20,8 @@
     "product": "サービス",
     "legal": "法的事項",
     "language": "言語",
-    "description": "AnyPost.dev は、ブログなどに設置した1つのリンクから、世界中の様々なSNSにシェアできるサービスです。mastodon, misskey, pleroma, X, facebook, ...などに対応しています。利用している他サービスのロゴの権利は、各権利者に帰属します。"
+    "description": "AnyPost.dev は、ブログなどに設置した1つのリンクから、世界中の様々なSNSにシェアできるサービスです。mastodon, misskey, pleroma, X, facebook, ...などに対応しています。利用している他サービスのロゴの権利は、各権利者に帰属します。",
+    "licenseLink": "詳細はライセンスページをご覧ください。"
   },
   "share": {
     "subtitle": "様々なSNSに簡単に投稿できます",
@@ -51,6 +52,7 @@
     "dropdownLabel": "よく使われるサーバーから選択...",
     "manualInputLabel": "または自分で入力",
     "previouslyUsed": "前回使用",
+    "viewSupportedServices": "対応サービス一覧",
     "visibilityOptions": {
       "public": "パブリック",
       "unlisted": "未収載",
@@ -86,18 +88,14 @@
       }
     },
     "features": {
-      "title": "主な機能",
+      "title": "特徴",
       "multiPlatform": {
         "title": "マルチプラットフォーム対応",
-        "description": "Mastodon、Misskey、Twitter、Facebookなど、主要なソーシャルメディアに対応"
-      },
-      "easyToUse": {
-        "title": "使いやすいインターface",
-        "description": "直感的なUIで、誰でも簡単に複数のプラットフォームに投稿可能"
+        "description": "Mastodon、Misskey、X、Facebookなど、多くのSNSに一つの共通URLで投稿できます。"
       },
       "privacy": {
         "title": "プライバシー重視",
-        "description": "投稿内容は保存されず、プライバシーを重視した設計"
+        "description": "あなたのアカウント名や投稿内容はサーバーに一切保存されません。"
       }
     }
   },
@@ -106,28 +104,34 @@
     "description": "AnyPost.devの3つの使用方法をご紹介します",
     "browser": {
       "title": "ブラウザで利用する",
+      "or": "または",
       "bookmarklet": {
-        "title": "ブックマークレットを登録する",
+        "title": "汎用的なブックマークレットを登録する",
         "description": "ブラウザのお気に入り機能を使って、どのページからでも簡単にシェアできます。",
         "codeLabel": "ブックマークレットコード",
         "steps": {
           "step1": "1. 上記のコードをコピーしてください",
           "step2": "2. ブラウザのお気に入りに新しいブックマークを作成し、URLに貼り付けてください",
-          "step3": "3. シェアしたいページでブックマークをクリックするだけ！"
+          "step3": "3. シェアしたいページでブックマークをクリックしてください",
+          "step4": "4. 表示された投稿ページで投稿先のサーバー名を入力してシェアしてください"
         }
       },
       "serverSpecific": {
-        "title": "特定サーバー向けのブックマークレットを作成する",
-        "description": "よく利用するサーバーを指定して、サーバー選択を省略できるブックマークレットを作成できます。",
+        "title": "投稿サーバーを指定したブックマークレットを作成する",
+        "description": "ブラウザのお気に入り機能を使って、どのページからでも簡単にシェアできます。投稿先サーバー名をあらかじめ指定しておきましょう。",
         "serverLabel": "投稿先サーバー名",
         "serverPlaceholder": "例: mastodon.social",
         "codeLabel": "カスタムブックマークレットコード",
-        "benefit1": "• このブックマークレットを使用すると、指定したサーバーが自動で選択されます",
-        "benefit2": "• よく使うサーバーがある場合、毎回入力する手間が省けて便利です"
+        "steps": {
+          "step1": "1. 上記の入力欄に投稿先サーバー名を入力してください",
+          "step2": "2. 生成されたコードをコピーしてください",
+          "step3": "3. ブラウザのお気に入りに新しいブックマークを作成し、URLに貼り付けてください",
+          "step4": "4. シェアしたいページでブックマークをクリックするだけ！"
+        }
       }
     },
     "website": {
-      "title": "あなたのサイトにボタンを設置する",
+      "title": "あなたのWebサイトやブログにボタンを設置する",
       "shareButton": {
         "title": "ページをシェアするボタンを設置する",
         "description": "以下のコードをあなたのブログやWebサイトに貼り付けてください。",
@@ -162,7 +166,7 @@
         }
       },
       "customButton": {
-        "title": "あなたのサイトにボタンを設置する（デベロッパー向け）",
+        "title": "（デベロッパー向け）カスタマイズして利用する",
         "description": "https://anypost.dev/share に以下のクエリ文字列を追加すると、投稿内容や投稿先を自由にカスタマイズできます。"
       }
     },
@@ -226,6 +230,10 @@
         "description": "Lemmy のロゴは Andy Cuccaro ({'@'}andycuccaro) 氏により作成され、CC BY-SA 4.0 でライセンスされています。"
       }
     },
+    "creativeCommons": {
+      "title": "Creative Commons について",
+      "description": "Creative Commons は、クリエイティブな作品の共有を促進するライセンス体系です。詳細については公式サイトをご確認ください。"
+    },
     "trademarks": {
       "title": "各社の商標",
       "description": "以下のロゴ・名称は、それぞれの権利者の登録商標または商標です。本サービスでは、各社のブランドガイドラインに従い、シェアボタンの表示のみを目的として使用しています。"
@@ -268,6 +276,11 @@
       "description": "主要な中央集権型ソーシャルメディアサービスです。"
     },
     "more": "その他のサービスも順次対応予定です",
+    "licenseInfo": {
+      "title": "ロゴ・名称のライセンスについて",
+      "description": "本ページに掲載しているロゴおよび名称の権利は、各権利者に帰属します。詳細は",
+      "link": "ライセンスページ"
+    },
     "info": {
       "title": "ご注意",
       "description": "各サービスによって利用可能な機能（投稿内容、公開範囲、ハッシュタグなど）が異なります。詳細は使い方ページをご確認ください。"

@@ -118,7 +118,7 @@
         </div>
 
         <div class="mt-16">
-          <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
             <!-- Multi-Platform Feature -->
             <div class="text-center">
               <div class="flex items-center justify-center h-16 w-16 rounded-md bg-blue-500 text-white mx-auto">
@@ -131,21 +131,6 @@
               </h3>
               <p class="mt-2 text-base text-gray-500">
                 {{ $t('top.features.multiPlatform.description') }}
-              </p>
-            </div>
-
-            <!-- Easy to Use Feature -->
-            <div class="text-center">
-              <div class="flex items-center justify-center h-16 w-16 rounded-md bg-green-500 text-white mx-auto">
-                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 class="mt-6 text-lg font-medium text-gray-900">
-                {{ $t('top.features.easyToUse.title') }}
-              </h3>
-              <p class="mt-2 text-base text-gray-500">
-                {{ $t('top.features.easyToUse.description') }}
               </p>
             </div>
 
@@ -199,8 +184,8 @@ const fediverseServices = ref([
   { name: 'misskey', displayName: 'Misskey', icon: '/assets/brand/misskey.png' },
   { name: 'bluesky', displayName: 'Bluesky', icon: '/assets/brand/bluesky.png' },
   { name: 'friendica', displayName: 'Friendica', icon: '/assets/brand/friendica.png' },
-  { name: 'gnusocial', displayName: 'GNU social', icon: '/assets/brand/gnusocial.png' },
-  { name: 'pleroma', displayName: 'Pleroma', icon: '/assets/brand/pleroma.png' }
+  { name: 'pleroma', displayName: 'Pleroma', icon: '/assets/brand/pleroma.png' },
+  { name: 'gnusocial', displayName: 'GNU Social', icon: '/assets/brand/gnusocial.png' }
 ])
 
 // Traditional/Non-fediverse services
@@ -208,9 +193,9 @@ const traditionalServices = ref([
   { name: 'twitter', displayName: 'X (Twitter)', icon: '/assets/brand/twitter.png' },
   { name: 'facebook', displayName: 'Facebook', icon: '/assets/brand/facebook.png' },
   { name: 'hatenabookmark', displayName: 'Hatena', icon: '/assets/brand/hatenabookmark.png' },
-  { name: 'line', displayName: 'LINE', icon: '/assets/brand/line.png' },
   { name: 'linkedin', displayName: 'LinkedIn', icon: '/assets/brand/linkedin.png' },
-  { name: 'pinterest', displayName: 'Pinterest', icon: '/assets/brand/pinterest.png' }
+  { name: 'threads', displayName: 'Threads', icon: '/assets/brand/threads.png' },
+  { name: 'whatsapp', displayName: 'WhatsApp', icon: '/assets/brand/whatsapp.png' }
 ])
 
 const handleImageError = (event) => {

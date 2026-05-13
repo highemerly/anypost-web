@@ -20,7 +20,8 @@
     "product": "Product",
     "legal": "Legal",
     "language": "Language",
-    "description": "AnyPost.dev is a service that allows you to share content to various social media platforms worldwide from a single link placed on blogs and other sites. Supports mastodon, misskey, pleroma, X, facebook, and more. The rights to logos of other services belong to their respective rights holders. "
+    "description": "AnyPost.dev is a service that allows you to share content to various social media platforms worldwide from a single link placed on blogs and other sites. Supports mastodon, misskey, pleroma, X, facebook, and more. The rights to logos of other services belong to their respective rights holders.",
+    "licenseLink": "See the License page for details."
   },
   "share": {
     "subtitle": "Easily share to various social media platforms",
@@ -51,6 +52,7 @@
     "dropdownLabel": "Select from popular servers...",
     "manualInputLabel": "or enter manually",
     "previouslyUsed": "previously used",
+    "viewSupportedServices": "list of supported services",
     "visibilityOptions": {
       "public": "Public",
       "unlisted": "Unlisted",
@@ -86,18 +88,14 @@
       }
     },
     "features": {
-      "title": "Key Features",
+      "title": "Features",
       "multiPlatform": {
         "title": "Multi-Platform Support",
-        "description": "Support for major social media platforms including Mastodon, Misskey, Twitter, Facebook, and more"
-      },
-      "easyToUse": {
-        "title": "Easy to Use Interface",
-        "description": "Intuitive UI that allows anyone to easily post to multiple platforms"
+        "description": "Support for major social media platforms including Mastodon, Misskey, X, Facebook, and more via single link."
       },
       "privacy": {
         "title": "Privacy Focused",
-        "description": "No content is stored, designed with privacy in mind"
+        "description": "We will not store your account information and contents."
       }
     }
   },
@@ -106,6 +104,7 @@
     "description": "Three ways to use AnyPost.dev",
     "browser": {
       "title": "Use in Browser",
+      "or": "OR",
       "bookmarklet": {
         "title": "Register Bookmarklet",
         "description": "Use your browser's bookmark feature to easily share from any page.",
@@ -113,21 +112,26 @@
         "steps": {
           "step1": "1. Copy the code above",
           "step2": "2. Create a new bookmark in your browser and paste it as the URL",
-          "step3": "3. Just click the bookmark on any page you want to share!"
+          "step3": "3. Click the bookmark on any page you want to share",
+          "step4": "4. On the share page that opens, enter your target server name to share"
         }
       },
       "serverSpecific": {
-        "title": "Create Server-Specific Bookmarklet",
+        "title": "Register Server-Specific Bookmarklet",
         "description": "Create a bookmarklet with your preferred server pre-selected to skip server selection.",
         "serverLabel": "Target Server Name",
         "serverPlaceholder": "e.g., mastodon.social",
         "codeLabel": "Custom Bookmarklet Code",
-        "benefit1": "• This bookmarklet will automatically select your specified server",
-        "benefit2": "• Convenient for users who frequently use the same server"
+        "steps": {
+          "step1": "1. Enter your target server name in the field above",
+          "step2": "2. Copy the generated code",
+          "step3": "3. Create a new bookmark in your browser and paste it as the URL",
+          "step4": "4. Just click the bookmark on any page you want to share!"
+        }
       }
     },
     "website": {
-      "title": "Add Button to Your Site",
+      "title": "Add Button to Your Web Site / Blog",
       "shareButton": {
         "title": "Add a Share Button",
         "description": "Paste the following code into your blog or website.",
@@ -162,7 +166,7 @@
         }
       },
       "customButton": {
-        "title": "Add Button to Your Site (For Developers)",
+        "title": "(For Developers)　Customize Button to Your Site",
         "description": "You can customize post content and destination by adding the following query strings to https://anypost.dev/share."
       }
     },
@@ -226,6 +230,10 @@
         "description": "The Lemmy logo was created by Andy Cuccaro ({'@'}andycuccaro) and is licensed under CC BY-SA 4.0."
       }
     },
+    "creativeCommons": {
+      "title": "About Creative Commons",
+      "description": "Creative Commons is a licensing system that promotes sharing of creative works. For more details, please check the official website."
+    },
     "trademarks": {
       "title": "Trademarks",
       "description": "The following logos and names are registered trademarks or trademarks of their respective rights holders. This Service displays them solely as share buttons in compliance with each company's brand guidelines."
@@ -268,6 +276,11 @@
       "description": "Major centralized social media services."
     },
     "more": "More services coming soon!",
+    "licenseInfo": {
+      "title": "About Logo & Name Licenses",
+      "description": "The rights to logos and names shown on this page belong to their respective rights holders. For details, see the ",
+      "link": "License page"
+    },
     "info": {
       "title": "Note",
       "description": "Available features (post content, visibility, hashtags, etc.) vary by service. Please check the How to Use page for details."

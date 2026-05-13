@@ -146,8 +146,9 @@
         <div class="mt-8 border-t border-gray-200 pt-8">
           <p class="text-sm text-gray-400 text-center leading-relaxed">
             {{ $t('footer.description') }}
-            Misskey: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="underline">BY-NC-SA 4.0</a>,
-            GNU social: <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="underline">CC BY-SA 4.0</a>.
+            <router-link to="/license" class="underline hover:text-gray-600">
+              {{ $t('footer.licenseLink') }}
+            </router-link>
           </p>
         </div>
       </div>

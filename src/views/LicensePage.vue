@@ -97,12 +97,9 @@
       </div>
 
       <div class="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-        <h3 class="text-lg font-semibold text-blue-900 mb-2">Creative Commons について / About Creative Commons</h3>
-        <p class="text-blue-800 mb-4">
-          Creative Commons は、クリエイティブな作品の共有を促進するライセンス体系です。詳細については公式サイトをご確認ください。
-        </p>
+        <h3 class="text-lg font-semibold text-blue-900 mb-2">{{ $t('license.creativeCommons.title') }}</h3>
         <p class="text-blue-800">
-          Creative Commons is a licensing system that promotes sharing of creative works. For more details, please check the official website.
+          {{ $t('license.creativeCommons.description') }}
         </p>
         <a
           href="https://creativecommons.org/"
@@ -117,7 +114,7 @@
         </a>
       </div>
 
-      <h2 class="mt-12">{{ $t('license.trademarks.title') }}</h2>
+      <h2 class="mt-20">{{ $t('license.trademarks.title') }}</h2>
 
       <p class="mb-6">
         {{ $t('license.trademarks.description') }}
@@ -158,11 +155,10 @@ const trademarks = [
   { name: 'Hatena Bookmark', holder: 'Hatena Co., Ltd.', icon: '/assets/brand/hatenabookmark.png' },
   { name: 'Pinterest', holder: 'Pinterest, Inc.', icon: '/assets/brand/pinterest.png' },
   { name: 'Pocket', holder: 'Mozilla Corporation', icon: '/assets/brand/pocket.png' },
-  { name: 'XING', holder: 'New Work SE', icon: '/assets/brand/other.png' },
   { name: 'Mastodon', holder: 'Mastodon gGmbH', icon: '/assets/brand/mastodon.png' },
-  { name: 'Pleroma', holder: 'Pleroma Project', icon: '/assets/brand/pleroma.png' },
-  { name: 'diaspora*', holder: 'diaspora* Project', icon: '/assets/brand/diaspora.png' },
-  { name: 'Friendica', holder: 'Friendica Project', icon: '/assets/brand/friendica.png' },
+  { name: 'Pleroma', holder: 'Pleroma contributors', icon: '/assets/brand/pleroma.png' },
+  { name: 'diaspora*', holder: 'The Diaspora Foundation', icon: '/assets/brand/diaspora.png' },
+  { name: 'Friendica', holder: 'Friendica contributors', icon: '/assets/brand/friendica.png' },
   { name: 'Reddit', holder: 'Reddit, Inc.', icon: '/assets/brand/reddit.png' },
   { name: 'Bluesky', holder: 'Bluesky Social, PBC', icon: '/assets/brand/bluesky.png' },
   { name: 'WhatsApp', holder: 'Meta Platforms, Inc.', icon: '/assets/brand/whatsapp.png' },
