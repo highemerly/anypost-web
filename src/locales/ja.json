@@ -68,7 +68,7 @@
     "hero": {
       "title": "複数のソーシャルメディアに",
       "subtitle": "簡単投稿",
-      "description": "AnyPost.devは、Mastodon、Misskey、Twitter、Facebookなど、様々なソーシャルメディアプラットフォームに簡単に投稿できるツールです。",
+      "description": "AnyPost.devは、Mastodon、Misskey、X、Facebookなど、様々なソーシャルメディアプラットフォームに簡単に投稿できるツールです。",
       "cta": "まずは使ってみる",
       "howTo": "使い方を見る"
     },
