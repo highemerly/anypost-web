@@ -121,12 +121,12 @@
         "description": "Create a bookmarklet with your preferred server pre-selected to skip server selection.",
         "serverLabel": "Target Server Name",
         "serverPlaceholder": "e.g., mastodon.social",
-        "codeLabel": "Custom Bookmarklet Code",
+        "codeLabel": "Bookmarklet",
         "steps": {
-          "step1": "1. Enter your target server name in the field above",
-          "step2": "2. Copy the generated code",
+          "step1": "1. Enter your server name in the field above",
+          "step2": "2. Copy the generated bookmarklet",
           "step3": "3. Create a new bookmark in your browser and paste it as the URL",
-          "step4": "4. Just click the bookmark on any page you want to share!"
+          "step4": "4. Click the bookmark on any page you want to share!"
         }
       }
     },
@@ -160,13 +160,17 @@
           "name": "Minimal Dark",
           "description": "Simple and compact dark design"
         },
-        "popPink": {
-          "name": "Pop Pink",
-          "description": "Cute and colorful pink design"
+        "purpleDynamic": {
+          "name": "Purple Dynamic",
+          "description": "Dynamic purple design with rotating service names"
         },
-        "techNavy": {
-          "name": "Tech Navy",
-          "description": "Developer-friendly rectangular design"
+        "glassMorphism": {
+          "name": "Glassmorphism",
+          "description": "Modern frosted-glass semi-transparent design"
+        },
+        "socialIconsRow": {
+          "name": "Social Icons Bar",
+          "description": "Icon-only design with supported service icons in a row"
         }
       },
       "customButton": {
