@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Auto-redirect Modal -->
-    <div v-if="autoRedirect && countdown > 0" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div v-if="autoRedirect && (isCheckingServer || countdown > 0)" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
         <div class="mb-4">
           <svg class="h-16 w-16 text-blue-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
@@ -11,11 +11,17 @@
         <h3 class="text-lg font-medium text-gray-900 mb-2">
           {{ $t('share.autoRedirectTitle') }}
         </h3>
-        <p class="text-sm text-gray-600 mb-4">
+        <p v-if="isCheckingServer" class="text-sm text-gray-600 mb-4">
+          {{ $t('share.autoRedirectChecking') }}
+        </p>
+        <p v-else class="text-sm text-gray-600 mb-4">
           {{ countdown }}{{ $t('share.autoRedirectMessage') }}
         </p>
-        <div class="w-full bg-gray-200 rounded-full h-2">
-          <div class="bg-blue-600 h-2 rounded-full transition-all duration-1000" :style="{ width: `${((4 - countdown) / 3) * 100}%` }"></div>
+        <div v-if="isCheckingServer" class="flex justify-center">
+          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+        </div>
+        <div v-else class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-blue-600 h-2 rounded-full transition-all duration-1000" :style="{ width: `${((3 - countdown) / 2) * 100}%` }"></div>
         </div>
       </div>
     </div>
@@ -313,6 +319,7 @@ const formData = reactive({
 
 // Auto-redirect functionality
 const autoRedirect = ref(false)
+const isCheckingServer = ref(false)
 const countdown = ref(0)
 let countdownTimer = null
 
@@ -630,7 +637,7 @@ const handleSubmit = (openInNewTab = true) => {
 }
 
 const startCountdown = () => {
-  countdown.value = 3
+  countdown.value = 2
   countdownTimer = setInterval(() => {
     countdown.value--
     if (countdown.value <= 0) {
@@ -681,12 +688,13 @@ const parseQueryParams = () => {
   // Auto-redirect functionality
   if (params.a && params.i) {
     autoRedirect.value = true
-    countdown.value = 3 // 即座にモーダルを表示するため初期値を設定
+    isCheckingServer.value = true // API応答待ちの間「サーバーを確認中...」を表示
     console.log('Auto-redirect enabled')
 
     // Wait for instance info to be loaded, then start countdown
     const stopWatcher = watch(instanceInfo, (newInfo) => {
       if (newInfo && newInfo.type !== 'unknown') {
+        isCheckingServer.value = false
         startCountdown()
         stopWatcher() // ウォッチャーを停止
       }

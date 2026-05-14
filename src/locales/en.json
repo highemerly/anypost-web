@@ -45,6 +45,7 @@
     "serverNameRequired": "Please enter a server name",
     "autoRedirectTitle": "Auto-posting...",
     "autoRedirectMessage": "seconds until automatic post",
+    "autoRedirectChecking": "Checking server...",
     "autoRedirectError": "Server name is required for auto-redirect",
     "autoRedirectErrorTitle": "Error",
     "close": "Close",
