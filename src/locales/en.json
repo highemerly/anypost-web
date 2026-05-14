@@ -144,13 +144,17 @@
           "name": "Default Blue",
           "description": "Original blue design"
         },
-        "modernGradient": {
-          "name": "Modern Gradient",
-          "description": "Modern gradient design"
-        },
         "orangeEnergy": {
           "name": "Orange Energy",
           "description": "Energetic orange design"
+        },
+        "socialIcons": {
+          "name": "Social Icons",
+          "description": "Light design showing supported service icons"
+        },
+        "socialIconsDark": {
+          "name": "Social Icons (Dark)",
+          "description": "Dark design showing supported service icons"
         },
         "minimalDark": {
           "name": "Minimal Dark",

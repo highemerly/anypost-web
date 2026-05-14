@@ -144,13 +144,17 @@
           "name": "デフォルトブルー",
           "description": "オリジナルのブルーデザイン"
         },
-        "modernGradient": {
-          "name": "モダングラデーション",
-          "description": "モダンなグラデーションデザイン"
-        },
         "orangeEnergy": {
           "name": "オレンジエナジー",
           "description": "エネルギッシュなオレンジデザイン"
+        },
+        "socialIcons": {
+          "name": "ソーシャルアイコン",
+          "description": "対応サービスのアイコンを表示するライトデザイン"
+        },
+        "socialIconsDark": {
+          "name": "ソーシャルアイコン（ダーク）",
+          "description": "対応サービスのアイコンを表示するダークデザイン"
         },
         "minimalDark": {
           "name": "ミニマルダーク",
