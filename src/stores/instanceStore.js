@@ -303,7 +303,7 @@ export const useInstanceStore = defineStore('instance', {
 
     async fetchInstanceInfo(instanceName) {
       if (!instanceName) {
-        this.error = 'Instance name is required'
+        this.error = 'invalidServer'
         return null
       }
 
@@ -405,12 +405,22 @@ export const useInstanceStore = defineStore('instance', {
         return this.currentInstance
       } catch (error) {
         // Don't update state if request was aborted or outdated
-        if (error.name === 'AbortError' || requestId !== this.currentRequestId) {
+        if (error.name === 'AbortError' || error.name === 'CanceledError' || requestId !== this.currentRequestId) {
           return null
         }
 
         console.error('Failed to fetch instance info:', error)
-        this.error = error.message
+
+        const status = error.response?.status
+        if (status === 400) {
+          this.error = 'invalidServer'
+        } else if (status === 404) {
+          this.error = 'unsupportedServer'
+        } else if (status === 502 || status === 503) {
+          this.error = 'serviceDown'
+        } else {
+          this.error = 'unsupportedServer'
+        }
 
         // Don't cache errors - allow retry
         const config = this.getInstanceConfig(INSTANCE_TYPES.ERROR)

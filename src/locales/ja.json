@@ -40,6 +40,11 @@
     "error": "エラーが発生しました",
     "unsupportedInstance": "サポートされていないインスタンスです",
     "invalidHostname": "不正なホスト名です",
+    "errors": {
+      "invalidServer": "入力されたサーバー名が不正です。",
+      "unsupportedServer": "対応していないサーバーです。別のサーバーを入力してください。",
+      "serviceDown": "サービスがダウンしています。しばらく待ってから、ページを更新し再度お試しください。"
+    },
     "autoPostLoaded": "投稿内容を自動で読み込みました",
     "autoPostDescription": "フォームに情報が自動入力されています。必要に応じて編集してください。",
     "serverNameRequired": "サーバー名を入力してください",

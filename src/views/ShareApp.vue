@@ -380,10 +380,17 @@ const shouldShowErrorMessage = computed(() => {
   return instanceInfo.value && instanceInfo.value.type === 'unknown'
 })
 
-// エラーメッセージの内容を決定
+// Map error codes (from store / local validation) to i18n keys
+const ERROR_MESSAGE_KEYS = {
+  invalidServer: 'share.errors.invalidServer',
+  unsupportedServer: 'share.errors.unsupportedServer',
+  serviceDown: 'share.errors.serviceDown'
+}
+
 const getErrorMessage = computed(() => {
-  if (instanceStore.error) {
-    return instanceStore.error
+  const key = ERROR_MESSAGE_KEYS[instanceStore.error]
+  if (key) {
+    return $t(key)
   }
   return $t('share.unsupportedInstance')
 })
@@ -574,7 +581,7 @@ const handleInstanceChange = () => {
           type: 'unknown',
           config: { name: 'unknown' }
         }
-        instanceStore.error = $t('share.invalidHostname')
+        instanceStore.error = 'invalidServer'
         return
       }
 

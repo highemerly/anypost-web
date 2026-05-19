@@ -40,6 +40,11 @@
     "error": "An error occurred",
     "unsupportedInstance": "Unsupported instance",
     "invalidHostname": "Invalid hostname",
+    "errors": {
+      "invalidServer": "The server name you entered is invalid.",
+      "unsupportedServer": "This server is not supported. Please enter a different server.",
+      "serviceDown": "The service is currently down. Please wait a moment, refresh the page, and try again."
+    },
     "autoPostLoaded": "Post content automatically loaded",
     "autoPostDescription": "Form has been auto-filled. Edit as needed.",
     "serverNameRequired": "Please enter a server name",
