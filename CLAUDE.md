@@ -14,3 +14,4 @@ AnyPost（https://anypost.dev）のフロントエンド。Mastodon・Misskey �
 - `npm run serve` - 開発サーバー
 - `npm run build` - 本番ビルド
 - `npm run lint -- --no-fix` - ESLint（CI と同じ。`--no-fix` を付けないと自動修正する）
+- E2E: 手順は `e2e/compose.yml` の冒頭（本番イメージ＋偽 API を起動して Playwright）
