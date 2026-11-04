@@ -1,0 +1,28 @@
+name: Checks
+
+# eslint を回す再利用可能ワークフロー。CI ステップの単一の定義元。
+# ビルドが通るかは e2e.yml の本番イメージのビルドで確かめる（ここで npm run build を重ねない）。
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      # vue-cli-service lint は既定で自動修正して成功扱いにするため、--no-fix で違反を落とす。
+      - name: Lint (eslint)
+        run: npm run lint -- --no-fix
