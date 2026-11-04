@@ -1,0 +1,30 @@
+# E2E 用: 本番と同じイメージの web と、偽の instance-info-api（fake-api）を起動する。
+# 手元でも CI と同じ手順で回せる:
+#   docker build -t anypost-web:e2e .
+#   docker compose -f e2e/compose.yml up -d --wait
+#   npx playwright test -c e2e/playwright.config.mjs
+#   docker compose -f e2e/compose.yml down
+# タグ時は E2E_IMAGE に push 済みのイメージを渡す（デプロイするものそのものを確かめる）。
+services:
+  web:
+    image: ${E2E_IMAGE:-anypost-web:e2e}
+    environment:
+      API_UPSTREAM: http://fake-api:8080
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      fake-api:
+        condition: service_healthy
+
+  fake-api:
+    image: node:24-alpine
+    command: ["node", "/srv/server.mjs"]
+    volumes:
+      - ./fake-api/server.mjs:/srv/server.mjs:ro
+    ports:
+      # テストが受けたリクエストを取り出す口（GET /__requests）
+      - "127.0.0.1:18080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/__health"]
+      interval: 1s
+      retries: 30

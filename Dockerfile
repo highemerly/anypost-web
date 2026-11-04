@@ -30,9 +30,9 @@ ENV API_UPSTREAM=https://anypost.dev
 # ビルド成果物をコピー
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# ヘルスチェック用
+# ヘルスチェック用（Alpine では localhost が ::1 に解決され、IPv4 だけで待つ nginx に繋がらないため 127.0.0.1）
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://127.0.0.1/ || exit 1
 
 EXPOSE 80
 

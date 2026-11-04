@@ -1,7 +1,7 @@
 name: Checks
 
 # eslint を回す再利用可能ワークフロー。CI ステップの単一の定義元。
-# ビルドが通るかは e2e.yml の本番イメージのビルドで確かめる（ここで npm run build を重ねない）。
+# ビルドが通るかは e2e.yml の本番イメージのビルド（Dockerfile の中）で確かめる（ここで npm run build を重ねない）。
 on:
   workflow_call:
 
