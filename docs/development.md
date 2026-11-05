@@ -52,6 +52,38 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 | マージ後のブランチ | 自動で削除 | |
 | auto-merge | 有効 | CI が緑になったらマージ、を予約できるようにする |
 
+## 依存更新（Renovate）
+
+設定は [.github/renovate.json5](../.github/renovate.json5)（各ルールの理由はコメント）。
+
+- 週2回（月・木の朝）にまとめて PR が来る。ラベル `dependencies`（Release のノートで Dependencies に分かれる）
+- **メジャーは自動で PR にならない。** Issue「Dependency Dashboard」でチェックを入れたものだけ PR になる
+- npm は公開から3日待つ。Docker のベースイメージは digest で固定し、digest の更新も PR になる
+- auto-merge はしない。CI（`ci-result`）が緑なのを見てから squash マージする
+
+### PR が来たら
+
+1. **lockfile の差分を見て、実際に入る版が変わるかを確かめる。** `package.json` の範囲の下限だけが上がり、
+   lockfile の版が変わらない PR もある（中身は何も変わらない）
+2. 下の表で、CI が緑でも確かめられていないものに当たるなら、そこだけ手元で見る
+3. マージ後、手元は `git switch main && git pull && npm ci`
+
+| 依存 | CI で確かめられること | CI では確かめられないこと |
+|---|---|---|
+| vue・vue-router・pinia・vue-i18n・axios・@headlessui/vue・@heroicons/vue | 主要なページが描画まで進み例外が無い。共有リンクで API を呼び、共有先の URL を組み立てて移る（E2E） | クリック・入力などの操作（E2E に画面操作は入れていない） |
+| tailwindcss・@tailwindcss/vite | ビルドが通り、ページが描画される | **見た目**（E2E は見た目を比べない）。マイナーでも見た目が変わりうるので、気になるときは手元で画面を見る |
+| vite・@vitejs/plugin-vue | 本番イメージのビルドと E2E | 開発サーバー（`npm run dev`） |
+| eslint・@eslint/js・eslint-plugin-vue・vue-eslint-parser・neostandard | lint が通る | — （neostandard は 0.x で、マイナーでも規則が増えることがある。lint が赤なら直すか規則を見直す） |
+| @playwright/test | E2E そのもの | — |
+| Docker の node（ビルド用）・nginx（配信用）の digest | 本番イメージのビルドと、nginx での配信・`/api` のプロキシ・ヘルスチェック（E2E） | — |
+| GitHub Actions | checks.yml・e2e.yml で使うもの | **docker-build.yml・tag-release.yml だけで使うもの**（リリース時にしか動かない）。マージ後の最初のリリースでログを見る |
+| Node のメジャー（Dockerfile・`.nvmrc`・E2E の偽 API を1つの PR に） | ビルド・lint・E2E | — （承認制。Node の LTS に合わせて承認する） |
+
+### 承認待ちの片付け
+
+Dependency Dashboard の「Pending Approval」にメジャーが溜まる。着手するときにチェックを入れる。
+見送るものは、理由を renovate.json5 にコメントで残す（承認待ちに残しておく理由が後から分かるように）。
+
 ## CI
 
 [ci.yml](../.github/workflows/ci.yml) が main 以外のブランチへの push で、**差分が影響しうるジョブだけ**を回す。
