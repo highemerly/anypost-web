@@ -55,7 +55,7 @@ git config core.hooksPath .githooks  # clone ごとに1回（下の「ブラン�
 - **偽 API**（[e2e/fake-api/server.mjs](../e2e/fake-api/server.mjs)）: 標準ライブラリだけで書き、応答の形は
   instance-info-api の `InstancesController#response_json` に合わせる。`mastodon.example`・`misskey.example` 以外は 404。
   受けたリクエストを記録し、テストは `127.0.0.1:18080/__requests` から取り出す
-- 本番では Traefik が `/api` を instance-info-api へ直接振り分けるので、イメージ内の nginx の `/api` プロキシは
+- 本番では Ingress が `/api` を instance-info-api へ直接振り分けるので、イメージ内の nginx の `/api` プロキシは
   本番では使われない（E2E と手元の検証用）。API 側の変更はこの E2E では確かめられない
 - 外への通信（Google Fonts・Google Analytics・共有先）はテスト側で止める（[fixtures.mjs](../e2e/fixtures.mjs)）。
   止めたリクエストも記録には出るので、共有先への遷移はそれで確かめる
@@ -64,8 +64,17 @@ git config core.hooksPath .githooks  # clone ごとに1回（下の「ブラン�
 
 ## リリース
 
-本番は k8sg1（Flux で同期している k8s のマニフェストのリポジトリ `highemerly/k8sg1-repo`）の
-`manifests/anypost/prd/web.yaml` が指すイメージ。版は `vX.Y.Z` のタグで決める（2026-05 までは日付のタグを手で push していた）。
+本番は、Flux で同期している k8s のマニフェストのリポジトリ（非公開）が指すイメージ。版は `vX.Y.Z` のタグで決める
+（2026-05 までは日付のタグを手で push していた）。
+
+マニフェストのリポジトリの名前とパスはこのリポジトリに書かない（Actions のログも公開されるため）。
+ワークフローはシークレットから読む:
+
+| シークレット | 中身 |
+|---|---|
+| `K8SG1_REPO` | マニフェストのリポジトリ（`owner/name`） |
+| `K8SG1_MANIFEST_PATHS` | 書き換える prd のマニフェストのパス（スペース区切り） |
+| `K8SG1_PAT` | そのリポジトリへ PR を出すトークン（Contents と Pull requests の Read and write） |
 
 1. バージョンの bump もブランチ → PR でマージする（`release/vX.Y.Z`。CI は何も回さない）。
    マージ後の main にタグを打って push する:
@@ -78,10 +87,9 @@ git config core.hooksPath .githooks  # clone ごとに1回（下の「ブラン�
    2. イメージを `X.Y.Z`・`X.Y`・`latest` で GHCR（非公開）へ push する。**イメージは検査の結果を待たずに push され、
       `latest` も動く。本番は版を固定していて、`latest` はデプロイに使わない**
    3. 全部が緑のときだけ **GitHub Release** を作る（タグごと・パッチも含む）。Release がある版＝デプロイしてよい版
-   4. 同じ条件で、k8sg1 へ「Update anypost-web to X.Y.Z」の PR を出す（ラベル `app-update`。
-      トークンはシークレット `K8SG1_PAT`）
-3. **k8sg1 の PR のマージがそのまま本番へのデプロイになる**（Flux が約1分で反映）。k8sg1 には必須チェックが無いので、
-   k8sg1 の CI が緑かを目で見てからマージする
+   4. 同じ条件で、マニフェストのリポジトリへ「Update anypost-web to X.Y.Z」の PR を出す（ラベル `app-update`）
+3. **その PR のマージがそのまま本番へのデプロイになる**（Flux が約1分で反映）。マニフェストのリポジトリには
+   必須チェックが無いので、そちらの CI が緑かを目で見てからマージする
 
 DB を持たないので、マイグレーションの手順は無い（API 側は instance-info-api のリポジトリで別にリリースする）。
 
@@ -89,7 +97,7 @@ DB を持たないので、マイグレーションの手順は無い（API 側�
 
 GitHub の自動生成（前回のタグからマージされた PR の一覧と Full Changelog・英語）。分類は
 [.github/release.yml](../.github/release.yml) で、Renovate の PR（`dependencies` ラベル）を
-`Dependencies` に、それ以外を `Changes` に分ける。同じノートを k8sg1 の PR 本文にも使う。
+`Dependencies` に、それ以外を `Changes` に分ける。同じノートをデプロイの PR 本文にも使う。
 
 - **前回のタグを明示している**（`previous_tag_name`）。省くと GitHub は前回の「Release」を起点にするので、
   Release を作っていない範囲があると起点がずれる
@@ -97,7 +105,7 @@ GitHub の自動生成（前回のタグからマージされた PR の一覧と
 
 ### うまくいかないとき
 
-- **k8sg1 に PR が出ない**: `create-k8s-pr` のログを見る。マニフェストの `image:` の行が書き換わらなかった
+- **デプロイの PR が出ない**: `create-k8s-pr` のログを見る。マニフェストの `image:` の行が書き換わらなかった
   （マニフェストの書式が変わった）ときは、わざと赤で止めている。検査が赤なら、そもそも `release` と
   `create-k8s-pr` は動かない
 - **イメージを作り直したい**: Actions から docker-build.yml を手で実行する（`workflow_dispatch`）。
