@@ -1,201 +1,43 @@
-# AnyPost Vue 3 Application
+# anypost-web
 
-A modern Vue 3 application for sharing content across multiple social media platforms.
+Mastodon・Misskey などの Fediverse や各種 SNS へ、ひとつのリンクから共有するためのサービス AnyPost のフロントエンド（Vue 3）。
 
-## Features
+https://anypost.dev
 
-- 🌐 **Multi-platform support**: Mastodon, Misskey, Twitter, Facebook, and more
-- 🎨 **Modern UI**: Built with Vue 3 + Composition API and Tailwind CSS
-- 🌍 **Internationalization**: Full i18n support (Japanese/English)
-- 🍪 **Cookie Compliance**: GDPR-compliant cookie banner
-- 📱 **Responsive**: Mobile-first responsive design
-- ⚡ **Fast**: Optimized for performance
-- 🔒 **Privacy-focused**: No data storage, privacy-first design
+共有先のサーバーの種類（Mastodon・Misskey など）は、別のリポジトリの API（instance-info-api）が判定する。
 
-## Tech Stack
+開発の手順は [docs/development.md](docs/development.md)。
 
-- **Frontend**: Vue 3 (Composition API)
-- **State Management**: Pinia
-- **Routing**: Vue Router 4
-- **Styling**: Tailwind CSS
-- **Internationalization**: Vue I18n
-- **HTTP Client**: Axios
-- **Build Tool**: Vue CLI
+## 共有リンク
 
-## Project Setup
+`https://anypost.dev/share` にクエリパラメータを付けると、共有フォームに値が入った状態で開く（すべて省略可）。
 
-### Prerequisites
-
-- Node.js 16+ and npm/yarn
-- Modern browser with ES6+ support
-
-### Installation
-
-```bash
-# Clone the repository
-git clone 
-cd anypost-vue3
-
-# Install dependencies
-npm install
-# or
-yarn install
-```
-
-### Development
-
-```bash
-# Compile and hot-reload for development
-npm run serve
-# or
-yarn serve
-```
-
-Open [http://localhost:8080](http://localhost:8080) in your browser.
-
-### Production Build
-
-```bash
-# Compile and minify for production
-npm run build
-# or
-yarn build
-```
-
-### Linting
-
-```bash
-# Lint and fix files
-npm run lint
-# or
-yarn lint
-```
-
-### Docker での検証
-
-ビルド済み静的ファイルを nginx で配信するイメージを作って、コンテナで検証できます。
-
-```bash
-# ビルド & 起動
-docker compose up --build
-
-# → http://localhost:8080 でアクセス
-# → フロントの /api/* リクエストは、ホストの http://localhost:3001 にプロキシされる
-```
-
-API のプロキシ先は `docker-compose.yml` の `API_UPSTREAM` 環境変数で切り替えられます。
-
-| 用途 | API_UPSTREAM の値 |
-| --- | --- |
-| ホストの localhost:3001 を叩く（既定） | `http://host.docker.internal:3001` |
-| 本番 API を叩く | `https://anypost.dev` |
-| 別コンテナの API を叩く | `http://anypost-api:3000` 等 |
-
-フロント側の API 呼び出しは相対パス (`/api/...`) で書かれており、nginx が `${API_UPSTREAM}/api/` にプロキシします。ビルド成果物は環境に依存しないので、同じイメージを dev/prod 両方で使えます。
-
-## Project Structure
+| パラメータ | 内容 |
+|---|---|
+| `i` | 共有先のサーバー（例：`mastodon.social`） |
+| `t` | 本文 |
+| `s` | 共有する URL |
+| `v` | 公開範囲（例：Mastodon なら `public`・`unlisted`） |
+| `h` | ハッシュタグ |
+| `a` | `1` で、サーバーを確かめたあと共有先の画面へ自動で移る（`i` が要る） |
 
 ```
-src/
-├── assets/           # Static assets (CSS, images)
-├── components/       # Reusable Vue components
-├── locales/         # Internationalization files
-├── router/          # Vue Router configuration
-├── stores/          # Pinia stores
-├── utils/           # Utility functions
-├── views/           # Page components
-├── App.vue          # Root component
-└── main.js          # Application entry point
+https://anypost.dev/share?i=mastodon.social&t=Hello%20World&s=https://example.com&v=unlisted&a=1
 ```
 
-## Key Components
+詳しくはサイトの「使い方」（`/howto`）。
 
-### Stores
+## ライセンス
 
-- **instanceStore.js**: Manages social media instance detection and URL generation
+コードは [AGPL-3.0-only](LICENSE)。
 
-### Components
+`public/assets/brand/` の各サービスのロゴはこのライセンスの対象外で、権利はそれぞれの権利者に帰属する。
+各社の登録商標または商標であり、共有先を示す目的でだけ使っている。Creative Commons でライセンスされているものは次のとおり。
 
-- **CookieBanner.vue**: GDPR-compliant cookie consent banner
-- **LanguageSwitcher.vue**: Language selection component
+| ロゴ | ライセンス |
+|---|---|
+| Misskey（`misskey.png`） | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
+| GNU social（`gnusocial.png`） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| Lemmy（`lemmy.png`。作者：Andy Cuccaro） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
-### Views
-
-- **ShareApp.vue**: Main sharing interface
-- **TopPage.vue**: Landing page
-- **HowToPage.vue**: Usage instructions
-- **PrivacyPage.vue**: Privacy policy
-
-## API Integration
-
-The application integrates with the AnyPost API:
-
-```
-GET https://anypost.dev/api/v1/instances/{server_name}
-```
-
-Returns instance type information for generating appropriate sharing URLs.
-
-## Supported Platforms
-
-- **Mastodon**: Standard ActivityPub platform
-- **Misskey**: Japanese-origin federated platform
-- **Pleroma**: Lightweight ActivityPub server
-- **Twitter**: Traditional social media
-- **Facebook**: Link sharing
-- **And more**: Extensible architecture for additional platforms
-
-## URL Parameters
-
-The application supports URL parameters for pre-filling the sharing form:
-
-- `i`: Instance name
-- `t`: Text content
-- `s`: URL to share
-- `v`: Visibility setting
-- `h`: Hashtag
-- `a`: Auto-redirect flag
-
-Example:
-```
-/share?i=mastodon.social&t=Hello%20World&s=https://example.com&v=public&a=1
-```
-
-## Internationalization
-
-The application supports multiple languages through Vue I18n:
-
-- **Japanese** (`ja`): Default for Japanese users
-- **English** (`en`): Default for international users
-
-Language is automatically detected from browser settings and can be manually switched.
-
-## Privacy & Compliance
-
-- **No data storage**: All processing happens client-side
-- **Cookie compliance**: GDPR-compliant cookie banner
-- **Privacy-first**: Minimal data collection
-- **Transparent**: Open source and auditable
-
-## Browser Compatibility
-
-- Chrome 80+
-- Firefox 75+
-- Safari 13.1+
-- Edge 80+
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-[MIT License](LICENSE)
-
-## Support
-
-For questions or issues, please open an issue on the repository or contact the maintainers.
+帰属表示はサイトの「ライセンス」（`/license`）にもある。

@@ -16,9 +16,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  K8S_REPO: highemerly/k8sg1-repo
-  # 同じイメージを使う prd のマニフェスト（スペース区切り）
-  K8S_MANIFEST_PATHS: "manifests/anypost/prd/web.yaml"
 
 jobs:
   # ブランチでは差分で間引いた検査を、リリースでは全部回す。定義はブランチの CI と同じ
@@ -118,7 +115,7 @@ jobs:
 
   # GitHub Release をタグごと（パッチも含む）に作る。全検査が通ったときだけ＝Release がある版はデプロイしてよい版。
   # ノートは GitHub の自動生成（前回のタグからマージされた PR の一覧・英語。分類は .github/release.yml）。
-  # 同じノートを create-k8s-pr が k8sg1 の PR 本文に使う（変更の一覧の出どころを1つにする）。
+  # 同じノートを create-k8s-pr がデプロイの PR 本文に使う（変更の一覧の出どころを1つにする）。
   release:
     needs: [build, checks, e2e]
     runs-on: ubuntu-latest
@@ -160,12 +157,17 @@ jobs:
 
   create-k8s-pr:
     # 検査が全部（ビルド・checks・E2E）通ったときだけ k8s マニフェストへ PR する（release が同じ条件で
-    # 待っているので、それを待てば足りる）。k8sg1 は Flux 同期なので、この PR のマージがそのまま
-    # 本番へのデプロイになる。
+    # 待っているので、それを待てば足りる）。マニフェストのリポジトリは Flux 同期なので、この PR のマージが
+    # そのまま本番へのデプロイになる。
     needs: [build, release]
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      # マニフェストのリポジトリは非公開。このリポジトリの Actions のログは誰でも読めるので、リポジトリ名と
+      # マニフェストのパス（同じイメージを使う prd のもの、スペース区切り）もシークレットに置き、ログでは伏せる
+      K8S_REPO: ${{ secrets.K8SG1_REPO }}
+      K8S_MANIFEST_PATHS: ${{ secrets.K8SG1_MANIFEST_PATHS }}
 
     steps:
       - name: Checkout k8s repo
@@ -189,7 +191,7 @@ jobs:
           done
 
       # 本文は英語・全アプリ共通の書式（イメージ・ビルドのリンク・release ジョブが生成したノート）。
-      # ノートの PR は完全な URL で書かれるので、k8sg1 の #N へのリンクに化けない。
+      # ノートの PR は完全な URL で書かれるので、マニフェストのリポジトリの #N へのリンクに化けない。
       - name: Write PR body
         env:
           IMAGE: ${{ needs.build.outputs.image }}
@@ -213,5 +215,5 @@ jobs:
           commit-message: Update anypost-web to ${{ needs.build.outputs.version }}
           title: Update anypost-web to ${{ needs.build.outputs.version }}
           body-path: ${{ runner.temp }}/pr-body.md
-          # app-update: k8sg1 に大量に来る PR のうちアプリの版上げを見分ける（全アプリ共通）
+          # app-update: マニフェストのリポジトリに大量に来る PR のうちアプリの版上げを見分ける（全アプリ共通）
           labels: app-update

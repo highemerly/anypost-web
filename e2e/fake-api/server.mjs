@@ -1,4 +1,4 @@
-// 偽の instance-info-api（標準ライブラリだけ）。本番では Traefik が /api を instance-info-api へ
+// 偽の instance-info-api（標準ライブラリだけ）。本番では Ingress が /api を instance-info-api へ
 // 振り分けるが、E2E ではイメージ内の nginx の /api プロキシ（API_UPSTREAM）からここへ届く。
 // 応答の形は instance-info-api の Api::V1::InstancesController#response_json に合わせる。
 // 受けたリクエストを記録し、テストは GET /__requests で取り出す。
