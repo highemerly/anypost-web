@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
     <!-- Auto-redirect Modal -->
-    <div v-if="autoRedirect && (isCheckingServer || countdown > 0)" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div v-if="autoRedirect && (isCheckingServer || countdown > 0)" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
         <div class="mb-4">
           <svg class="h-16 w-16 text-blue-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Error Modal for missing instance when auto-redirect -->
-    <div v-if="showAutoRedirectError" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div v-if="showAutoRedirectError" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
         <div class="mb-4">
           <svg class="h-16 w-16 text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
@@ -57,7 +57,7 @@
       <!-- Query Parameters Loaded Notice -->
       <div v-if="hasQueryParams" class="mb-6 p-4 bg-green-50 border border-green-200 rounded-md">
         <div class="flex">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
             </svg>
@@ -73,7 +73,7 @@
       <!-- Server Name Required Notice -->
       <div v-if="!formData.instanceName.trim()" class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
         <div class="flex">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
             </svg>
@@ -92,7 +92,7 @@
           type="button"
           @click="handleSubmit"
           :disabled="!formData.instanceName.trim() || (instanceInfo && instanceInfo.type === 'unknown') || instanceStore.loading"
-          class="w-full flex justify-center py-4 px-6 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all transform hover:scale-105 disabled:hover:scale-100"
+          class="w-full flex justify-center py-4 px-6 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all transform hover:scale-105 disabled:hover:scale-100"
         >
           <span v-if="instanceStore.loading">{{ $t('common.loading') }}</span>
           <span v-else>🚀 {{ $t('share.postButton') }}</span>
@@ -118,7 +118,7 @@
             <select
               v-model="selectedPresetInstance"
               @change="handlePresetSelection"
-              class="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
+              class="w-full px-3 py-2 mb-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
             >
               <option value="">{{ $t('share.dropdownLabel') }}</option>
               <option v-if="rememberedServer" :value="rememberedServer" class="font-semibold bg-blue-50">
@@ -136,7 +136,7 @@
               v-model="formData.instanceName"
               type="text"
               :placeholder="dynamicPlaceholder"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               :class="{ 'pr-10': instanceInfo && instanceInfo.type !== 'unknown' }"
               @input="handleInstanceChange"
               @focus="handleInputFocus"
@@ -175,7 +175,7 @@
           <!-- Unified Error Display -->
           <div v-if="shouldShowErrorMessage" class="mt-2 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
             <div class="flex">
-              <div class="flex-shrink-0">
+              <div class="shrink-0">
                 <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                 </svg>
@@ -215,7 +215,7 @@
             v-model="formData.text"
             rows="4"
             :placeholder="$t('share.postTextPlaceholder')"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           ></textarea>
         </div>
 
@@ -229,7 +229,7 @@
             v-model="formData.url"
             type="url"
             :placeholder="$t('share.postUrlPlaceholder')"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -243,7 +243,7 @@
             v-model="formData.hashtag"
             type="text"
             :placeholder="$t('share.hashtagPlaceholder')"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
         </div>
 
@@ -255,7 +255,7 @@
           <select
             id="visibility"
             v-model="formData.visibility"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option
               v-for="option in availableVisibility"
@@ -272,7 +272,7 @@
           <button
             type="submit"
             :disabled="!formData.instanceName.trim() || (instanceInfo && instanceInfo.type === 'unknown') || instanceStore.loading"
-            class="w-full flex justify-center py-4 px-6 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all transform hover:scale-105 disabled:hover:scale-100"
+            class="w-full flex justify-center py-4 px-6 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all transform hover:scale-105 disabled:hover:scale-100"
           >
             <span v-if="instanceStore.loading">{{ $t('common.loading') }}</span>
             <span v-else>🚀 {{ $t('share.postButton') }}</span>

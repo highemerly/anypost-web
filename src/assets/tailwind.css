@@ -1,6 +1,90 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  /* v4 はプレースホルダーを文字色の50%、ボタンのカーソルを default に変えた。v3 の見た目と操作感を保つ
+     （https://tailwindcss.com/docs/upgrade-guide#preflight-changes） */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility prose {
+  @apply text-gray-700 leading-7;
+
+  & h1 {
+    @apply text-3xl font-bold text-gray-900 mb-6;
+  }
+
+  & h2 {
+    @apply text-2xl font-semibold text-gray-900 mt-8 mb-4;
+  }
+
+  & h3 {
+    @apply text-xl font-medium text-gray-900 mt-6 mb-3;
+  }
+
+  & p {
+    @apply mb-4;
+  }
+
+  & ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+
+  & li {
+    @apply ml-4;
+  }
+
+  & strong {
+    @apply font-semibold text-gray-900;
+  }
+
+  & .lead {
+    @apply text-lg text-gray-600 mb-6;
+  }
+}
+
+@utility lead {
+  .prose & {
+    @apply text-lg text-gray-600 mb-6;
+  }
+}
+
+@utility animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
 
 /* Custom styles */
 @layer base {
@@ -9,50 +93,8 @@
   }
 }
 
-@layer components {
-  .prose {
-    @apply text-gray-700 leading-7;
-  }
-  
-  .prose h1 {
-    @apply text-3xl font-bold text-gray-900 mb-6;
-  }
-  
-  .prose h2 {
-    @apply text-2xl font-semibold text-gray-900 mt-8 mb-4;
-  }
-  
-  .prose h3 {
-    @apply text-xl font-medium text-gray-900 mt-6 mb-3;
-  }
-  
-  .prose p {
-    @apply mb-4;
-  }
-  
-  .prose ul {
-    @apply list-disc list-inside mb-4 space-y-2;
-  }
-  
-  .prose li {
-    @apply ml-4;
-  }
-  
-  .prose strong {
-    @apply font-semibold text-gray-900;
-  }
-  
-  .prose .lead {
-    @apply text-lg text-gray-600 mb-6;
-  }
-}
-
 /* Animation utilities */
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
   @keyframes fadeIn {
     from {
       opacity: 0;

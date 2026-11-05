@@ -18,10 +18,10 @@
         {{ $t('services.fediverse.description') }}
       </p>
 
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div class="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div v-for="service in fediverseServices" :key="service.name" class="flex items-center p-3 rounded-lg hover:bg-gray-50">
-            <div class="flex-shrink-0">
+            <div class="shrink-0">
               <img
                 :src="service.icon"
                 :alt="service.name"
@@ -46,10 +46,10 @@
         {{ $t('services.traditional.description') }}
       </p>
 
-      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div class="bg-white rounded-lg shadow-xs border border-gray-200 p-6">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div v-for="service in traditionalServices" :key="service.name" class="flex items-center p-3 rounded-lg hover:bg-gray-50">
-            <div class="flex-shrink-0">
+            <div class="shrink-0">
               <img
                 :src="service.icon"
                 :alt="service.name"
@@ -72,7 +72,7 @@
     <!-- License Information -->
     <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-4">
       <div class="flex">
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
           </svg>
@@ -96,7 +96,7 @@
     <!-- Additional Information -->
     <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
       <div class="flex">
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
           </svg>

@@ -24,7 +24,7 @@
       <!-- Browser Usage -->
       <div class="bg-white rounded-lg shadow-lg p-8">
         <div class="flex items-center mb-6">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
@@ -62,7 +62,7 @@
               v-model="customServerName"
               type="text"
               :placeholder="$t('howto.browser.serverSpecific.serverPlaceholder')"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               @input="updateCustomBookmarklet"
             />
           </div>
@@ -81,7 +81,7 @@
               ></textarea>
               <button
                 @click="copyCustomBookmarkletCode"
-                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition-colors"
               >
                 {{ $t('common.copy') }}
               </button>
@@ -98,9 +98,9 @@
 
         <!-- OR Divider -->
         <div class="my-8 flex items-center" aria-hidden="true">
-          <div class="flex-grow border-t border-gray-200"></div>
+          <div class="grow border-t border-gray-200"></div>
           <span class="px-4 text-sm font-medium text-gray-500">— {{ $t('howto.browser.or') }} —</span>
-          <div class="flex-grow border-t border-gray-200"></div>
+          <div class="grow border-t border-gray-200"></div>
         </div>
 
         <!-- General Bookmarklet -->
@@ -126,7 +126,7 @@
               ></textarea>
               <button
                 @click="copyBookmarkletCode"
-                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition-colors"
               >
                 {{ $t('common.copy') }}
               </button>
@@ -145,7 +145,7 @@
       <!-- Website Integration - Simple -->
       <div class="bg-white rounded-lg shadow-lg p-8">
         <div class="flex items-center mb-6">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m-4 4l4 4-4 4" />
@@ -199,7 +199,7 @@
             ></textarea>
             <button
               @click="copyShareButtonCode"
-              class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              class="absolute top-2 right-2 px-3 py-1 text-xs bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition-colors"
             >
               {{ $t('common.copy') }}
             </button>
@@ -210,7 +210,7 @@
       <!-- Developer Section - Independent -->
       <div class="bg-white rounded-lg shadow-lg p-8">
         <div class="flex items-center mb-6">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-500 text-white">
               <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -267,12 +267,12 @@
             <div v-for="(sample, index) in sampleUrls" :key="index">
               <p class="text-sm font-medium text-gray-700 mb-1">{{ sample.title }}</p>
               <div class="relative">
-                <code class="block p-3 bg-white border border-gray-200 rounded text-sm break-all">
+                <code class="block p-3 bg-white border border-gray-200 rounded-sm text-sm break-all">
                   {{ sample.url }}
                 </code>
                 <button
                   @click="copySampleUrl(sample.url)"
-                  class="absolute top-2 right-2 px-2 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  class="absolute top-2 right-2 px-2 py-1 text-xs bg-blue-600 text-white rounded-sm hover:bg-blue-700 transition-colors"
                 >
                   {{ $t('common.copy') }}
                 </button>
