@@ -15,12 +15,6 @@ export default defineConfig([
   // .vue のパーサーと Vue 3 の基本ルール。neostandard より後に置き、.vue のパーサーをこちらにする
   ...pluginVue.configs['flat/essential'],
 
-  // ビルドの道具の設定ファイル（tailwind・postcss）は CommonJS
-  {
-    files: ['*.config.js'],
-    languageOptions: { sourceType: 'commonjs' }
-  },
-
   // 旧設定（.eslintrc.js）から引き継いだもの
   {
     rules: {

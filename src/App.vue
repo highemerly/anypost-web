@@ -8,17 +8,17 @@
     />
 
     <!-- Header -->
-    <header class="bg-white shadow-sm">
+    <header class="bg-white shadow-xs">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <div class="flex items-center">
-            <router-link to="/" class="flex-shrink-0 flex items-center">
+            <router-link to="/" class="shrink-0 flex items-center">
               <div class="flex items-center space-x-3">
                 <h1 class="text-xl font-bold text-gray-900">
                   AnyPost<span class="text-sm text-gray-600">.dev</span>
                 </h1>
                 <!-- Tech Preview Only
-                <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-700">
+                <span class="inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium bg-blue-100 text-blue-700">
                   {{ $t('common.techPreview') }}
                 </span>
                 -->
@@ -26,7 +26,8 @@
             </router-link>
           </div>
 
-          <div class="flex items-center space-x-4">
+          <!-- gap: v4 の space-x は「最後以外の子の右」に余白を付けるので、モバイルで隠れるナビが後ろにあると切り替えが左にずれる -->
+          <div class="flex items-center gap-4">
             <!-- Language Switcher -->
             <LanguageSwitcher />
 

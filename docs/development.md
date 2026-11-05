@@ -10,6 +10,11 @@ npm run dev                          # http://localhost:8080
 git config core.hooksPath .githooks  # clone ごとに1回（下の「ブランチと PR」）
 ```
 
+## 対応ブラウザ
+
+Tailwind CSS 4 の要件に合わせて、**Chrome 111・Safari 16.4・Firefox 128 以降**（2023年3月・2024年7月）。
+これより古いブラウザでは見た目が崩れる（https://tailwindcss.com/docs/compatibility）。
+
 ## ブランチと PR
 
 - **main へは直接コミット・push しない。** 変更は必ずブランチを切り、PR → CI 緑 → squash マージで取り込む

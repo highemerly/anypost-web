@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600">
+    <section class="bg-linear-to-r from-blue-600 to-purple-600">
       <div class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div class="text-center">
           <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -20,7 +20,7 @@
             </router-link>
             <router-link
               to="/share"
-              class="inline-flex items-center justify-center px-6 py-2 border border-white text-sm font-medium rounded-md text-white bg-transparent hover:bg-white hover:bg-opacity-10 md:py-3 md:text-base md:px-8 transition-colors"
+              class="inline-flex items-center justify-center px-6 py-2 border border-white text-sm font-medium rounded-md text-white bg-transparent hover:bg-white/10 md:py-3 md:text-base md:px-8 transition-colors"
             >
               {{ $t('top.hero.cta') }}
             </router-link>
@@ -160,8 +160,8 @@
           <span class="block">Ready to start sharing?</span>
           <span class="block text-blue-600">Try AnyPost.dev today.</span>
         </h2>
-        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-          <div class="inline-flex rounded-md shadow">
+        <div class="mt-8 flex lg:mt-0 lg:shrink-0">
+          <div class="inline-flex rounded-md shadow-sm">
             <router-link
               to="/howto"
               class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"

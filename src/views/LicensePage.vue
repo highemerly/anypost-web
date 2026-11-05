@@ -129,7 +129,7 @@
           <img
             :src="tm.icon"
             :alt="tm.name + ' logo'"
-            class="w-10 h-10 mr-3 flex-shrink-0"
+            class="w-10 h-10 mr-3 shrink-0"
             @error="handleImageError"
           />
           <div class="min-w-0">

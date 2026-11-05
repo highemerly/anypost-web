@@ -3,7 +3,7 @@
     <select
       v-model="currentLocale"
       @change="changeLanguage"
-      class="appearance-none bg-white border border-gray-300 rounded-md px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      class="appearance-none bg-white border border-gray-300 rounded-md px-3 py-2 pr-8 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       :aria-label="$t('language.switch')"
     >
       <option value="ja">{{ $t('language.japanese') }}</option>
