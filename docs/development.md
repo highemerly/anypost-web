@@ -2,6 +2,8 @@
 
 ## セットアップ
 
+Node.js は [.nvmrc](../.nvmrc) に従う（CI も同じファイルを読む。Dockerfile のビルド用のイメージの版も揃える）。
+
 ```bash
 npm ci
 npm run serve                        # http://localhost:8080

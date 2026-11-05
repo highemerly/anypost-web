@@ -3,7 +3,7 @@
 # ============================================
 # Stage 1: ビルド
 # ============================================
-FROM node:18-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 # 依存関係をインストール
