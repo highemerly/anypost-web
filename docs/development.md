@@ -15,6 +15,35 @@ git config core.hooksPath .githooks  # clone ごとに1回（下の「ブラン�
   ```bash
   git config core.hooksPath .githooks
   ```
+- サーバー側: GitHub の ruleset（定義は [.github/rulesets/main.json](../.github/rulesets/main.json)）が
+  main への push を拒否する。タグは ruleset の対象外（リリースのタグは main に直接打つ）
+
+### ruleset の中身と理由
+
+| ルール | 設定 | 理由 |
+|---|---|---|
+| PR 必須 | 承認数 0 | 一人運用で、自分の PR は自分で承認できないため |
+| マージ方式 | squash のみ＋linear history | 「1変更＝1コミット」の履歴を保つ |
+| 必須チェック | `ci-result`（checks / e2e のうち走ったものの結果をまとめたもの） | ブランチへの push で [ci.yml](../.github/workflows/ci.yml) が付ける。ジョブは差分で間引く（下の「CI」）ので、個別に必須にするとスキップされたジョブに結果が付かずマージできなくなる。必須でないチェックは赤でもマージできるので、マージ前に見たい検査は全部 `ci-result` に入れる |
+| 最新化の強制 | しない（strict=false） | 依存更新の PR が並んだとき、1件マージするたびに全件を rebase・再 CI させないため |
+| force push・削除 | 禁止 | |
+| バイパス | なし（管理者も対象） | |
+| 作者の紐づかないコミットの追加承認 | 求めない | 省略すると true が入り、アカウントに紐づかない作者のコミットがあると自分で承認できずマージできなくなる |
+
+ruleset を変えたら JSON を直して反映する（作成時は POST、以降は `gh api repos/highemerly/anypost-web/rulesets` で id を引いて PUT）:
+```bash
+gh api -X POST repos/highemerly/anypost-web/rulesets --input .github/rulesets/main.json
+gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/rulesets/main.json
+```
+
+### リポジトリの設定
+
+| 設定 | 値 | 理由 |
+|---|---|---|
+| マージ方式 | squash だけ許可 | ruleset と同じ。画面で別の方式を選べないようにする |
+| squash のコミットメッセージ | PR タイトルだけ（本文は空） | ブランチ上の途中のコミットの一覧を main の履歴に持ち込まない |
+| マージ後のブランチ | 自動で削除 | |
+| auto-merge | 有効 | CI が緑になったらマージ、を予約できるようにする |
 
 ## CI
 
