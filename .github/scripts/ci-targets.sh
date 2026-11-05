@@ -5,7 +5,7 @@
 # 方針（docs/development.md「CI」）:
 # - アプリ・依存・ビルド設定に触れたら両方回す
 # - 下の一覧にないファイルは両方回す（知らない種類の変更を素通しさせない）
-# - release/*（バージョンの bump だけ）は何も回さない。タグ push 時に全部回す
+# - release/*（リリースの準備だけ）は何も回さない。リリース時に全部回す
 #
 # 使い方: ci-targets.sh <ブランチ名>。GITHUB_OUTPUT があればそこへ、無ければ標準出力へ書く（手元で試せる）。
 set -euo pipefail
@@ -21,7 +21,7 @@ if [[ "$branch" != release/* ]]; then
       # 動作に影響しないもの（ドキュメント・Claude Code の設定・ローカル hook・GitHub の設定）
       *.md | docs/* | .claude/* | .githooks/* | .github/rulesets/* | .github/renovate.json5 | .github/release.yml | LICENSE) ;;
       # タグ push でしか動かない（ブランチでは確かめようがない）
-      .github/workflows/docker-build.yml) ;;
+      .github/workflows/docker-build.yml | .github/workflows/tag-release.yml) ;;
       # ワークフロー単体の変更（Actions の更新など）は、それを使うジョブだけ
       .github/workflows/checks.yml) checks=true ;;
       .github/workflows/e2e.yml) e2e=true ;;

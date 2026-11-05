@@ -66,7 +66,7 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 | `Dockerfile`・`.dockerignore`・`docker/**`・`docker-compose.yml` | – | ✓ |
 | ワークフロー（checks.yml / e2e.yml） | そのワークフローのジョブだけ | 同左 |
 | ドキュメント（`*.md`・`docs/**`）・`.claude/**`・`.githooks/**`・ruleset・Renovate 設定・LICENSE・docker-build.yml | – | – |
-| `release/*` ブランチ（バージョンの bump だけ） | – | – |
+| `release/*` ブランチ（リリースの準備だけ。例：アプリ内のリリースノート） | – | – |
 
 - 結果は `ci-result` に集まる（main の必須チェックはこれだけにする）。成功とスキップは通し、失敗とキャンセルは落とす
 - **main への push では回さない。** マージ前に同じ中身をブランチで通しているため
@@ -112,12 +112,22 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 | `K8SG1_MANIFEST_PATHS` | 書き換える prd のマニフェストのパス（スペース区切り） |
 | `K8SG1_PAT` | そのリポジトリへ PR を出すトークン（Contents と Pull requests の Read and write） |
 
-1. バージョンの bump もブランチ → PR でマージする（`release/vX.Y.Z`。CI は何も回さない）。
-   マージ後の main にタグを打って push する:
+**版はタグだけに持つ**（`package.json` に `version` を置かない。版を上げる PR は要らない）。
+
+1. Actions の画面の **Tag a release**（[tag-release.yml](../.github/workflows/tag-release.yml)）を main で実行し、
+   上げ方を選ぶ。main の先頭に次の版のタグを打ち、そのまま docker-build.yml を呼ぶ。手元からは:
    ```bash
-   git switch main && git pull && git tag vX.Y.Z && git push origin vX.Y.Z
+   gh workflow run tag-release.yml --ref main -f bump=patch
    ```
-2. タグの push で [docker-build.yml](../.github/workflows/docker-build.yml) が動く:
+   | 上げ方 | いつ |
+   |---|---|
+   | patch | 修正と依存の更新だけ |
+   | minor | 新しい機能（利用者・運用者から見てできることが増えた） |
+   | major | 互換性を崩す |
+
+   手元でタグを打って push しても同じことが起きる（飛び番の版を出すとき）:
+   `git switch main && git pull && git tag vX.Y.Z && git push origin vX.Y.Z`
+2. [docker-build.yml](../.github/workflows/docker-build.yml) が動く:
    1. **検査を全部回す**（ブランチで差分により省いたものも）。checks はビルドと並走し、
       E2E は **push したイメージそのもの**で回す（作り直したイメージで通っても、デプロイするものの確認にならない）
    2. イメージを `X.Y.Z`・`X.Y`・`latest` で GHCR（非公開）へ push する。**イメージは検査の結果を待たずに push され、
@@ -144,6 +154,5 @@ GitHub の自動生成（前回のタグからマージされた PR の一覧と
 - **デプロイの PR が出ない**: `create-k8s-pr` のログを見る。マニフェストの `image:` の行が書き換わらなかった
   （マニフェストの書式が変わった）ときは、わざと赤で止めている。検査が赤なら、そもそも `release` と
   `create-k8s-pr` は動かない
-- **イメージを作り直したい**: Actions から docker-build.yml を手で実行する（`workflow_dispatch`）。
-  入力はそのままイメージタグと k8s マニフェストの版になるので、`v` を付けずに `3.0.0` のように入れる。
-  このときは GitHub Release を作らない（タグが無い・既にある）
+- **失敗した実行を作り直したい**: Actions の画面で、その実行を Re-run する（失敗したジョブだけでもよい）
+- **Tag a release が「Nothing to release」で止まる**: 前回のタグから main にコミットが無い
