@@ -16,7 +16,7 @@ AnyPost（https://anypost.dev）のフロントエンド。Mastodon・Misskey �
 
 ## コマンド
 
-- `npm run serve` - 開発サーバー
+- `npm run dev` - 開発サーバー（Vite）
 - `npm run build` - 本番ビルド
-- `npm run lint -- --no-fix` - ESLint（CI と同じ。`--no-fix` を付けないと自動修正する）
+- `npm run lint` - ESLint（CI と同じ）
 - E2E: 手順は `e2e/compose.yml` の冒頭（本番イメージ＋偽 API を起動して Playwright）
