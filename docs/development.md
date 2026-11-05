@@ -56,8 +56,8 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 | 変更 | checks（eslint） | e2e（本番イメージのビルドと起動してのスモーク） |
 |---|---|---|
 | `src/**`・`public/**`・依存（package.json・lockfile）・ビルド設定など、下に無いもの全部 | ✓ | ✓ |
-| `.eslintrc.js` | ✓ | – |
-| `e2e/**` | – | ✓ |
+| `eslint.config.mjs` | ✓ | – |
+| `e2e/**`（eslint の対象でもある） | ✓ | ✓ |
 | `Dockerfile`・`.dockerignore`・`docker/**`・`docker-compose.yml` | – | ✓ |
 | ワークフロー（checks.yml / e2e.yml） | そのワークフローのジョブだけ | 同左 |
 | ドキュメント（`*.md`・`docs/**`）・`.claude/**`・`.githooks/**`・ruleset・Renovate 設定・LICENSE・docker-build.yml | – | – |

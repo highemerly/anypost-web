@@ -25,10 +25,10 @@ if [[ "$branch" != release/* ]]; then
       # ワークフロー単体の変更（Actions の更新など）は、それを使うジョブだけ
       .github/workflows/checks.yml) checks=true ;;
       .github/workflows/e2e.yml) e2e=true ;;
-      # E2E のテストと偽 API（eslint の対象外）
-      e2e/*) e2e=true ;;
+      # E2E のテストと偽 API（eslint の対象でもある）
+      e2e/*) checks=true; e2e=true ;;
       # lint の設定は lint にしか効かない
-      .eslintrc.js) checks=true ;;
+      eslint.config.mjs) checks=true ;;
       # イメージの組み立てと配信の設定は lint に関係しない
       Dockerfile | .dockerignore | docker/* | docker-compose.yml) e2e=true ;;
       *) checks=true; e2e=true ;;
