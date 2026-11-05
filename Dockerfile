@@ -1,9 +1,9 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1@sha256:4edf897a3ffa55b89f906fc8cc78afdb3f1834cc9c7083565e611a8a7d5fe99e
 
 # ============================================
 # Stage 1: ビルド
 # ============================================
-FROM node:24-alpine AS builder
+FROM node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85 AS builder
 WORKDIR /app
 
 # 依存関係をインストール
@@ -17,7 +17,7 @@ RUN npm run build
 # ============================================
 # Stage 2: nginx で静的配信
 # ============================================
-FROM nginx:alpine AS runner
+FROM nginx:alpine@sha256:785835ea65db4bba6f021acc0f3be91b0fef76a53fe41f8588c6698d2aed0606 AS runner
 
 # nginx 設定テンプレートをコピー（起動時に envsubst で展開される）
 COPY docker/default.conf.template /etc/nginx/templates/default.conf.template

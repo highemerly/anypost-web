@@ -17,7 +17,7 @@ services:
         condition: service_healthy
 
   fake-api:
-    image: node:24-alpine
+    image: node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85
     command: ["node", "/srv/server.mjs"]
     volumes:
       - ./fake-api/server.mjs:/srv/server.mjs:ro
