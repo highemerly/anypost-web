@@ -26,8 +26,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      # push 済みのイメージ（タグ時）と buildcache（ブランチ時）を読むのに要る
       - name: Log in to Container Registry
-        if: ${{ inputs.image }}
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
@@ -38,14 +38,18 @@ jobs:
         if: ${{ !inputs.image }}
         uses: docker/setup-buildx-action@v4
 
+      # タグ時のビルド（docker-build.yml）が積む buildcache を読む。lockfile が同じなら
+      # npm ci は飛ばされ、実質 npm run build だけになる。
       - name: Build production image (no push)
         if: ${{ !inputs.image }}
         uses: docker/build-push-action@v7
         with:
           context: .
+          target: runner
           platforms: linux/amd64
           load: true
           tags: anypost-web:e2e
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
 
       - name: Set up Node.js
         uses: actions/setup-node@v7
