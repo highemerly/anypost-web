@@ -6,7 +6,7 @@ Node.js は [.nvmrc](../.nvmrc) に従う（CI も同じファイルを読む。
 
 ```bash
 npm ci
-npm run serve                        # http://localhost:8080
+npm run dev                          # http://localhost:8080
 git config core.hooksPath .githooks  # clone ごとに1回（下の「ブランチと PR」）
 ```
 
