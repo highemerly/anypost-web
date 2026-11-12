@@ -9,6 +9,13 @@ import './assets/tailwind.css'
 import ja from './locales/ja.json'
 import en from './locales/en.json'
 
+// 以前の Cookie 同意 UI と Google Analytics の残り（同意した人のブラウザにだけある）を消す。
+// GA の Cookie（_ga, _ga_<ID>）は anypost.dev のドメインに付いているので domain を付けて期限切れにする
+localStorage.removeItem('cookieConsent')
+for (const name of document.cookie.split('; ').map((c) => c.split('=')[0]).filter((n) => n.startsWith('_ga'))) {
+  document.cookie = `${name}=; Max-Age=0; path=/; domain=${location.hostname}`
+}
+
 const i18n = createI18n({
   legacy: false,
   locale: localStorage.getItem('locale') || navigator.language.split('-')[0] || 'en',

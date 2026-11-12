@@ -192,17 +192,6 @@
           <!-- <div v-if="instanceStore.error" class="mt-2 text-sm text-red-600">
             {{ instanceStore.error }}
           </div> -->
-
-          <!-- Cookie Disabled Notice -->
-          <div v-if="cookieConsent === false" class="mt-2 text-xs text-gray-400">
-            {{ $t('cookies.noSaveNotice') }}
-            <button
-              @click="showCookieSettings"
-              class="text-blue-400 hover:text-blue-600 underline ml-1"
-            >
-              {{ $t('cookies.changeSettings') }}
-            </button>
-          </div>
         </div>
 
         <!-- Post Text -->
@@ -284,7 +273,7 @@
     </div>
 
     <!-- Clear Server History Button -->
-    <div v-if="rememberedServer && cookieConsent === true" class="mt-8 text-center">
+    <div v-if="rememberedServer" class="mt-8 text-center">
       <button
         @click="clearServerHistory"
         class="text-sm text-gray-500 hover:text-red-600 underline transition-colors"
@@ -339,8 +328,7 @@ let placeholderTimer = null
 let typingTimer = null
 const isTyping = ref(false)
 
-// Cookie management
-const cookieConsent = ref(null) // null: 未設定, true: 許可, false: 拒否
+// 前回使用したサーバー（ブラウザの localStorage にだけ置く。プライバシーポリシーに載せている）
 const rememberedServer = ref('')
 
 // Debounce timer
@@ -480,41 +468,21 @@ const stopPlaceholderRotation = () => {
   isTyping.value = false
 }
 
-const loadCookieSettings = () => {
-  const consent = localStorage.getItem('cookieConsent')
-  cookieConsent.value = consent === 'accepted' ? true : consent === 'declined' ? false : null
-
-  if (cookieConsent.value === true) {
-    const saved = localStorage.getItem('lastUsedServer')
-    if (saved) {
-      rememberedServer.value = saved
-      // 記憶されたサーバーをデフォルト選択
-      selectedPresetInstance.value = saved
-      // フォームにも設定して自動的にAPI呼び出し
-      formData.instanceName = saved
-      // 自動的にインスタンス情報を取得
-      handleInstanceChange()
-    }
-  }
-}
-
-const showCookieSettings = () => {
-  // グローバルイベントを発火してApp.vueでCookieBannerを表示
-  window.dispatchEvent(new CustomEvent('showCookieSettings'))
-}
-
-const handleCookieConsentChange = (event) => {
-  loadCookieSettings()
-
-  // Cookie拒否時はサーバー履歴をクリア
-  if (event.detail === 'declined') {
-    rememberedServer.value = ''
-    selectedPresetInstance.value = ''
+const loadRememberedServer = () => {
+  const saved = localStorage.getItem('lastUsedServer')
+  if (saved) {
+    rememberedServer.value = saved
+    // 記憶されたサーバーをデフォルト選択
+    selectedPresetInstance.value = saved
+    // フォームにも設定して自動的にAPI呼び出し
+    formData.instanceName = saved
+    // 自動的にインスタンス情報を取得
+    handleInstanceChange()
   }
 }
 
 const saveServerToHistory = (serverName) => {
-  if (cookieConsent.value === true && serverName && serverName.trim()) {
+  if (serverName && serverName.trim()) {
     localStorage.setItem('lastUsedServer', serverName.trim())
     rememberedServer.value = serverName.trim()
   }
@@ -710,15 +678,8 @@ const parseQueryParams = () => {
 }
 
 onMounted(() => {
-  // Cookie設定とサーバー履歴を読み込み
-  loadCookieSettings()
-
-  // Cookie同意変更のイベントリスナー
-  window.addEventListener('cookieConsentChanged', handleCookieConsentChange)
-  window.addEventListener('showCookieSettings', () => {
-    // App.vueにCookie設定表示を要求
-    window.dispatchEvent(new CustomEvent('requestCookieSettings'))
-  })
+  // 前回使用したサーバーを読み込み
+  loadRememberedServer()
 
   // 初期タイピングアニメーション開始
   startInitialTyping()
@@ -739,9 +700,6 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  // イベントリスナーのクリーンアップ
-  window.removeEventListener('cookieConsentChanged', handleCookieConsentChange)
-
   if (countdownTimer) {
     clearInterval(countdownTimer)
   }

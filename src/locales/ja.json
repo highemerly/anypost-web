@@ -101,7 +101,7 @@
       },
       "privacy": {
         "title": "プライバシー重視",
-        "description": "あなたのアカウント名や投稿内容はサーバーに一切保存されません。"
+        "description": "アカウントとの連携は不要で、Cookie も使いません。"
       }
     }
   },
@@ -216,17 +216,7 @@
     }
   },
   "privacy": {
-    "title": "プライバシーポリシー",
-    "lastUpdated": "最終更新日: 2025年5月28日",
-    "intro": "AnyPost values user privacy. This privacy policy explains what information our service collects and how it is used.",
-    "dataCollection": {
-      "title": "Data Collection",
-      "description": "AnyPost does not store post content or personal information. All processing is done in the browser, and only minimal technical information is sent to the server."
-    },
-    "cookies": {
-      "title": "Cookie Usage",
-      "description": "This site uses minimal necessary cookies to improve user experience. These cookies are used for language settings and basic site functionality."
-    }
+    "title": "プライバシーポリシー"
   },
   "license": {
     "title": "ライセンス・帰属表示",
@@ -252,16 +242,6 @@
       "title": "各社の商標",
       "description": "以下のロゴ・名称は、それぞれの権利者の登録商標または商標です。本サービスでは、各社のブランドガイドラインに従い、シェアボタンの表示のみを目的として使用しています。"
     }
-  },
-  "cookies": {
-    "title": "Cookieの使用について",
-    "description": "このサイトでは、サイトの機能向上とユーザー体験の最適化のためにCookieを使用します。",
-    "essential": "個人を特定する情報は収集していません。",
-    "serverSaveFeature": "Cookieを許可すると、前回使用したサーバー名を記憶して入力を省略できる機能が利用できます。",
-    "accept": "同意する",
-    "decline": "拒否する",
-    "noSaveNotice": "Cookieが無効のため、サーバーの記憶機能は利用できません。",
-    "changeSettings": "Cookieの許諾設定を変更する"
   },
   "language": {
     "switch": "言語を切り替え",

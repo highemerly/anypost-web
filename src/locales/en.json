@@ -101,7 +101,7 @@
       },
       "privacy": {
         "title": "Privacy Focused",
-        "description": "We will not store your account information and contents."
+        "description": "No account linking needed, and no cookies."
       }
     }
   },
@@ -216,17 +216,7 @@
     }
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "lastUpdated": "Last updated: May 28, 2025",
-    "intro": "AnyPost values user privacy. This privacy policy explains what information our service collects and how it is used.",
-    "dataCollection": {
-      "title": "Data Collection",
-      "description": "AnyPost does not store post content or personal information. All processing is done in the browser, and only minimal technical information is sent to the server."
-    },
-    "cookies": {
-      "title": "Cookie Usage",
-      "description": "This site uses minimal necessary cookies to improve user experience. These cookies are used for language settings and basic site functionality."
-    }
+    "title": "Privacy Policy"
   },
   "license": {
     "title": "License & Attribution",
@@ -252,16 +242,6 @@
       "title": "Trademarks",
       "description": "The following logos and names are registered trademarks or trademarks of their respective rights holders. This Service displays them solely as share buttons in compliance with each company's brand guidelines."
     }
-  },
-  "cookies": {
-    "title": "About Cookie Usage",
-    "description": "This site uses cookies to improve site functionality and optimize user experience.",
-    "essential": "We only use necessary cookies and do not collect personally identifiable information.",
-    "serverSaveFeature": "By allowing cookies, you can use the feature to remember previously used servers.",
-    "accept": "Accept",
-    "decline": "Decline",
-    "noSaveNotice": "Server memory feature is not available because cookies are disabled.",
-    "changeSettings": "Change cookie acceptance"
   },
   "language": {
     "switch": "Switch Language",
