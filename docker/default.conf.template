@@ -16,6 +16,14 @@ server {
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-XSS-Protection "1; mode=block" always;
 
+    # RUM（next-rum。index.html の <script src="/_n-rum/beacon.js">）。
+    # 本番ではこのパスは nginx へ届かない（手前のルーティングがコレクタへ回す）。
+    # 届いたらルートの無い環境（手元・E2E）なので 404 を返す。これが無いと、下の SPA 設定で
+    # index.html が 200 で返る。^~ で、下の静的アセットの正規表現より先に決める
+    location ^~ /_n-rum/ {
+        return 404;
+    }
+
     # Vue Router のための SPA 設定
     location / {
         try_files $uri $uri/ /index.html;

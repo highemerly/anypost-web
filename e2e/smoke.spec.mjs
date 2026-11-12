@@ -10,3 +10,15 @@ for (const path of PAGES) {
     await expect(page.locator('#app main')).not.toBeEmpty()
   })
 }
+
+// RUM のビーコンは index.html に直接書いてあり、本番では手前のルーティングがコレクタへ回す。
+// ルートの無いここでは nginx が 404 を返す（SPA の index.html が返らない）
+test('RUM beacon is in <head> and /_n-rum/ is 404 without the route', async ({ page, request }) => {
+  await page.goto('/')
+  await expect(page.locator('head script[src="/_n-rum/beacon.js"][async]')).toHaveCount(1)
+
+  for (const path of ['beacon.js', 'web-vitals.js', 'rum-config.json', 'collect']) {
+    const res = await request.get(`/_n-rum/${path}`)
+    expect(res.status(), path).toBe(404)
+  }
+})
