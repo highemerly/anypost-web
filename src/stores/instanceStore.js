@@ -25,8 +25,18 @@ export const INSTANCE_TYPES = {
   WHATSAPP: 'whatsapp',
   TELEGRAM: 'telegram',
   THREADS: 'threads',
+  HUBZILLA: 'hubzilla',
+  SNAC: 'snac',
+  PIEFED: 'piefed',
+  ICESHRIMP_NET: 'iceshrimp.net',
+  TUMBLR: 'tumblr',
+  TAITTSUU: 'taittsuu',
   ERROR: 'unknown'
 }
+
+// For services whose share page has only a text box: put the URL after the
+// text, the same way Mastodon's /share joins its text and url parameters.
+const joinTextAndUrl = (params) => [params.text, params.url].filter(Boolean).join(' ')
 
 // Instance configurations
 const instanceConfigs = {
@@ -64,9 +74,10 @@ const instanceConfigs = {
     availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
+      // Pleroma-FE / Akkoma-FE read only ?message= (a url parameter is ignored)
       const url = new URL(`https://${instanceName}/`)
-      if (params.text) url.searchParams.set('message', params.text)
-      if (params.url) url.searchParams.set('url', params.url)
+      const message = joinTextAndUrl(params)
+      if (message) url.searchParams.set('message', message)
       return url.toString()
     }
   },
@@ -142,7 +153,7 @@ const instanceConfigs = {
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://www.linkedin.com/sharing/share-offsite/')
-      if (params.url) url.searchParams.set('u', params.url)
+      if (params.url) url.searchParams.set('url', params.url)
       return url.toString()
     }
   },
@@ -224,11 +235,12 @@ const instanceConfigs = {
   [INSTANCE_TYPES.BLUESKY]: {
     name: INSTANCE_TYPES.BLUESKY,
     icon: '/assets/brand/bluesky.png',
-    availableParams: ['text'],
+    availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://bsky.app/intent/compose')
-      if (params.text) url.searchParams.set('text', params.text)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
       return url.toString()
     }
   },
@@ -236,11 +248,12 @@ const instanceConfigs = {
   [INSTANCE_TYPES.WHATSAPP]: {
     name: INSTANCE_TYPES.WHATSAPP,
     icon: '/assets/brand/whatsapp.png',
-    availableParams: ['text'],
+    availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://wa.me/')
-      if (params.text) url.searchParams.set('text', params.text)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
       return url.toString()
     }
   },
@@ -269,6 +282,98 @@ const instanceConfigs = {
       if (params.url) url.searchParams.set('url', params.url)
       return url.toString()
     }
+  },
+
+  [INSTANCE_TYPES.HUBZILLA]: {
+    name: INSTANCE_TYPES.HUBZILLA,
+    icon: '/assets/brand/hubzilla.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // rpost: f= is an empty placeholder; url is fetched and its preview appended to the body
+      const url = new URL(`https://${instanceName}/rpost`)
+      url.searchParams.set('f', '')
+      if (params.text) url.searchParams.set('body', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.SNAC]: {
+    name: INSTANCE_TYPES.SNAC,
+    icon: '/assets/brand/snac.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // Mastodon-like /share. It is optional for the server admin to route it to snac.
+      const url = new URL(`https://${instanceName}/share`)
+      if (params.text) url.searchParams.set('text', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.PIEFED]: {
+    name: INSTANCE_TYPES.PIEFED,
+    icon: '/assets/brand/piefed.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // /share shares a link to a community; it fails without the url parameter
+      const url = new URL(`https://${instanceName}/share`)
+      url.searchParams.set('url', params.url || '')
+      if (params.text) url.searchParams.set('title', params.text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.ICESHRIMP_NET]: {
+    name: INSTANCE_TYPES.ICESHRIMP_NET,
+    icon: '/assets/brand/iceshrimp.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // /share accepts title, text and url, but concatenates them without a
+      // separator, so the URL goes into text ourselves
+      const url = new URL(`https://${instanceName}/share`)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.TUMBLR]: {
+    name: INSTANCE_TYPES.TUMBLR,
+    icon: '/assets/brand/tumblr.png',
+    availableParams: ['text', 'url', 'hashtag'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://www.tumblr.com/widgets/share/tool')
+      if (params.url) {
+        url.searchParams.set('posttype', 'link')
+        url.searchParams.set('canonicalUrl', params.url)
+        if (params.text) url.searchParams.set('caption', params.text)
+      } else {
+        url.searchParams.set('posttype', 'text')
+        if (params.text) url.searchParams.set('content', params.text)
+      }
+      if (params.hashtag) url.searchParams.set('tags', params.hashtag)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.TAITTSUU]: {
+    name: INSTANCE_TYPES.TAITTSUU,
+    icon: '/assets/brand/taittsuu.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // https://taittsuu.com/share_link : only text
+      const url = new URL('https://taittsuu.com/share')
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
+      return url.toString()
+    }
   }
 }
 
@@ -284,8 +389,10 @@ export const useInstanceStore = defineStore('instance', {
   }),
 
   getters: {
+    // null for 'unknown' and for types the API knows but we can't share to
+    // (e.g. gotosocial, mbin)
     getInstanceConfig: (state) => (instanceType) => {
-      return instanceConfigs[instanceType] || instanceConfigs[INSTANCE_TYPES.ERROR]
+      return instanceConfigs[instanceType] || null
     },
 
     isInstanceSupported: (state) => (instanceType) => {
@@ -316,6 +423,7 @@ export const useInstanceStore = defineStore('instance', {
       if (this.apiCache.has(cleanInstanceName)) {
         const cachedType = this.apiCache.get(cleanInstanceName)
         const config = this.getInstanceConfig(cachedType)
+        this.error = config ? null : 'unsupportedServer'
         this.currentInstance = {
           name: cleanInstanceName,
           type: cachedType,
@@ -341,7 +449,7 @@ export const useInstanceStore = defineStore('instance', {
       try {
         // Check static cache
         const cachedInfo = this.getInstanceFromCache(cleanInstanceName)
-        if (cachedInfo && cachedInfo.name !== INSTANCE_TYPES.ERROR) {
+        if (cachedInfo) {
           // Check if this is still the latest request
           if (requestId !== this.currentRequestId) {
             return null // Ignore outdated request
@@ -374,30 +482,30 @@ export const useInstanceStore = defineStore('instance', {
           return null // Ignore outdated request
         }
 
-        let instanceType = INSTANCE_TYPES.ERROR
+        const apiType = response.data?.type
+        const config = this.getInstanceConfig(apiType)
+        const instanceType = config ? apiType : INSTANCE_TYPES.ERROR
 
-        if (response.data && response.data.type !== 'unknown') {
-          instanceType = response.data.type
-
-          // Add to static cache if successful
-          const config = this.getInstanceConfig(instanceType)
-          if (config.name !== INSTANCE_TYPES.ERROR) {
-            this.instanceCache.push({
-              instanceName: cleanInstanceName,
-              instanceType: response.data.type
-            })
-          }
+        if (config) {
+          this.instanceCache.push({
+            instanceName: cleanInstanceName,
+            instanceType
+          })
+        } else {
+          // The API recognized the server (e.g. gotosocial) but we have no
+          // share page for it
+          this.error = 'unsupportedServer'
         }
 
         // Add to API cache (including unknown types to avoid repeated requests)
         this.apiCache.set(cleanInstanceName, instanceType)
 
-        const config = this.getInstanceConfig(instanceType)
         this.currentInstance = {
           name: cleanInstanceName,
           type: instanceType,
           config,
-          source: response.data?.source || null // source情報を追加
+          source: response.data?.source || null, // source情報を追加
+          detectedType: config || !apiType || apiType === 'unknown' ? null : apiType
         }
 
         this.loading = false
@@ -423,11 +531,10 @@ export const useInstanceStore = defineStore('instance', {
         }
 
         // Don't cache errors - allow retry
-        const config = this.getInstanceConfig(INSTANCE_TYPES.ERROR)
         this.currentInstance = {
           name: cleanInstanceName,
           type: INSTANCE_TYPES.ERROR,
-          config
+          config: null
         }
         this.loading = false
         this.currentController = null
@@ -437,7 +544,7 @@ export const useInstanceStore = defineStore('instance', {
 
     generateShareUrl(instanceName, instanceType, params) {
       const config = this.getInstanceConfig(instanceType)
-      if (config.generateUrl) {
+      if (config?.generateUrl) {
         return config.generateUrl(instanceName, params)
       }
       return '/'

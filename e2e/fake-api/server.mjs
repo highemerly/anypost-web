@@ -9,7 +9,23 @@ const UPDATED_AT = '2026-01-01T00:00:00Z'
 // ここに無いサーバーは「nodeinfo が無い」扱い（本物は 404 と type: unknown を返す）
 const KNOWN = {
   'mastodon.example': { type: 'mastodon', software: 'mastodon', version: '4.3.0', total_users: 1234 },
-  'misskey.example': { type: 'misskey', software: 'misskey', version: '2025.1.0', total_users: 567 }
+  'misskey.example': { type: 'misskey', software: 'misskey', version: '2025.1.0', total_users: 567 },
+  'akkoma.example': { type: 'pleroma', software: 'akkoma', version: '3.15.0', total_users: 12 },
+  'hubzilla.example': { type: 'hubzilla', software: 'hubzilla', version: '10.4', total_users: 8 },
+  'snac.example': { type: 'snac', software: 'snac', version: '2.80', total_users: 1 },
+  'piefed.example': { type: 'piefed', software: 'piefed', version: '1.3.0', total_users: 90 },
+  'iceshrimp.example': { type: 'iceshrimp.net', software: 'Iceshrimp.NET', version: '2025.1', total_users: 20 },
+  // API が種類を返すが、AnyPost に共有先の画面が無いもの
+  'gotosocial.example': { type: 'gotosocial', software: 'gotosocial', version: '0.20.0', total_users: 3 }
+}
+
+// instance-info-api の seeds（db/seeds.rb）にある、Fediverse 以外のサービス
+const BUILTIN = {
+  'linkedin.com': 'linkedin',
+  'bsky.app': 'bluesky',
+  'wa.me': 'whatsapp',
+  'tumblr.com': 'tumblr',
+  'taittsuu.com': 'taittsuu'
 }
 
 const requests = []
@@ -34,6 +50,9 @@ createServer((req, res) => {
   const known = KNOWN[name]
   if (known) {
     return send(res, 200, { name, ...known, status: null, updated_at: UPDATED_AT, source: 'nodeinfo' })
+  }
+  if (BUILTIN[name]) {
+    return send(res, 200, { name, type: BUILTIN[name], updated_at: UPDATED_AT, source: 'builtin' })
   }
   return send(res, 404, {
     name,

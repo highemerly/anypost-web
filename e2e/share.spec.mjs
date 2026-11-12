@@ -21,6 +21,82 @@ test('auto-redirects to the Mastodon share page', async ({ page, request }) => {
   expect(received).toContainEqual({ method: 'GET', url: '/api/v1/instances/mastodon.example' })
 })
 
+// 共有先ごとの URL の組み立て。本文の欄しかない共有先へは、URL を本文の後ろに付けて渡す
+const SHARE = 't=Hello%20AnyPost&s=https://example.com/&a=1'
+const REDIRECTS = [
+  {
+    server: 'akkoma.example',
+    target: 'https://akkoma.example/',
+    params: { message: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'linkedin.com',
+    target: 'https://www.linkedin.com/sharing/share-offsite/',
+    params: { url: 'https://example.com/' }
+  },
+  {
+    server: 'bsky.app',
+    target: 'https://bsky.app/intent/compose',
+    params: { text: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'wa.me',
+    target: 'https://wa.me/',
+    params: { text: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'hubzilla.example',
+    target: 'https://hubzilla.example/rpost',
+    params: { f: '', body: 'Hello AnyPost', url: 'https://example.com/' }
+  },
+  {
+    server: 'snac.example',
+    target: 'https://snac.example/share',
+    params: { text: 'Hello AnyPost', url: 'https://example.com/' }
+  },
+  {
+    server: 'piefed.example',
+    target: 'https://piefed.example/share',
+    params: { url: 'https://example.com/', title: 'Hello AnyPost' }
+  },
+  {
+    server: 'iceshrimp.example',
+    target: 'https://iceshrimp.example/share',
+    params: { text: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'tumblr.com',
+    target: 'https://www.tumblr.com/widgets/share/tool',
+    params: { posttype: 'link', canonicalUrl: 'https://example.com/', caption: 'Hello AnyPost' }
+  },
+  {
+    server: 'taittsuu.com',
+    target: 'https://taittsuu.com/share',
+    params: { text: 'Hello AnyPost https://example.com/' }
+  }
+]
+
+for (const { server, target, params } of REDIRECTS) {
+  test(`builds the share URL for ${server}`, async ({ page }) => {
+    const { hostname } = new URL(target)
+    const navigation = page.waitForRequest(
+      (r) => r.isNavigationRequest() && new URL(r.url()).hostname === hostname
+    )
+    await page.goto(`/share?i=${server}&${SHARE}`)
+
+    const url = new URL((await navigation).url())
+    expect(`${url.origin}${url.pathname}`).toBe(target)
+    expect(Object.fromEntries(url.searchParams)).toEqual(params)
+  })
+}
+
+// API が種類を返しても、共有先の画面が無いもの（GoToSocial など）は「対応していない」と出すこと
+test('shows unsupported for a recognized server without a share page', async ({ page }) => {
+  await page.goto('/share?i=gotosocial.example&a=1')
+  await expect(page.getByText('This server is not supported.')).toBeVisible()
+  await expect(page.getByText('(gotosocial)')).toBeVisible()
+})
+
 // API が 404（nodeinfo が無い）を返すサーバーは、遷移せずに「対応していない」と出すこと
 test('shows unsupported for an unknown server', async ({ page }) => {
   await page.goto('/share?i=unknown.example&a=1')
