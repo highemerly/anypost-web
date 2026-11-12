@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!--
+      RUM (next-rum). /_n-rum/ never reaches this nginx in production: the routing in front of it
+      sends those paths to the collector. Elsewhere nginx answers 404 (docker/default.conf.template).
+      Keep it early in <head> so the measurement is registered before the first paint. beacon.js
+      does nothing when the browser sends GPC. vite-ignore: the file is not ours to bundle (Vite
+      drops the attribute from the build).
+    -->
+    <script async vite-ignore src="/_n-rum/beacon.js"></script>
+
     <meta name="description" content="AnyPost - Easily share content to various social media platforms including Mastodon, Misskey, Twitter, Facebook, and more.">
     <meta name="keywords" content="social media, sharing, mastodon, misskey, twitter, facebook, cross-platform">
     <meta name="author" content="AnyPost">
