@@ -154,7 +154,6 @@ const trademarks = [
   { name: 'LINE', holder: 'LY Corporation', icon: '/assets/brand/line.png' },
   { name: 'Hatena Bookmark', holder: 'Hatena Co., Ltd.', icon: '/assets/brand/hatenabookmark.png' },
   { name: 'Pinterest', holder: 'Pinterest, Inc.', icon: '/assets/brand/pinterest.png' },
-  { name: 'Pocket', holder: 'Mozilla Corporation', icon: '/assets/brand/pocket.png' },
   { name: 'Mastodon', holder: 'Mastodon gGmbH', icon: '/assets/brand/mastodon.png' },
   { name: 'Pleroma', holder: 'Pleroma contributors', icon: '/assets/brand/pleroma.png' },
   { name: 'diaspora*', holder: 'The Diaspora Foundation', icon: '/assets/brand/diaspora.png' },

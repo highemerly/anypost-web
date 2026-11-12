@@ -28,6 +28,10 @@ export const INSTANCE_TYPES = {
   ERROR: 'unknown'
 }
 
+// For services whose share page has only a text box: put the URL after the
+// text, the same way Mastodon's /share joins its text and url parameters.
+const joinTextAndUrl = (params) => [params.text, params.url].filter(Boolean).join(' ')
+
 // Instance configurations
 const instanceConfigs = {
   [INSTANCE_TYPES.MISSKEY]: {
@@ -64,9 +68,10 @@ const instanceConfigs = {
     availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
+      // Pleroma-FE / Akkoma-FE read only ?message= (a url parameter is ignored)
       const url = new URL(`https://${instanceName}/`)
-      if (params.text) url.searchParams.set('message', params.text)
-      if (params.url) url.searchParams.set('url', params.url)
+      const message = joinTextAndUrl(params)
+      if (message) url.searchParams.set('message', message)
       return url.toString()
     }
   },
@@ -142,7 +147,7 @@ const instanceConfigs = {
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://www.linkedin.com/sharing/share-offsite/')
-      if (params.url) url.searchParams.set('u', params.url)
+      if (params.url) url.searchParams.set('url', params.url)
       return url.toString()
     }
   },
@@ -224,11 +229,12 @@ const instanceConfigs = {
   [INSTANCE_TYPES.BLUESKY]: {
     name: INSTANCE_TYPES.BLUESKY,
     icon: '/assets/brand/bluesky.png',
-    availableParams: ['text'],
+    availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://bsky.app/intent/compose')
-      if (params.text) url.searchParams.set('text', params.text)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
       return url.toString()
     }
   },
@@ -236,11 +242,12 @@ const instanceConfigs = {
   [INSTANCE_TYPES.WHATSAPP]: {
     name: INSTANCE_TYPES.WHATSAPP,
     icon: '/assets/brand/whatsapp.png',
-    availableParams: ['text'],
+    availableParams: ['text', 'url'],
     availableVisibility: [],
     generateUrl: (instanceName, params) => {
       const url = new URL('https://wa.me/')
-      if (params.text) url.searchParams.set('text', params.text)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
       return url.toString()
     }
   },
@@ -284,8 +291,10 @@ export const useInstanceStore = defineStore('instance', {
   }),
 
   getters: {
+    // null for 'unknown' and for types the API knows but we can't share to
+    // (e.g. gotosocial, mbin)
     getInstanceConfig: (state) => (instanceType) => {
-      return instanceConfigs[instanceType] || instanceConfigs[INSTANCE_TYPES.ERROR]
+      return instanceConfigs[instanceType] || null
     },
 
     isInstanceSupported: (state) => (instanceType) => {
@@ -316,6 +325,7 @@ export const useInstanceStore = defineStore('instance', {
       if (this.apiCache.has(cleanInstanceName)) {
         const cachedType = this.apiCache.get(cleanInstanceName)
         const config = this.getInstanceConfig(cachedType)
+        this.error = config ? null : 'unsupportedServer'
         this.currentInstance = {
           name: cleanInstanceName,
           type: cachedType,
@@ -341,7 +351,7 @@ export const useInstanceStore = defineStore('instance', {
       try {
         // Check static cache
         const cachedInfo = this.getInstanceFromCache(cleanInstanceName)
-        if (cachedInfo && cachedInfo.name !== INSTANCE_TYPES.ERROR) {
+        if (cachedInfo) {
           // Check if this is still the latest request
           if (requestId !== this.currentRequestId) {
             return null // Ignore outdated request
@@ -374,30 +384,30 @@ export const useInstanceStore = defineStore('instance', {
           return null // Ignore outdated request
         }
 
-        let instanceType = INSTANCE_TYPES.ERROR
+        const apiType = response.data?.type
+        const config = this.getInstanceConfig(apiType)
+        const instanceType = config ? apiType : INSTANCE_TYPES.ERROR
 
-        if (response.data && response.data.type !== 'unknown') {
-          instanceType = response.data.type
-
-          // Add to static cache if successful
-          const config = this.getInstanceConfig(instanceType)
-          if (config.name !== INSTANCE_TYPES.ERROR) {
-            this.instanceCache.push({
-              instanceName: cleanInstanceName,
-              instanceType: response.data.type
-            })
-          }
+        if (config) {
+          this.instanceCache.push({
+            instanceName: cleanInstanceName,
+            instanceType
+          })
+        } else {
+          // The API recognized the server (e.g. gotosocial) but we have no
+          // share page for it
+          this.error = 'unsupportedServer'
         }
 
         // Add to API cache (including unknown types to avoid repeated requests)
         this.apiCache.set(cleanInstanceName, instanceType)
 
-        const config = this.getInstanceConfig(instanceType)
         this.currentInstance = {
           name: cleanInstanceName,
           type: instanceType,
           config,
-          source: response.data?.source || null // source情報を追加
+          source: response.data?.source || null, // source情報を追加
+          detectedType: config || !apiType || apiType === 'unknown' ? null : apiType
         }
 
         this.loading = false
@@ -423,11 +433,10 @@ export const useInstanceStore = defineStore('instance', {
         }
 
         // Don't cache errors - allow retry
-        const config = this.getInstanceConfig(INSTANCE_TYPES.ERROR)
         this.currentInstance = {
           name: cleanInstanceName,
           type: INSTANCE_TYPES.ERROR,
-          config
+          config: null
         }
         this.loading = false
         this.currentController = null
@@ -437,7 +446,7 @@ export const useInstanceStore = defineStore('instance', {
 
     generateShareUrl(instanceName, instanceType, params) {
       const config = this.getInstanceConfig(instanceType)
-      if (config.generateUrl) {
+      if (config?.generateUrl) {
         return config.generateUrl(instanceName, params)
       }
       return '/'

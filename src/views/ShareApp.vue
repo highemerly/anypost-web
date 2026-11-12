@@ -167,8 +167,8 @@
               {{ $t('share.instanceType') }}: {{ instanceInfo.type }}
             </span>
             <!-- Source display for unknown type -->
-            <span v-if="instanceInfo.type === 'unknown' && instanceInfo.source" class="text-xs text-gray-400 ml-2">
-              ({{ instanceInfo.source }})
+            <span v-if="instanceInfo.type === 'unknown' && (instanceInfo.detectedType || instanceInfo.source)" class="text-xs text-gray-400 ml-2">
+              ({{ instanceInfo.detectedType || instanceInfo.source }})
             </span>
           </div>
 
