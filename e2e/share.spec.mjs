@@ -116,3 +116,22 @@ test('remembers the last used server without asking', async ({ page }) => {
   await expect(page.locator('option', { hasText: 'mastodon.example (previously used)' })).toBeAttached()
   await expect(page.getByRole('button', { name: 'Clear server history' })).toBeVisible()
 })
+
+// 「対応サービス一覧」はページへ移らずにポップアップで開き、「See more」で対応サービスのページへ移ること
+test('shows supported services in a dialog, with a link to the full page', async ({ page }) => {
+  await page.goto('/share')
+  const opener = page.getByRole('button', { name: 'list of supported services' })
+  const dialog = page.getByRole('dialog', { name: 'Supported Services' })
+
+  await opener.click()
+  await expect(dialog).toBeVisible()
+  await expect(dialog.getByText('Mastodon')).toBeVisible()
+  await expect(page).toHaveURL(/\/share$/)
+
+  await page.keyboard.press('Escape')
+  await expect(dialog).toBeHidden()
+
+  await opener.click()
+  await dialog.getByRole('link', { name: 'See more' }).click()
+  await expect(page).toHaveURL(/\/services$/)
+})
