@@ -43,6 +43,36 @@ const REDIRECTS = [
     server: 'wa.me',
     target: 'https://wa.me/',
     params: { text: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'hubzilla.example',
+    target: 'https://hubzilla.example/rpost',
+    params: { f: '', body: 'Hello AnyPost', url: 'https://example.com/' }
+  },
+  {
+    server: 'snac.example',
+    target: 'https://snac.example/share',
+    params: { text: 'Hello AnyPost', url: 'https://example.com/' }
+  },
+  {
+    server: 'piefed.example',
+    target: 'https://piefed.example/share',
+    params: { url: 'https://example.com/', title: 'Hello AnyPost' }
+  },
+  {
+    server: 'iceshrimp.example',
+    target: 'https://iceshrimp.example/share',
+    params: { text: 'Hello AnyPost https://example.com/' }
+  },
+  {
+    server: 'tumblr.com',
+    target: 'https://www.tumblr.com/widgets/share/tool',
+    params: { posttype: 'link', canonicalUrl: 'https://example.com/', caption: 'Hello AnyPost' }
+  },
+  {
+    server: 'taittsuu.com',
+    target: 'https://taittsuu.com/share',
+    params: { text: 'Hello AnyPost https://example.com/' }
   }
 ]
 

@@ -136,6 +136,10 @@ const fediverseServices = ref([
   { name: 'diaspora', displayName: 'diaspora*', icon: '/assets/brand/diaspora.png' },
   { name: 'friendica', displayName: 'Friendica', icon: '/assets/brand/friendica.png' },
   { name: 'lemmy', displayName: 'Lemmy', icon: '/assets/brand/lemmy.png' },
+  { name: 'piefed', displayName: 'PieFed', icon: '/assets/brand/piefed.png' },
+  { name: 'hubzilla', displayName: 'Hubzilla', icon: '/assets/brand/hubzilla.png' },
+  { name: 'iceshrimp.net', displayName: 'Iceshrimp.NET', icon: '/assets/brand/iceshrimp.png' },
+  { name: 'snac', displayName: 'snac', icon: '/assets/brand/snac.png' },
   { name: 'bluesky', displayName: 'Bluesky', icon: '/assets/brand/bluesky.png' }
 ])
 
@@ -145,11 +149,13 @@ const traditionalServices = ref([
   { name: 'threads', displayName: 'Threads', icon: '/assets/brand/threads.png' },
   { name: 'facebook', displayName: 'Facebook', icon: '/assets/brand/facebook.png' },
   { name: 'reddit', displayName: 'Reddit', icon: '/assets/brand/reddit.png' },
+  { name: 'tumblr', displayName: 'Tumblr', icon: '/assets/brand/tumblr.png' },
   { name: 'linkedin', displayName: 'LinkedIn', icon: '/assets/brand/linkedin.png' },
   { name: 'line', displayName: 'LINE', icon: '/assets/brand/line.png' },
   { name: 'whatsapp', displayName: 'WhatsApp', icon: '/assets/brand/whatsapp.png' },
   { name: 'telegram', displayName: 'Telegram', icon: '/assets/brand/telegram.png' },
   { name: 'hatenabookmark', displayName: 'Hatena Bookmark', icon: '/assets/brand/hatenabookmark.png' },
+  { name: 'taittsuu', displayName: 'タイッツー', icon: '/assets/brand/taittsuu.png' },
   { name: 'pinterest', displayName: 'Pinterest', icon: '/assets/brand/pinterest.png' },
   { name: 'xing', displayName: 'XING', icon: '/assets/brand/other.png' }
 ])

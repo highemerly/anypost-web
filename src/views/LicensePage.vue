@@ -14,81 +14,26 @@
       <h2>{{ $t('license.ccLogos.title') }}</h2>
 
       <div class="space-y-6">
-        <!-- Misskey -->
-        <div class="bg-gray-50 rounded-lg p-6">
+        <div v-for="logo in ccLogos" :key="logo.key" class="bg-gray-50 rounded-lg p-6">
           <div class="flex items-center mb-4">
             <img
-              src="/assets/brand/misskey.png"
-              alt="Misskey logo"
+              :src="logo.icon"
+              :alt="logo.name + ' logo'"
               class="w-12 h-12 mr-4"
               @error="handleImageError"
             />
-            <h3 class="text-lg font-semibold text-gray-900 mb-0">Misskey</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-0">{{ logo.name }}</h3>
           </div>
           <p class="mb-2">
-            {{ $t('license.ccLogos.misskey.description') }}
+            {{ $t(`license.ccLogos.${logo.key}.description`) }}
           </p>
           <a
-            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            :href="logo.licenseUrl"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center text-blue-600 hover:text-blue-800 underline font-medium"
           >
-            CC BY-NC-SA 4.0
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        <!-- GNU social -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <div class="flex items-center mb-4">
-            <img
-              src="/assets/brand/gnusocial.png"
-              alt="GNU social logo"
-              class="w-12 h-12 mr-4"
-              @error="handleImageError"
-            />
-            <h3 class="text-lg font-semibold text-gray-900 mb-0">GNU social</h3>
-          </div>
-          <p class="mb-2">
-            {{ $t('license.ccLogos.gnusocial.description') }}
-          </p>
-          <a
-            href="https://creativecommons.org/licenses/by-sa/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center text-blue-600 hover:text-blue-800 underline font-medium"
-          >
-            CC BY-SA 4.0
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        <!-- Lemmy -->
-        <div class="bg-gray-50 rounded-lg p-6">
-          <div class="flex items-center mb-4">
-            <img
-              src="/assets/brand/lemmy.png"
-              alt="Lemmy logo"
-              class="w-12 h-12 mr-4"
-              @error="handleImageError"
-            />
-            <h3 class="text-lg font-semibold text-gray-900 mb-0">Lemmy</h3>
-          </div>
-          <p class="mb-2">
-            {{ $t('license.ccLogos.lemmy.description') }}
-          </p>
-          <a
-            href="https://creativecommons.org/licenses/by-sa/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center text-blue-600 hover:text-blue-800 underline font-medium"
-          >
-            CC BY-SA 4.0
+            {{ logo.license }}
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
@@ -112,6 +57,40 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
         </a>
+      </div>
+
+      <h2 class="mt-20">{{ $t('license.ossLogos.title') }}</h2>
+
+      <p class="mb-6">
+        {{ $t('license.ossLogos.description') }}
+      </p>
+
+      <div class="space-y-6">
+        <div v-for="logo in ossLogos" :key="logo.key" class="bg-gray-50 rounded-lg p-6">
+          <div class="flex items-center mb-4">
+            <img
+              :src="logo.icon"
+              :alt="logo.name + ' logo'"
+              class="w-12 h-12 mr-4"
+              @error="handleImageError"
+            />
+            <h3 class="text-lg font-semibold text-gray-900 mb-0">{{ logo.name }}</h3>
+          </div>
+          <p class="mb-2">
+            {{ $t(`license.ossLogos.${logo.key}.description`) }}
+          </p>
+          <a
+            :href="logo.licenseUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center text-blue-600 hover:text-blue-800 underline font-medium"
+          >
+            {{ logo.license }}
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
       </div>
 
       <h2 class="mt-20">{{ $t('license.trademarks.title') }}</h2>
@@ -147,6 +126,22 @@ import { useI18n } from 'vue-i18n'
 
 const { t: $t } = useI18n()
 
+const CC_BY_SA = { license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/' }
+
+const ccLogos = [
+  { key: 'misskey', name: 'Misskey', icon: '/assets/brand/misskey.png', license: 'CC BY-NC-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-nc-sa/4.0/' },
+  { key: 'gnusocial', name: 'GNU social', icon: '/assets/brand/gnusocial.png', ...CC_BY_SA },
+  { key: 'lemmy', name: 'Lemmy', icon: '/assets/brand/lemmy.png', ...CC_BY_SA },
+  { key: 'iceshrimp', name: 'Iceshrimp', icon: '/assets/brand/iceshrimp.png', ...CC_BY_SA }
+]
+
+// Logos shipped in the projects' source repositories, under the repositories' licenses
+const ossLogos = [
+  { key: 'hubzilla', name: 'Hubzilla', icon: '/assets/brand/hubzilla.png', license: 'MIT License', licenseUrl: 'https://framagit.org/hubzilla/core/-/blob/master/LICENSE' },
+  { key: 'piefed', name: 'PieFed', icon: '/assets/brand/piefed.png', license: 'AGPL-3.0', licenseUrl: 'https://codeberg.org/rimu/pyfedi/src/branch/main/LICENSE' },
+  { key: 'snac', name: 'snac', icon: '/assets/brand/snac.png', license: 'MIT License', licenseUrl: 'https://codeberg.org/grunfink/snac2/src/branch/master/LICENSE' }
+]
+
 const trademarks = [
   { name: 'X (Twitter)', holder: 'X Corp.', icon: '/assets/brand/twitter.png' },
   { name: 'Facebook', holder: 'Meta Platforms, Inc.', icon: '/assets/brand/facebook.png' },
@@ -162,7 +157,9 @@ const trademarks = [
   { name: 'Bluesky', holder: 'Bluesky Social, PBC', icon: '/assets/brand/bluesky.png' },
   { name: 'WhatsApp', holder: 'Meta Platforms, Inc.', icon: '/assets/brand/whatsapp.png' },
   { name: 'Telegram', holder: 'Telegram FZ-LLC', icon: '/assets/brand/telegram.png' },
-  { name: 'Threads', holder: 'Meta Platforms, Inc.', icon: '/assets/brand/threads.png' }
+  { name: 'Threads', holder: 'Meta Platforms, Inc.', icon: '/assets/brand/threads.png' },
+  { name: 'Tumblr', holder: 'Tumblr, Inc.', icon: '/assets/brand/tumblr.png' },
+  { name: 'タイッツー (Taittsuu)', holder: 'タイッツー', icon: '/assets/brand/taittsuu.png' }
 ]
 
 const handleImageError = (event) => {

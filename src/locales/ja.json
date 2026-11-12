@@ -220,7 +220,7 @@
   },
   "license": {
     "title": "ライセンス・帰属表示",
-    "lastUpdated": "最終更新日: 2026年5月13日",
+    "lastUpdated": "最終更新日: 2026年11月12日",
     "intro": "anypost.dev（以下、「本サービス」）で利用している他サービスのロゴの権利は、各権利者に帰属します。",
     "ccLogos": {
       "title": "Creative Commons ライセンスのロゴ",
@@ -232,15 +232,31 @@
       },
       "lemmy": {
         "description": "Lemmy のロゴは Andy Cuccaro ({'@'}andycuccaro) 氏により作成され、CC BY-SA 4.0 でライセンスされています。"
+      },
+      "iceshrimp": {
+        "description": "Iceshrimp のロゴは © 2023 Laura Hausmann、Kilcat 氏により作成され、CC BY-SA 4.0 でライセンスされています。本サービスでは公式の黒の版に余白を加え、PNG に変換して使用しています。"
       }
     },
     "creativeCommons": {
       "title": "Creative Commons について",
       "description": "Creative Commons は、クリエイティブな作品の共有を促進するライセンス体系です。詳細については公式サイトをご確認ください。"
     },
+    "ossLogos": {
+      "title": "オープンソースライセンスのロゴ",
+      "description": "以下のロゴは、各プロジェクトのソースコードのリポジトリに含まれており、そのリポジトリのライセンスの下で使用しています。",
+      "hubzilla": {
+        "description": "Hubzilla のロゴは Hubzilla のリポジトリ（framagit.org/hubzilla/core）に含まれるもので、© Hubzilla Community、MIT License です。"
+      },
+      "piefed": {
+        "description": "PieFed のロゴは PieFed のリポジトリ（codeberg.org/rimu/pyfedi）に含まれるもので、AGPL-3.0 でライセンスされています。"
+      },
+      "snac": {
+        "description": "snac のアイコン（Susie）は snac のリポジトリ（codeberg.org/grunfink/snac2）に含まれるもので、© 2022–2026 grunfink et al.、MIT License です。"
+      }
+    },
     "trademarks": {
       "title": "各社の商標",
-      "description": "以下のロゴ・名称は、それぞれの権利者の登録商標または商標です。本サービスでは、各社のブランドガイドラインに従い、シェアボタンの表示のみを目的として使用しています。"
+      "description": "以下のロゴ・名称は、それぞれの権利者の登録商標または商標です。本サービスでは、各社のブランドガイドラインに従い、シェアボタンの表示のみを目的として使用しています。本サービスは、これらの権利者から承認・提携を受けたものではありません。"
     }
   },
   "language": {

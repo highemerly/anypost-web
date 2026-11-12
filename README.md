@@ -39,5 +39,16 @@ https://anypost.dev/share?i=mastodon.social&t=Hello%20World&s=https://example.co
 | Misskey（`misskey.png`） | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
 | GNU social（`gnusocial.png`） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | Lemmy（`lemmy.png`。作者：Andy Cuccaro） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| Iceshrimp（`iceshrimp.png`。© 2023 Laura Hausmann、作者：Kilcat。公式の黒の版に余白を加えて PNG に変換） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+
+各プロジェクトのリポジトリに含まれ、そのライセンスで使っているものは次のとおり。
+
+| ロゴ | ライセンス |
+|---|---|
+| Hubzilla（`hubzilla.png`。© Hubzilla Community。[framagit.org/hubzilla/core](https://framagit.org/hubzilla/core)） | MIT |
+| PieFed（`piefed.png`。[codeberg.org/rimu/pyfedi](https://codeberg.org/rimu/pyfedi)） | AGPL-3.0 |
+| snac（`snac.png`。Susie。© grunfink et al.。[codeberg.org/grunfink/snac2](https://codeberg.org/grunfink/snac2)） | MIT |
+
+タイッツーのアイコン（`taittsuu.png`）は、タイッツーが共有ボタン用に配布しているもの（[taittsuu.com/share_link](https://taittsuu.com/share_link)）。
 
 帰属表示はサイトの「ライセンス」（`/license`）にもある。

@@ -25,6 +25,12 @@ export const INSTANCE_TYPES = {
   WHATSAPP: 'whatsapp',
   TELEGRAM: 'telegram',
   THREADS: 'threads',
+  HUBZILLA: 'hubzilla',
+  SNAC: 'snac',
+  PIEFED: 'piefed',
+  ICESHRIMP_NET: 'iceshrimp.net',
+  TUMBLR: 'tumblr',
+  TAITTSUU: 'taittsuu',
   ERROR: 'unknown'
 }
 
@@ -274,6 +280,98 @@ const instanceConfigs = {
       const url = new URL('https://www.threads.net/intent/post')
       if (params.text) url.searchParams.set('text', params.text)
       if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.HUBZILLA]: {
+    name: INSTANCE_TYPES.HUBZILLA,
+    icon: '/assets/brand/hubzilla.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // rpost: f= is an empty placeholder; url is fetched and its preview appended to the body
+      const url = new URL(`https://${instanceName}/rpost`)
+      url.searchParams.set('f', '')
+      if (params.text) url.searchParams.set('body', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.SNAC]: {
+    name: INSTANCE_TYPES.SNAC,
+    icon: '/assets/brand/snac.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // Mastodon-like /share. It is optional for the server admin to route it to snac.
+      const url = new URL(`https://${instanceName}/share`)
+      if (params.text) url.searchParams.set('text', params.text)
+      if (params.url) url.searchParams.set('url', params.url)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.PIEFED]: {
+    name: INSTANCE_TYPES.PIEFED,
+    icon: '/assets/brand/piefed.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // /share shares a link to a community; it fails without the url parameter
+      const url = new URL(`https://${instanceName}/share`)
+      url.searchParams.set('url', params.url || '')
+      if (params.text) url.searchParams.set('title', params.text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.ICESHRIMP_NET]: {
+    name: INSTANCE_TYPES.ICESHRIMP_NET,
+    icon: '/assets/brand/iceshrimp.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // /share accepts title, text and url, but concatenates them without a
+      // separator, so the URL goes into text ourselves
+      const url = new URL(`https://${instanceName}/share`)
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.TUMBLR]: {
+    name: INSTANCE_TYPES.TUMBLR,
+    icon: '/assets/brand/tumblr.png',
+    availableParams: ['text', 'url', 'hashtag'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      const url = new URL('https://www.tumblr.com/widgets/share/tool')
+      if (params.url) {
+        url.searchParams.set('posttype', 'link')
+        url.searchParams.set('canonicalUrl', params.url)
+        if (params.text) url.searchParams.set('caption', params.text)
+      } else {
+        url.searchParams.set('posttype', 'text')
+        if (params.text) url.searchParams.set('content', params.text)
+      }
+      if (params.hashtag) url.searchParams.set('tags', params.hashtag)
+      return url.toString()
+    }
+  },
+
+  [INSTANCE_TYPES.TAITTSUU]: {
+    name: INSTANCE_TYPES.TAITTSUU,
+    icon: '/assets/brand/taittsuu.png',
+    availableParams: ['text', 'url'],
+    availableVisibility: [],
+    generateUrl: (instanceName, params) => {
+      // https://taittsuu.com/share_link : only text
+      const url = new URL('https://taittsuu.com/share')
+      const text = joinTextAndUrl(params)
+      if (text) url.searchParams.set('text', text)
       return url.toString()
     }
   }
