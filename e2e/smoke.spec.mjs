@@ -1,13 +1,27 @@
 import { test, expect } from './fixtures.mjs'
 
-// 直接開いても nginx の SPA 設定（try_files）で index.html が返り、Vue が描画まで進むこと
+// 直接開いても nginx の SPA 設定（try_files）で index.html が返り、Vue が描画まで進むこと。
+// 開いただけでは外（別のドメイン）へリクエストを出さないこと（フォントも同梱した Inter を自分のドメインから読む）。
+// プライバシーポリシーにそう書いてある。Cloudflare がエッジで差し込むもの（Web Analytics など）は
+// イメージには無いので、ここでは確かめられない（Cloudflare 側で切ってある前提）
 const PAGES = ['/', '/share', '/privacy', '/howto', '/license', '/services', '/contact']
 
 for (const path of PAGES) {
-  test(`${path} renders`, async ({ page }) => {
+  test(`${path} renders`, async ({ page, baseURL }) => {
+    const external = []
+    page.on('request', (req) => {
+      if (new URL(req.url()).origin !== new URL(baseURL).origin) external.push(req.url())
+    })
     const res = await page.goto(path)
     expect(res.status()).toBe(200)
     await expect(page.locator('#app main')).not.toBeEmpty()
+    await page.waitForLoadState('networkidle')
+    const interLoaded = await page.evaluate(async () => {
+      await document.fonts.ready
+      return [...document.fonts].some((f) => f.family.replace(/["']/g, '') === 'Inter Variable' && f.status === 'loaded')
+    })
+    expect(interLoaded, 'Inter is loaded').toBe(true)
+    expect(external, 'requests to other origins').toEqual([])
   })
 }
 
