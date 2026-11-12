@@ -22,3 +22,23 @@ test('RUM beacon is in <head> and /_n-rum/ is 404 without the route', async ({ p
     expect(res.status(), path).toBe(404)
   }
 })
+
+// 以前の Cookie 同意 UI と Google Analytics の残り（cookieConsent と _ga* の Cookie）を起動時に消すこと
+test('clears leftovers of the old consent UI and Google Analytics', async ({ page, context, baseURL }) => {
+  const { hostname } = new URL(baseURL)
+  await context.addCookies([
+    { name: '_ga', value: 'GA1.1.1.1', domain: hostname, path: '/' },
+    { name: '_ga_PQ2HSYKKQF', value: 'GS1.1.1', domain: hostname, path: '/' }
+  ])
+  await page.addInitScript(() => {
+    if (!sessionStorage.getItem('seeded')) {
+      sessionStorage.setItem('seeded', '1')
+      localStorage.setItem('cookieConsent', 'accepted')
+    }
+  })
+
+  await page.goto('/')
+  await expect(page.locator('#app main')).not.toBeEmpty()
+  expect(await page.evaluate(() => localStorage.getItem('cookieConsent'))).toBeNull()
+  expect(await context.cookies()).toEqual([])
+})

@@ -1,12 +1,5 @@
 <template>
   <div id="app" class="min-h-screen bg-gray-50">
-    <!-- Cookie Banner -->
-    <CookieBanner
-      v-if="showCookieBanner"
-      @accept="acceptCookies"
-      @decline="declineCookies"
-    />
-
     <!-- Header -->
     <header class="bg-white shadow-xs">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,14 +50,6 @@
               >
                 {{ $t('nav.license') }}
               </router-link>
-
-              <!-- Cookie Settings Link -->
-              <button
-                @click="showCookieSettings"
-                class="text-gray-500 hover:text-blue-600 px-2 py-1 text-xs"
-              >
-                {{ $t('cookies.changeSettings') }}
-              </button>
             </div>
           </div>
         </div>
@@ -123,14 +108,6 @@
                   {{ $t('nav.contact') }}
                 </router-link>
               </li>
-              <li>
-                <button
-                  @click="showCookieSettings"
-                  class="text-base text-gray-500 hover:text-gray-900 text-left"
-                >
-                  {{ $t('cookies.changeSettings') }}
-                </button>
-              </li>
             </ul>
           </div>
 
@@ -158,84 +135,5 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import CookieBanner from '@/components/CookieBanner.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
-
-const showCookieBanner = ref(false)
-
-onMounted(() => {
-  checkCookieConsent()
-
-  // Initialize analytics if already consented
-  initializeAnalytics()
-
-  // Cookie設定表示リクエストのリスナー
-  window.addEventListener('requestCookieSettings', () => {
-    showCookieBanner.value = true
-  })
-})
-
-const checkCookieConsent = () => {
-  const cookieConsent = localStorage.getItem('cookieConsent')
-  if (!cookieConsent) {
-    showCookieBanner.value = true
-  }
-}
-
-const showCookieSettings = () => {
-  showCookieBanner.value = true
-}
-
-const acceptCookies = () => {
-  localStorage.setItem('cookieConsent', 'accepted')
-  showCookieBanner.value = false
-
-  // Initialize Google Analytics
-  initializeAnalytics()
-
-  // Trigger event for other components to update
-  window.dispatchEvent(new CustomEvent('cookieConsentChanged', { detail: 'accepted' }))
-}
-
-const declineCookies = () => {
-  localStorage.setItem('cookieConsent', 'declined')
-  showCookieBanner.value = false
-  // Clear any existing server history
-  localStorage.removeItem('lastUsedServer')
-
-  // Disable analytics if already loaded
-  if (window.gtag) {
-    window.gtag('consent', 'update', {
-      analytics_storage: 'denied'
-    })
-  }
-
-  // Trigger event for other components to update
-  window.dispatchEvent(new CustomEvent('cookieConsentChanged', { detail: 'declined' }))
-}
-
-const initializeAnalytics = () => {
-  // Only initialize if user has consented
-  const consent = localStorage.getItem('cookieConsent')
-  if (consent !== 'accepted') return
-
-  // Add Google Analytics script
-  const script1 = document.createElement('script')
-  script1.async = true
-  script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-PQ2HSYKKQF'
-  document.head.appendChild(script1)
-
-  // Add gtag configuration
-  const script2 = document.createElement('script')
-  script2.textContent = `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PQ2HSYKKQF', {
-      cookie_flags: 'SameSite=None;Secure'
-    });
-  `
-  document.head.appendChild(script2)
-}
 </script>

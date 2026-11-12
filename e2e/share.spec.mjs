@@ -26,3 +26,17 @@ test('shows unsupported for an unknown server', async ({ page }) => {
   await page.goto('/share?i=unknown.example&a=1')
   await expect(page.getByText('This server is not supported.')).toBeVisible()
 })
+
+// 投稿したサーバーを、同意を求めずにブラウザへ記憶し、次に共有画面を開いたとき候補に出すこと
+// （Cookie の同意 UI は無い。プライバシーポリシーの「ブラウザ内の保存領域」の lastUsedServer）
+test('remembers the last used server without asking', async ({ page }) => {
+  const navigation = page.waitForRequest(
+    (r) => r.isNavigationRequest() && new URL(r.url()).hostname === 'mastodon.example'
+  )
+  await page.goto('/share?i=mastodon.example&a=1')
+  await navigation
+
+  await page.goto('/share')
+  await expect(page.locator('option', { hasText: 'mastodon.example (previously used)' })).toBeAttached()
+  await expect(page.getByRole('button', { name: 'Clear server history' })).toBeVisible()
+})
