@@ -4,7 +4,7 @@ import { test, expect } from './fixtures.mjs'
 // 開いただけでは外（別のドメイン）へリクエストを出さないこと（フォントも同梱した Inter を自分のドメインから読む）。
 // プライバシーポリシーにそう書いてある。Cloudflare がエッジで差し込むもの（Web Analytics など）は
 // イメージには無いので、ここでは確かめられない（Cloudflare 側で切ってある前提）
-const PAGES = ['/', '/share', '/privacy', '/howto', '/license', '/services', '/contact']
+const PAGES = ['/', '/share', '/privacy', '/howto', '/services', '/contact']
 
 for (const path of PAGES) {
   test(`${path} renders`, async ({ page, baseURL }) => {
@@ -55,4 +55,12 @@ test('clears leftovers of the old consent UI and Google Analytics', async ({ pag
   await expect(page.locator('#app main')).not.toBeEmpty()
   expect(await page.evaluate(() => localStorage.getItem('cookieConsent'))).toBeNull()
   expect(await context.cookies()).toEqual([])
+})
+
+// 旧 /license は対応サービスのページの「ライセンス・帰属表示」へ移した。古いリンクで開いても辿り着けること
+test('/license redirects to the license section of /services', async ({ page }) => {
+  const res = await page.goto('/license')
+  expect(res.status()).toBe(200)
+  await expect(page).toHaveURL(/\/services#license$/)
+  await expect(page.locator('#license')).toBeVisible()
 })

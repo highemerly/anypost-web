@@ -45,10 +45,10 @@
                 {{ $t('nav.privacy') }}
               </router-link>
               <router-link
-                to="/license"
+                to="/services"
                 class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                {{ $t('nav.license') }}
+                {{ $t('nav.services') }}
               </router-link>
             </div>
           </div>
@@ -99,7 +99,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/license" class="text-base text-gray-500 hover:text-gray-900">
+                <router-link to="/services#license" class="text-base text-gray-500 hover:text-gray-900">
                   {{ $t('nav.license') }}
                 </router-link>
               </li>
@@ -124,7 +124,7 @@
         <div class="mt-8 border-t border-gray-200 pt-8">
           <p class="text-sm text-gray-400 text-center leading-relaxed">
             {{ $t('footer.description') }}
-            <router-link to="/license" class="underline hover:text-gray-600">
+            <router-link to="/services#license" class="underline hover:text-gray-600">
               {{ $t('footer.licenseLink') }}
             </router-link>
           </p>

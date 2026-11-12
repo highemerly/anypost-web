@@ -32,23 +32,20 @@ https://anypost.dev/share?i=mastodon.social&t=Hello%20World&s=https://example.co
 コードは [AGPL-3.0-only](LICENSE)。
 
 `public/assets/brand/` の各サービスのロゴはこのライセンスの対象外で、権利はそれぞれの権利者に帰属する。
-各社の登録商標または商標であり、共有先を示す目的でだけ使っている。Creative Commons でライセンスされているものは次のとおり。
+各社の登録商標または商標であり、共有先を示す目的でだけ使っている。公開ライセンスのものは次のとおり（2026-11-12 に一次情報で確認）。
 
-| ロゴ | ライセンス |
-|---|---|
-| Misskey（`misskey.png`） | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
-| GNU social（`gnusocial.png`） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| Lemmy（`lemmy.png`。作者：Andy Cuccaro） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| Iceshrimp（`iceshrimp.png`。© 2023 Laura Hausmann、作者：Kilcat。公式の黒の版に余白を加えて PNG に変換） | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| ロゴ | 著作権者・作者 | ライセンス | 出典・加工 |
+|---|---|---|---|
+| Misskey（`misskey.png`） | Misskey Project | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | [Misskey Hub](https://misskey-hub.net/brand-assets/) の `icon.png` そのまま |
+| Lemmy（`lemmy.png`） | Andy Cuccaro | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | [LemmyNet/lemmy](https://github.com/LemmyNet/lemmy) |
+| Iceshrimp.NET（`iceshrimp.png`） | © 2023 Laura Hausmann、作者 Kilcat | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | [iceshrimp/branding](https://iceshrimp.dev/iceshrimp/branding) の黒のマークに余白を加えて PNG に変換（改変物も CC BY-SA 4.0） |
+| GNU social（`gnusocial.png`） | Jonas Laugs・Steven DuBois | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [gnu.org](https://www.gnu.org/graphics/social) のロゴのマーク部分 |
+| Hubzilla（`hubzilla.png`） | © 2019 Hubzilla Community | MIT | [hubzilla/core](https://framagit.org/hubzilla/core) のロゴを縮小 |
+| PieFed（`piefed.png`） | © 2024 Rimu Atkinson | [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) | [rimu/pyfedi](https://codeberg.org/rimu/pyfedi) の SVG を PNG に書き出し（元の SVG は `app/static/images`） |
+| snac（`snac.png`。Susie） | © 2022–2026 grunfink et al. | MIT | [grunfink/snac2](https://codeberg.org/grunfink/snac2) の画像を縮小 |
 
-各プロジェクトのリポジトリに含まれ、そのライセンスで使っているものは次のとおり。
+MIT のものは、サイトに著作権表示と許諾の全文を載せている（MIT は「全ての複製に含める」ことを求めるため）。
 
-| ロゴ | ライセンス |
-|---|---|
-| Hubzilla（`hubzilla.png`。© Hubzilla Community。[framagit.org/hubzilla/core](https://framagit.org/hubzilla/core)） | MIT |
-| PieFed（`piefed.png`。[codeberg.org/rimu/pyfedi](https://codeberg.org/rimu/pyfedi)） | AGPL-3.0 |
-| snac（`snac.png`。Susie。© grunfink et al.。[codeberg.org/grunfink/snac2](https://codeberg.org/grunfink/snac2)） | MIT |
+タイッツーのアイコン（`taittsuu.png`）は、タイッツー（運営：ホクシス）が共有ボタン用に配布しているもの（[taittsuu.com/share_link](https://taittsuu.com/share_link)。加工も可とされている）。
 
-タイッツーのアイコン（`taittsuu.png`）は、タイッツーが共有ボタン用に配布しているもの（[taittsuu.com/share_link](https://taittsuu.com/share_link)）。
-
-帰属表示はサイトの「ライセンス」（`/license`）にもある。
+帰属表示はサイトの「対応サービス」の下部（`/services#license`）にもある。ロゴを足したり差し替えたりしたら、両方を直す。
