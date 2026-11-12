@@ -3,6 +3,9 @@ import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
 import router from './router'
+// Inter は npm パッケージから同梱して自分のドメインから配る（Google Fonts から読むと、ページを開くたびに
+// IP アドレスなどが Google に送られるため）。ウェイトは可変フォント1つで 100〜900 をまかなう
+import '@fontsource-variable/inter'
 import './assets/tailwind.css'
 
 // i18n設定

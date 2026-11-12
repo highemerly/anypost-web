@@ -168,22 +168,6 @@
         >https://www.cloudflare.com/privacypolicy/</a>
       </p>
 
-      <h3 class="text-xl font-medium text-gray-900 mt-6 mb-3">
-        Google LLC
-      </h3>
-      <p class="mb-3">
-        ページの表示に用いるフォントを Google Fonts から読み込んでいます。そのため、ページを表示した際、IPアドレスやUser-Agentなどが Google に送信されます。
-      </p>
-      <p>
-        Google のプライバシーポリシーもご参照ください。
-        <a
-          href="https://policies.google.com/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-blue-600 hover:text-blue-800 underline"
-        >https://policies.google.com/privacy</a>
-      </p>
-
       <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">
         分析ツール
       </h2>
@@ -225,6 +209,7 @@
       <ul class="list-disc list-inside mb-4 space-y-2 ml-4">
         <li>全ての通信はHTTPSで暗号化します</li>
         <li>投稿内容は、ユーザーのブラウザから投稿先のサービスへ直接送られるようにし、本サービスのサーバーを経由させません</li>
+        <li>ページの表示に用いるフォント・画像・スクリプトは全て本サービスのサーバーから配信し、外部のサービスから読み込みません</li>
         <li>前回使用した投稿先サーバー名は、ユーザーのブラウザ内にのみ保存します</li>
         <li>IPアドレスやUser-Agentを含む「HTTPアクセスによって収集する情報」は、保存期間を90日とし、保存期間を経過した情報は速やかに完全に消去します</li>
       </ul>
@@ -429,22 +414,6 @@
           >https://www.cloudflare.com/privacypolicy/</a>
         </p>
 
-        <h3 class="text-xl font-medium text-gray-900 mt-6 mb-3">
-          Google LLC
-        </h3>
-        <p class="mb-3">
-          We load the fonts used on the pages from Google Fonts, so your IP address, User-Agent, etc. are sent to Google when you view a page.
-        </p>
-        <p>
-          Please also refer to Google's privacy policy:
-          <a
-            href="https://policies.google.com/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-600 hover:text-blue-800 underline"
-          >https://policies.google.com/privacy</a>
-        </p>
-
         <h2 class="text-2xl font-semibold text-gray-900 mt-8 mb-4">
           Analytics
         </h2>
@@ -486,6 +455,7 @@
         <ul class="list-disc list-inside mb-4 space-y-2 ml-4">
           <li>All communication is encrypted with HTTPS</li>
           <li>Post content goes directly from your browser to the destination service and does not pass through this Service's server</li>
+          <li>All fonts, images and scripts used to display the pages are served from this Service's server and are not loaded from external services</li>
           <li>The last-used destination server is stored only in your browser</li>
           <li>"Information collected through HTTP access", including IP addresses and User-Agents, is kept for 90 days and promptly and completely deleted after that period</li>
         </ul>
