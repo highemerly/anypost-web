@@ -3,7 +3,6 @@ import TopPage from '@/views/TopPage.vue'
 import ShareApp from '@/views/ShareApp.vue'
 import PrivacyPage from '@/views/PrivacyPage.vue'
 import HowToPage from '@/views/HowToPage.vue'
-import LicensePage from '@/views/LicensePage.vue'
 import ServicesPage from '@/views/ServicesPage.vue'
 import ContactPage from '@/views/ContactPage.vue'
 
@@ -34,9 +33,10 @@ const routes = [
     component: HowToPage
   },
   {
+    // ライセンス・帰属表示は対応サービスのページの下部に統合した。古いリンクのために残す
     path: '/license',
     name: 'license',
-    component: LicensePage
+    redirect: { path: '/services', hash: '#license' }
   },
   {
     path: '/services',
@@ -56,6 +56,8 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition
+    } else if (to.hash) {
+      return { el: to.hash }
     } else {
       return { top: 0 }
     }

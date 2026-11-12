@@ -21,7 +21,7 @@
     "legal": "Legal",
     "language": "Language",
     "description": "AnyPost.dev is a service that allows you to share content to various social media platforms worldwide from a single link placed on blogs and other sites. Supports mastodon, misskey, pleroma, X, facebook, and more. The rights to logos of other services belong to their respective rights holders.",
-    "licenseLink": "See the License page for details."
+    "licenseLink": "See \"License & Attribution\" on the Services page for details."
   },
   "share": {
     "subtitle": "Easily share to various social media platforms",
@@ -218,47 +218,6 @@
   "privacy": {
     "title": "Privacy Policy"
   },
-  "license": {
-    "title": "License & Attribution",
-    "lastUpdated": "Last updated: November 12, 2026",
-    "intro": "The rights to logos of other services used in anypost.dev (hereinafter, \"this Service\") belong to their respective rights holders.",
-    "ccLogos": {
-      "title": "Creative Commons Licensed Logos",
-      "misskey": {
-        "description": "The Misskey logo is licensed under CC BY-NC-SA 4.0."
-      },
-      "gnusocial": {
-        "description": "The GNU social logo is licensed under CC BY-SA 4.0."
-      },
-      "lemmy": {
-        "description": "The Lemmy logo was created by Andy Cuccaro ({'@'}andycuccaro) and is licensed under CC BY-SA 4.0."
-      },
-      "iceshrimp": {
-        "description": "The Iceshrimp logo is © 2023 Laura Hausmann, created by Kilcat, and licensed under CC BY-SA 4.0. This Service uses the official black version with padding added, converted to PNG."
-      }
-    },
-    "creativeCommons": {
-      "title": "About Creative Commons",
-      "description": "Creative Commons is a licensing system that promotes sharing of creative works. For more details, please check the official website."
-    },
-    "ossLogos": {
-      "title": "Open Source Licensed Logos",
-      "description": "The following logos are included in each project's source code repository and are used under that repository's license.",
-      "hubzilla": {
-        "description": "The Hubzilla logo is from the Hubzilla repository (framagit.org/hubzilla/core), © Hubzilla Community, MIT License."
-      },
-      "piefed": {
-        "description": "The PieFed logo is from the PieFed repository (codeberg.org/rimu/pyfedi) and is licensed under AGPL-3.0."
-      },
-      "snac": {
-        "description": "The snac icon (Susie) is from the snac repository (codeberg.org/grunfink/snac2), © 2022–2026 grunfink et al., MIT License."
-      }
-    },
-    "trademarks": {
-      "title": "Trademarks",
-      "description": "The following logos and names are registered trademarks or trademarks of their respective rights holders. This Service displays them solely as share buttons in compliance with each company's brand guidelines. This Service is not endorsed by or affiliated with these rights holders."
-    }
-  },
   "language": {
     "switch": "Switch Language",
     "japanese": "日本語",
@@ -286,14 +245,40 @@
       "description": "Major centralized social media services."
     },
     "more": "More services coming soon!",
-    "licenseInfo": {
-      "title": "About Logo & Name Licenses",
-      "description": "The rights to logos and names shown on this page belong to their respective rights holders. For details, see the ",
-      "link": "License page"
-    },
     "info": {
       "title": "Note",
       "description": "Available features (post content, visibility, hashtags, etc.) vary by service. Please check the How to Use page for details."
+    },
+    "license": {
+      "title": "License & Attribution",
+      "lastUpdated": "Last updated: November 12, 2026",
+      "intro": "The rights to the logos and names of other services shown on this page and elsewhere on anypost.dev (\"this Service\") belong to their respective rights holders. This Service uses them only to indicate where content is shared; their use does not imply any affiliation with or endorsement by those rights holders.",
+      "openLogos": {
+        "title": "Openly Licensed Logos",
+        "description": "The following logos are used under their respective licenses.",
+        "misskey": "By Misskey Project",
+        "lemmy": "By Andy Cuccaro ({'@'}andycuccaro)",
+        "gnusocial": "By Jonas Laugs (drawing) and Steven DuBois (lettering). This Service uses only the mark portion of the logo.",
+        "iceshrimp": "© 2023 Laura Hausmann, by Kilcat. This Service adds padding to the official black version and converts it to PNG (the modified image is also licensed under CC BY-SA 4.0).",
+        "hubzilla": "© 2019 Hubzilla Community. A resized copy of the logo included in the Hubzilla repository.",
+        "piefed": "© 2024 Rimu Atkinson. The SVG logo from the PieFed repository, exported to PNG. The original SVG is in the source repository (app/static/images).",
+        "snac": "The Susie icon. © 2022–2026 grunfink et al. A resized copy of the image included in the snac repository."
+      },
+      "labels": {
+        "license": "License",
+        "source": "Source",
+        "fullText": "Full license text"
+      },
+      "trademarks": {
+        "title": "Trademarks",
+        "description": "The following names and logos are trademarks or registered trademarks of their respective owners.",
+        "others": "The names and logos of other services likewise belong to their respective projects or rights holders."
+      },
+      "sourceCode": {
+        "title": "AnyPost Source Code",
+        "description": "AnyPost's source code is available under the GNU Affero General Public License v3.0.",
+        "link": "View on GitHub"
+      }
     },
     "backToTop": "Back to Top"
   }
