@@ -4,6 +4,26 @@ import axios from 'axios'
 // Configuration constants
 const API_TIMEOUT = 9000 // ms
 
+// instance-info-api v2 errors come back as { domain, error: { code, message } }.
+// Map by code, not HTTP status: `unresolvable` (a typo'd domain) is a 404 like
+// `not_fediverse`, but it means the name is wrong rather than unsupported.
+const API_ERROR_CODES = {
+  invalid_name: 'invalidServer',
+  unresolvable: 'invalidServer',
+  not_fediverse: 'unsupportedServer',
+  upstream_unavailable: 'serviceDown'
+}
+
+// No JSON body (e.g. nginx's own 502 when the API is down): fall back to the status
+const errorFromResponse = (response) => {
+  const byCode = API_ERROR_CODES[response?.data?.error?.code]
+  if (byCode) return byCode
+  const status = response?.status
+  if (status === 400) return 'invalidServer'
+  if (status === 502 || status === 503 || status === 504) return 'serviceDown'
+  return 'unsupportedServer'
+}
+
 // Instance type constants
 export const INSTANCE_TYPES = {
   MISSKEY: 'misskey',
@@ -470,7 +490,7 @@ export const useInstanceStore = defineStore('instance', {
 
         // Fetch from API (same-origin; nginx proxies /api/ to the upstream)
         const response = await axios.get(
-          `/api/v1/instances/${cleanInstanceName}`,
+          `/api/v2/instances/${encodeURIComponent(cleanInstanceName)}`,
           {
             timeout: API_TIMEOUT,
             signal: this.currentController.signal
@@ -504,8 +524,7 @@ export const useInstanceStore = defineStore('instance', {
           name: cleanInstanceName,
           type: instanceType,
           config,
-          source: response.data?.source || null, // source情報を追加
-          detectedType: config || !apiType || apiType === 'unknown' ? null : apiType
+          detectedType: config || !apiType ? null : apiType
         }
 
         this.loading = false
@@ -519,16 +538,7 @@ export const useInstanceStore = defineStore('instance', {
 
         console.error('Failed to fetch instance info:', error)
 
-        const status = error.response?.status
-        if (status === 400) {
-          this.error = 'invalidServer'
-        } else if (status === 404) {
-          this.error = 'unsupportedServer'
-        } else if (status === 502 || status === 503) {
-          this.error = 'serviceDown'
-        } else {
-          this.error = 'unsupportedServer'
-        }
+        this.error = errorFromResponse(error.response)
 
         // Don't cache errors - allow retry
         this.currentInstance = {

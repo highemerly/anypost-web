@@ -18,7 +18,7 @@ test('auto-redirects to the Mastodon share page', async ({ page, request }) => {
 
   // nginx の /api プロキシが、パスを変えずに API へ渡していること
   const received = await (await request.get(`${FAKE_API}/__requests`)).json()
-  expect(received).toContainEqual({ method: 'GET', url: '/api/v1/instances/mastodon.example' })
+  expect(received).toContainEqual({ method: 'GET', url: '/api/v2/instances/mastodon.example' })
 })
 
 // 共有先ごとの URL の組み立て。本文の欄しかない共有先へは、URL を本文の後ろに付けて渡す
@@ -101,6 +101,19 @@ test('shows unsupported for a recognized server without a share page', async ({ 
 test('shows unsupported for an unknown server', async ({ page }) => {
   await page.goto('/share?i=unknown.example&a=1')
   await expect(page.getByText('This server is not supported.')).toBeVisible()
+})
+
+// 同じ 404 でも、ドメインが引けない（unresolvable）ときは「サーバー名が不正」と出すこと。
+// エラーは HTTP ステータスではなく error.code で見分けている
+test('shows invalid for a domain that does not resolve', async ({ page }) => {
+  await page.goto('/share?i=unresolvable.example&a=1')
+  await expect(page.getByText('The server name you entered is invalid.')).toBeVisible()
+})
+
+// 相手のサーバーに届かない（upstream_unavailable, 503）ときは「サービスがダウンしている」と出すこと
+test('shows service down when the server cannot be reached', async ({ page }) => {
+  await page.goto('/share?i=down.example&a=1')
+  await expect(page.getByText('The service is currently down.')).toBeVisible()
 })
 
 // 投稿したサーバーを、同意を求めずにブラウザへ記憶し、次に共有画面を開いたとき候補に出すこと
