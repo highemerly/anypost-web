@@ -50,7 +50,7 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 | マージ方式 | squash だけ許可 | ruleset と同じ。画面で別の方式を選べないようにする |
 | squash のコミットメッセージ | PR タイトルだけ（本文は空） | ブランチ上の途中のコミットの一覧を main の履歴に持ち込まない |
 | マージ後のブランチ | 自動で削除 | |
-| auto-merge | 有効 | CI が緑になったらマージ、を予約できるようにする |
+| auto-merge | 有効 | Renovate の PR を、CI が緑になったら自動でマージさせる（人の PR も予約できる） |
 
 ## 依存更新（Renovate）
 
@@ -59,21 +59,32 @@ gh api -X PUT repos/highemerly/anypost-web/rulesets/<id> --input .github/ruleset
 - 週2回（月・木の朝）にまとめて PR が来る。ラベル `dependencies`（Release のノートで Dependencies に分かれる）
 - **メジャーは自動で PR にならない。** Issue「Dependency Dashboard」でチェックを入れたものだけ PR になる
 - npm は公開から3日待つ。Docker のベースイメージは digest で固定し、digest の更新も PR になる
-- auto-merge はしない。CI（`ci-result`）が緑なのを見てから squash マージする
+- **マイナー・パッチと Docker の digest は、CI（`ci-result`）が緑なら自動でマージされる。** 除くのは、下の表で
+  「自動ではマージしない」としたもの（vue・vue-router・pinia・vue-i18n・@headlessui/vue・tailwind・@heroicons/vue・
+  @fontsource-variable/inter・neostandard）と、タグ時にしか動かないワークフロー（docker-build.yml・tag-release.yml）。
+  PR に1つでも除外の更新が入っていれば手でマージする。自動でマージされる PR は assign されない（「Assigned to you」に残るのは手で見るものだけ）
+- メジャー・lockfile の一括更新は手でマージする
+- 自動でマージされても main に入るだけ。本番へはリリース（タグ）とデプロイの PR のマージを経る
+- Dependabot alerts を有効にしてあり（Dependabot 自身の PR は無効のまま）、Renovate がスケジュールと3日待ちを待たずに
+  PR を作る（題名の末尾に `[SECURITY]`）。自動マージの対象かどうかは通常と同じ。
+  **マージしても本番には入らないので、マージしたらパッチ版をリリースする**
 
 ### PR が来たら
+
+自動でマージされなかったもの（assign されて残っているもの）を見る。
 
 1. **lockfile の差分を見て、実際に入る版が変わるかを確かめる。** `package.json` の範囲の下限だけが上がり、
    lockfile の版が変わらない PR もある（中身は何も変わらない）
 2. 下の表で、CI が緑でも確かめられていないものに当たるなら、そこだけ手元で見る
-3. マージ後、手元は `git switch main && git pull && npm ci`
+3. マージ後（自動でマージされたものも、作業を始める前に）、手元は `git switch main && git pull && npm ci`
 
 | 依存 | CI で確かめられること | CI では確かめられないこと |
 |---|---|---|
-| vue・vue-router・pinia・vue-i18n・axios・@headlessui/vue・@heroicons/vue | 主要なページが描画まで進み例外が無い。共有リンクで API を呼び、共有先の URL を組み立てて移る（E2E） | クリック・入力などの操作（E2E に画面操作は入れていない） |
-| tailwindcss・@tailwindcss/vite | ビルドが通り、ページが描画される | **見た目**（E2E は見た目を比べない）。マイナーでも見た目が変わりうるので、気になるときは手元で画面を見る |
+| vue・vue-router・pinia・vue-i18n・@headlessui/vue | 主要なページが描画まで進み例外が無い。共有リンクで API を呼び、共有先の URL を組み立てて移る（E2E） | クリック・入力などの操作（E2E に画面操作は入れていない）。**自動ではマージしない** |
+| axios | 共有リンクから instanceStore が axios で `/api` を呼び、nginx のプロキシ越しに偽 API へ届く（E2E が偽 API の受信記録まで見る） | — |
+| tailwindcss・@tailwindcss/vite・@heroicons/vue・@fontsource-variable/inter | ビルドが通り、ページが描画される（Inter は読み込まれたかまで） | **見た目**（E2E は見た目を比べない）。マイナーでも見た目が変わりうるので手元で画面を見る。**自動ではマージしない** |
 | vite・@vitejs/plugin-vue | 本番イメージのビルドと E2E | 開発サーバー（`npm run dev`） |
-| eslint・@eslint/js・eslint-plugin-vue・vue-eslint-parser・neostandard | lint が通る | — （neostandard は 0.x で、マイナーでも規則が増えることがある。lint が赤なら直すか規則を見直す） |
+| eslint・@eslint/js・eslint-plugin-vue・vue-eslint-parser・neostandard | lint が通る | — （neostandard は 0.x で、マイナーでも規則が増えることがある。lint が赤なら直すか規則を見直す。**neostandard は自動ではマージしない**） |
 | @playwright/test | E2E そのもの | — |
 | Docker の node（ビルド用）・nginx（配信用）の digest | 本番イメージのビルドと、nginx での配信・`/api` のプロキシ・ヘルスチェック（E2E） | — |
 | GitHub Actions | checks.yml・e2e.yml で使うもの | **docker-build.yml・tag-release.yml だけで使うもの**（リリース時にしか動かない）。マージ後の最初のリリースでログを見る |
