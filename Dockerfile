@@ -17,7 +17,7 @@ RUN npm run build
 # ============================================
 # Stage 2: nginx で静的配信
 # ============================================
-FROM nginx:alpine@sha256:0563c36f94a6d3ec3584161b77859f740f7e20b4853f52c796a864ce6908e8ea AS runner
+FROM nginx:alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7 AS runner
 
 # nginx 設定テンプレートをコピー（起動時に envsubst で展開される）
 COPY docker/default.conf.template /etc/nginx/templates/default.conf.template
