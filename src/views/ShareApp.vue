@@ -171,9 +171,9 @@
             <span class="text-sm font-medium text-gray-700">
               {{ $t('share.instanceType') }}: {{ instanceInfo.type }}
             </span>
-            <!-- Source display for unknown type -->
-            <span v-if="instanceInfo.type === 'unknown' && (instanceInfo.detectedType || instanceInfo.source)" class="text-xs text-gray-400 ml-2">
-              ({{ instanceInfo.detectedType || instanceInfo.source }})
+            <!-- The type the API detected, when we have no share page for it -->
+            <span v-if="instanceInfo.type === 'unknown' && instanceInfo.detectedType" class="text-xs text-gray-400 ml-2">
+              ({{ instanceInfo.detectedType }})
             </span>
           </div>
 
@@ -568,11 +568,7 @@ const handleInstanceChange = () => {
       currentRequestController = new AbortController()
 
       try {
-        const result = await instanceStore.fetchInstanceInfo(trimmedInput)
-        // APIレスポンスからsource情報を取得して保存
-        if (result && result.type === 'unknown' && result.source) {
-          instanceStore.currentInstance.source = result.source
-        }
+        await instanceStore.fetchInstanceInfo(trimmedInput)
       } catch (error) {
         // Ignore aborted requests
         if (error.name !== 'AbortError') {

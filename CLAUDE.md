@@ -3,7 +3,7 @@
 ## 概要
 
 AnyPost（https://anypost.dev）のフロントエンド。Mastodon・Misskey などへの共有画面を組み立てる Vue 3 の SPA で、
-本番は nginx のイメージで k8s に載る。サーバーの種類の判定は別リポジトリの API（instance-info-api、`/api/v1/instances/{name}`）が行う。
+本番は nginx のイメージで k8s に載る。サーバーの種類の判定は別リポジトリの API（instance-info-api、`/api/v2/instances/{name}`）が行う。
 
 ## ブランチ（必ず守ること）
 
